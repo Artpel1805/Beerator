@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-09-28T14:37:20.788Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" etag="jrMc40LLge41cSGvLLsn" version="20.3.7" type="github">
+<mxfile host="app.diagrams.net" modified="2022-09-28T14:39:21.701Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" etag="IjiNZ99dgCLzuL9LHKm_" version="20.3.7" type="github">
   <diagram id="_jEmHj2mFV9FXTg2HRN9" name="Page-1">
-    <mxGraphModel dx="798" dy="421" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1887" dy="995" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -780,7 +780,17 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <UserObject label="Capteur de couleur&lt;br&gt;3.6V" treeRoot="1" id="33VA1eLPJi6Qy8k9FSGy-20">
+        <mxCell id="33VA1eLPJi6Qy8k9FSGy-53" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=6;endArrow=none;endFill=0;" edge="1" parent="1" source="33VA1eLPJi6Qy8k9FSGy-20" target="MKDejTEfUFbS2tOspgIM-154">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1050" y="780" />
+              <mxPoint x="1050" y="520" />
+              <mxPoint x="1223" y="520" />
+              <mxPoint x="1223" y="130" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <UserObject label="Capteur de couleur&lt;br&gt;2.7V" treeRoot="1" id="33VA1eLPJi6Qy8k9FSGy-20">
           <mxCell style="whiteSpace=wrap;html=1;align=center;treeFolding=1;treeMoving=1;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;};" vertex="1" parent="1">
             <mxGeometry x="905" y="750" width="120" height="60" as="geometry" />
           </mxCell>
