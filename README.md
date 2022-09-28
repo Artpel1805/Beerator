@@ -7,7 +7,7 @@ This project aims to create a robot capable of picking a colored can and to put 
 
 **Integration**: Arthur Pellegrin 
 
-**Hardward**: Software: Adrien Lenoir
+**Hardware & Software**: : Adrien Lenoir
 
 **Livrable**: Clarisse Cheng
 
