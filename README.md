@@ -5,7 +5,9 @@ This project aims to create a robot capable of picking a colored can and to put 
 
 ## Roles of Contributors
 
-**Integration**: Arthur Pellegrin \n
-**Hardward**: Software: Adrien Lenoir \n
-**Livrable**: Clarisse Cheng \n
+**Integration**: Arthur Pellegrin 
+
+**Hardward**: Software: Adrien Lenoir
+
+**Livrable**: Clarisse Cheng
 
