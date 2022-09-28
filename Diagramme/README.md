@@ -2,7 +2,7 @@
 
 Here you'll find the latest version of the architectural diagramm of the robot.
 
-You can open and modify the diagram on https://diagrams.io
+You can open and modify the diagram on https://app.diagrams.net
 
 
 ## Diagram
