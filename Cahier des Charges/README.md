@@ -6,7 +6,7 @@ Dans le schéma suivant:
 * **FP** : correspond à fonction principale.
 * **FS** : correspond à fonction secondaire.
 * **FC** : correspond à fonction contrainte.
-## Color Reference
+## Cahier des charges
 
 | Fonction             | Rôle                                                                |
 | ----------------- | ------------------------------------------------------------------ |
