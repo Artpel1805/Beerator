@@ -1,1 +1,16 @@
-<mxfile host="app.diagrams.net" modified="2022-09-28T12:31:17.264Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Safari/605.1.15" version="20.3.7" etag="CHysENABk1vCT0ffBGsa" type="github"><diagram id="_jEmHj2mFV9FXTg2HRN9">UzV2zq1wL0osyPDNT0nNUTV2VTV2LsrPL4GwciucU3NyVI0MMlNUjV1UjYwMgFjVyA2HrCFY1qAgsSg1rwSLBiADYTaQg2Y1AA==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2022-09-28T12:35:43.536Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Safari/605.1.15" etag="7bMn1Y0shWWmG-vCk_o8" version="20.3.7" type="github">
+  <diagram id="_jEmHj2mFV9FXTg2HRN9" name="Page-1">
+    <mxGraphModel dx="946" dy="622" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="MKDejTEfUFbS2tOspgIM-1" value="Batterie&lt;br&gt;7,2V&lt;br&gt;1.3Ah" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="70" y="50" width="90" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="MKDejTEfUFbS2tOspgIM-2" value="STM32G070RBT6" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="290" y="240" width="210" height="210" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
