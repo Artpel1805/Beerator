@@ -12,8 +12,9 @@ This project aims to create a robot capable of picking a colored can and to put 
 * Software unitary tests
 * Total unitary tests
 * Integration tests
+* Carter design
 * Carter Build (Final assembly)
-* Enslavement Ajustments on the whole build
+* Enslavement Adjustments on the whole build
 
 ## Roles of Contributors
 
