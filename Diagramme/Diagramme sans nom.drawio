@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-09-29T11:00:05.110Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Safari/605.1.15" etag="_XRaFaaeYu-2tT6CzGt0" version="20.3.7" type="github" pages="4">
+<mxfile host="app.diagrams.net" modified="2022-09-29T11:00:59.436Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Safari/605.1.15" etag="FGxayFoL1FXNmgdNmmg7" version="20.3.7" type="github" pages="4">
   <diagram id="_jEmHj2mFV9FXTg2HRN9" name="Global Schemas">
     <mxGraphModel dx="823" dy="541" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -1051,7 +1051,7 @@
           <mxGeometry x="865" y="240" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="yZ0bWerpVHvF2N3iKDFM-14" value="V = 3,3V +- 3%&lt;br&gt;I = 150mA" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;dashed=1;strokeWidth=6;fontSize=15;" vertex="1" parent="1">
-          <mxGeometry x="1300" y="763" width="136" height="30" as="geometry" />
+          <mxGeometry x="1340" y="850" width="136" height="30" as="geometry" />
         </mxCell>
         <mxCell id="yZ0bWerpVHvF2N3iKDFM-17" value="Max Input Voltage = 6V" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;dashed=1;strokeWidth=6;fontSize=15;" vertex="1" parent="1">
           <mxGeometry x="924.5" y="820" width="170" height="30" as="geometry" />
