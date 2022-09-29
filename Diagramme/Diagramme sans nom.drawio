@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-09-29T08:20:43.601Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Safari/605.1.15" etag="OBkRHpBB7BUUO0GhyfaH" version="20.3.7" type="github" pages="2">
-  <diagram id="_jEmHj2mFV9FXTg2HRN9" name="Page-1">
-    <mxGraphModel dx="1892" dy="1244" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+<mxfile host="app.diagrams.net" modified="2022-09-29T08:41:06.435Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Safari/605.1.15" etag="ucm2B5YkuAOX0Kcmbxqn" version="20.3.7" type="github" pages="2">
+  <diagram id="_jEmHj2mFV9FXTg2HRN9" name="Global Schemas">
+    <mxGraphModel dx="2102" dy="1382" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -29,6 +29,9 @@
         </mxCell>
         <mxCell id="MKDejTEfUFbS2tOspgIM-1" value="Batterie&lt;br&gt;7,2V&lt;br&gt;1.3Ah" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#b1ddf0;strokeColor=#10739e;" parent="1" vertex="1">
           <mxGeometry x="70" y="50" width="90" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="KcxZBeON1zcsIMJRfk1I-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;endArrow=none;endFill=0;" edge="1" parent="1" source="MKDejTEfUFbS2tOspgIM-2" target="MKDejTEfUFbS2tOspgIM-154">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="MKDejTEfUFbS2tOspgIM-2" value="STM32G070RBT6" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#fad9d5;strokeColor=#ae4132;" parent="1" vertex="1">
           <mxGeometry x="664" y="260" width="200" height="200" as="geometry" />
@@ -872,33 +875,19 @@
       </root>
     </mxGraphModel>
   </diagram>
-  <diagram id="jB5QHBShzmHUcWL1D1_5" name="Page-2">
-    <mxGraphModel dx="1113" dy="732" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+  <diagram id="LgT5LgbWfMtcP0gajrun" name="Alimentation">
+    <mxGraphModel dx="1577" dy="1037" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="kJtDOI0l4ZGti_CSB5qF-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="VgH-u9O71GFDMOXbEYw_-1" target="VgH-u9O71GFDMOXbEYw_-2">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="280" y="394" />
-              <mxPoint x="280" y="83" />
-            </Array>
-          </mxGeometry>
+        <mxCell id="vdmg18Wzf34p4jmL4wMt-1" value="" style="whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=6;dashed=1;fillColor=none;strokeColor=#66B2FF;" vertex="1" parent="1">
+          <mxGeometry x="460" y="91" width="986" height="986" as="geometry" />
         </mxCell>
-        <mxCell id="VgH-u9O71GFDMOXbEYw_-1" value="Alimentation" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
-          <mxGeometry x="30" y="354" width="160" height="160" as="geometry" />
+        <mxCell id="YQu1KoEvz7qJgXC2Raz_-1" value="&lt;font style=&quot;font-size: 50px;&quot;&gt;Alimentation Bloc&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;dashed=1;strokeWidth=6;" vertex="1" parent="1">
+          <mxGeometry x="160" y="100" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="VgH-u9O71GFDMOXbEYw_-2" value="Capteur" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
-          <mxGeometry x="535" y="40" width="170" height="170" as="geometry" />
-        </mxCell>
-        <mxCell id="VgH-u9O71GFDMOXbEYw_-3" value="Controle" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#FFCCFF;strokeColor=none;" vertex="1" parent="1">
-          <mxGeometry x="470" y="284" width="300" height="300" as="geometry" />
-        </mxCell>
-        <mxCell id="VgH-u9O71GFDMOXbEYw_-4" value="Actionneurs" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#cdeb8b;strokeColor=#36393d;" vertex="1" parent="1">
-          <mxGeometry x="520" y="670" width="200" height="200" as="geometry" />
-        </mxCell>
-        <mxCell id="kJtDOI0l4ZGti_CSB5qF-3" value="3,3V" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="190" y="370" width="60" height="30" as="geometry" />
+        <mxCell id="KbP3uyn52E35Sq37TRhF-1" value="Batterie&lt;br&gt;7,2V&lt;br&gt;1.3Ah" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#b1ddf0;strokeColor=#10739e;" vertex="1" parent="1">
+          <mxGeometry x="100" y="374" width="170" height="266" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
