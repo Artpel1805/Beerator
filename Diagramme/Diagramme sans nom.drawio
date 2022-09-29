@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-09-29T11:10:33.103Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Safari/605.1.15" etag="9Vw-L1Zoj1DwMK11pWV_" version="20.3.7" type="github" pages="4">
+<mxfile host="app.diagrams.net" modified="2022-09-29T11:15:37.801Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Safari/605.1.15" etag="OYJFDZq6alk8pVRBT-qZ" version="20.3.7" type="github" pages="4">
   <diagram id="_jEmHj2mFV9FXTg2HRN9" name="Global Schemas">
-    <mxGraphModel dx="1720" dy="1131" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1183" dy="778" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -876,7 +876,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="LgT5LgbWfMtcP0gajrun" name="Alimentation">
-    <mxGraphModel dx="2547" dy="1131" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2719" dy="1244" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -904,7 +904,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="KbP3uyn52E35Sq37TRhF-1" value="&lt;b style=&quot;font-size: 20px;&quot;&gt;Batterie&lt;br&gt;&lt;/b&gt;7,2V&lt;br&gt;1.3Ah&lt;br&gt;1C max discharge Current" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#b1ddf0;strokeColor=#10739e;" vertex="1" parent="1">
-          <mxGeometry x="-110" y="491" width="330" height="188" as="geometry" />
+          <mxGeometry x="-110" y="500" width="330" height="188" as="geometry" />
         </mxCell>
         <mxCell id="-SeMZqbxLGw7f9UPlT7X-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.855;entryY=1;entryDx=0;entryDy=-4.35;entryPerimeter=0;fontSize=20;startArrow=none;startFill=0;endArrow=classic;endFill=1;strokeWidth=3;" edge="1" parent="1" source="-SeMZqbxLGw7f9UPlT7X-1" target="KbP3uyn52E35Sq37TRhF-1">
           <mxGeometry relative="1" as="geometry">
@@ -1290,7 +1290,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="0JfAx__jh9DHLGMrukv-" name="Actuators">
-    <mxGraphModel dx="946" dy="622" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="450" dy="296" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
