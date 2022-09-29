@@ -3,7 +3,7 @@ This project aims to create a robot capable of picking a colored can and to put 
 
 ## General Informations
 
-#### Realisation of the V-cycle:
+#### Realization of the V-cycle:
 * Technical specification (Clarisse)
 * Working block diagram (Arthur)
 * Gantt diagram (Every contributor)
