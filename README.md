@@ -6,7 +6,8 @@ This project aims to create a robot capable of picking a colored can and to put 
 #### Realisation of the V-cycle:
 * Technical specification (Clarisse)
 * Working block diagram (Arthur)
-* Electric schemes (Arthur, Adrien, Clarisse)
+* Gantt diagram (Every contributor)
+* Electric schemes (Every contributor)
 * Hardware unitary tests
 * Software unitary tests
 * Total unitary tests
