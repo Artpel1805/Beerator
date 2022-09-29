@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-09-29T11:00:59.436Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Safari/605.1.15" etag="FGxayFoL1FXNmgdNmmg7" version="20.3.7" type="github" pages="4">
+<mxfile host="app.diagrams.net" modified="2022-09-29T11:10:33.103Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Safari/605.1.15" etag="9Vw-L1Zoj1DwMK11pWV_" version="20.3.7" type="github" pages="4">
   <diagram id="_jEmHj2mFV9FXTg2HRN9" name="Global Schemas">
-    <mxGraphModel dx="823" dy="541" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1720" dy="1131" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -969,9 +969,10 @@
         <mxCell id="wRnfZEi_rVS1ZJ6pjU_f-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=20;startArrow=none;startFill=1;endArrow=none;endFill=0;strokeColor=#00CC00;strokeWidth=2;" edge="1" parent="1" source="wRnfZEi_rVS1ZJ6pjU_f-5" target="yZ0bWerpVHvF2N3iKDFM-9">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
+              <mxPoint x="740" y="645" />
               <mxPoint x="740" y="560" />
-              <mxPoint x="1185" y="560" />
-              <mxPoint x="1185" y="360" />
+              <mxPoint x="1250" y="560" />
+              <mxPoint x="1250" y="360" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -1101,11 +1102,26 @@
         <mxCell id="wRnfZEi_rVS1ZJ6pjU_f-19" value="V = 1,5V&lt;br&gt;Imax = 1uA" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;dashed=1;strokeWidth=6;fontSize=15;" vertex="1" parent="1">
           <mxGeometry x="742" y="763" width="136" height="30" as="geometry" />
         </mxCell>
+        <mxCell id="LKd5wUwPrefoSisjacPV-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#007FFF;strokeWidth=2;fontSize=5;startArrow=none;startFill=0;endArrow=none;endFill=0;" edge="1" parent="1" source="LKd5wUwPrefoSisjacPV-1" target="D3TFC2V3clASHKAV0zVa-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1295" y="830" />
+              <mxPoint x="1230" y="830" />
+              <mxPoint x="1230" y="797" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LKd5wUwPrefoSisjacPV-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#000000;strokeWidth=1;fontSize=5;startArrow=none;startFill=0;endArrow=none;endFill=0;" edge="1" parent="1" source="LKd5wUwPrefoSisjacPV-1" target="qgHi4zzU6zpAK_9ZO8V_-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LKd5wUwPrefoSisjacPV-1" value="C&lt;br&gt;10uF" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="1280" y="885" width="30" height="30" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
   <diagram id="I1oRLa1JB8xOTJrdsd35" name="Capteurs">
-    <mxGraphModel dx="1351" dy="2058" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1577" dy="2206" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
