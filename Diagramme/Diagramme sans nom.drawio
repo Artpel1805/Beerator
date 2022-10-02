@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-10-02T22:52:34.825Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Safari/605.1.15" etag="5qGNi2taoX45uk3pWZVn" version="20.3.7" type="github" pages="4">
+<mxfile host="app.diagrams.net" modified="2022-10-02T22:53:17.579Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Safari/605.1.15" etag="O3nP75Jk9P8J3eyMnDBi" version="20.3.7" type="github" pages="4">
   <diagram id="_jEmHj2mFV9FXTg2HRN9" name="Global Schemas">
     <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -1072,7 +1072,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="I1oRLa1JB8xOTJrdsd35" name="Sensors">
-    <mxGraphModel dx="1378" dy="2111" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1714,7 +1714,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="0JfAx__jh9DHLGMrukv-" name="Actuators">
-    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="892" dy="609" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
