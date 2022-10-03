@@ -5,13 +5,12 @@
 ## Bloc Diagram
 
 
-On peut voir ici un schema Bloc des fonctions principales du Diagramme.
+Nous avons décidé dans un premier temps de schématiser la partie électronique du projet grâce à une architecture très générale. Nous avons décider de découper le projet en 4 grands Blocs:
 
-On voit qu'il existe une boucle entre les 3 Blocs. Control - Motors - Sensors
-
-Le Bloc Control va piloter le comportement des actionneurs (Moteurs, etc...), les actionneurs vont renvoyer des informations de positions, vitesse etc... aux capteurs. Ces capteurs en complément d'autres capteurs vont communiquer avec le Bloc de controle qui va en conséquence modifier le comportement des actionneurs.
-
-
+- L'alimentation : Ce Bloc va être en charge de fournir de l'énergie à tous les composants de notre robot
+- Les capteurs : Ce BloC va être en charge de récolter des données sur l'environement de notre robot
+- Les actionneurs : Ce Bloc est responsable de tous les mouvements de notre robot
+- Le contrôleur : C'est le cerveau du robot, c'est lui qui permet au robot d'atteindre son objectif 
 
 
 ![](BLOC_Diagram.png)
