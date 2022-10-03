@@ -10,7 +10,7 @@ Vous trouverez dans ce repo bon nombre de dossier.
 - Nous avons ensuite listé toutes les documentations des composants que nous utiliserons pour répondre à notre cahier des charges dans le dossier [Documentation](Documentation)
 
 - Après cela nous avons architecturer la partie électronique du projet dans le dossier [Diagramme](Diagramme)
-- 
+
 - Une fois l'architecture satisfaisante nous avons modéliser le projet sous KiCaD vous trouverez le projet dans le dossier [KiCad/Beerator](KiCad/Beerator)
 
 
