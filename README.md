@@ -5,7 +5,7 @@ This project aims to create a robot capable of picking a colored can and to put 
 
 Vous trouverez dans ce repo bon nombre de dossier.
 
-- Nous avons lister toutes les documentations des composants que nous utilisons dans le dossier [a relative link](Diagramme)
+- Nous avons lister toutes les documentations des composants que nous utilisons dans le dossier [a Documentation](Documentation)
 
 
 
