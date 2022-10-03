@@ -5,7 +5,7 @@ This project aims to create a robot capable of picking a colored can and to put 
 
 Vous trouverez dans ce repo bon nombre de dossier.
 
-- Nous avons effectuer un cahier des charges du projet dans le dossier [Cahier des Charges](Cahier%des%Charges)
+- Nous avons effectuer un cahier des charges du projet dans le dossier [Cahier des Charges](Cahier%20des%20Charges)
 
 - Nous avons lister toutes les documentations des composants que nous utilisons dans le dossier [Documentation](Documentation)
 
