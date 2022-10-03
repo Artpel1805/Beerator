@@ -3,24 +3,19 @@ This project aims to create a robot capable of picking a colored can and to put 
 
 ## General Informations
 
-#### Realization of the V-cycle:
-* Technical specification (Clarisse)
-* Working block diagram (Arthur)
-* Gantt diagram (Every contributor)
-* Electric schemes (Every contributor)
-* Hardware unitary tests
-* Software unitary tests
-* Total unitary tests
-* Integration tests
-* Carter design
-* Carter Build (Final assembly)
-* Enslavement Adjustments on the whole build
+Vous trouverez dans ce repo bon nombre de dossier.
+
+- Nous avons lister toutes les documentations des composants que nous utilisons dans le dossier [a relative link](Diagramme)
+
+
 
 ## Roles of Contributors
 
 **Integration**: Arthur Pellegrin 
 
-**Hardware & Software**: : Adrien Lenoir
+**Hardware**: : Adrien Lenoir
+
+**Software** : Nassim Rami
 
 **Livrable**: Clarisse Cheng
 
