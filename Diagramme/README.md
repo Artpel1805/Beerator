@@ -14,7 +14,7 @@ Le Bloc Control va piloter le comportement des actionneurs (Moteurs, etc...), le
 
 
 
-![](BLOC_Diagram)
+![](BLOC_Diagram.png)
 
 ## Technical Diagram
 
