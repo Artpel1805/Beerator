@@ -1,6 +1,12 @@
 
 # Analyse fonctionnelle
 
+
+Nous avons rassemblé ici, toutes les contraintes auxquelles devrait répondre le robot, ainsi que toutes les fonctionnalité qu'il devrait posséder dans sa première version.
+
+Cette liste est non exhaustive est à de grande chance d'évoluer pendant la durée du projet.
+
+
 Dans le schéma suivant:
 
 * **FP** : correspond à fonction principale.
