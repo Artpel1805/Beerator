@@ -11,7 +11,7 @@ Voici un model 3D de ce à quoi pourrais ressembler le robot:
 
 Vous trouverez dans ce repo bon nombre de dossier.
 
-- Nous avons effectuer un cahier des charges du projet dans le dossier [Cahier des Charges](Cahier%20des%20Charges)
+- Nous avons dans un premier temps rassembler les contraintes et les fonctionnalités du robot dans un cahier des charges: [Cahier des Charges](Cahier%20des%20Charges)
 
 - Nous avons ensuite listé toutes les documentations des composants que nous utiliserons pour répondre à notre cahier des charges dans le dossier [Documentation](Documentation)
 
