@@ -7,7 +7,9 @@ Vous trouverez dans ce repo bon nombre de dossier.
 
 - Nous avons effectuer un cahier des charges du projet dans le dossier [Cahier des Charges](Cahier%20des%20Charges)
 
-- Nous avons lister toutes les documentations des composants que nous utilisons dans le dossier [Documentation](Documentation)
+- Nous avons ensuite listé toutes les documentations des composants que nous utiliserons pour répondre à notre cahier des charges dans le dossier [Documentation](Documentation)
+
+- Après cela nous avons architecturer la partie électronique du projet dans le dossier [Diagramme](Diagramme)
 
 
 
