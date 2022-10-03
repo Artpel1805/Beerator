@@ -5,7 +5,7 @@ Le robot devra répondre à un certain nombre de contrainte et devra pouvoir eff
 
 Voici un model 3D de ce à quoi pourrais ressembler le robot:
 
-[alt](/Beerator-3D.png)
+[img](Beerator3D.png)
 
 ## General Informations
 
