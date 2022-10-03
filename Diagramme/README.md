@@ -14,7 +14,7 @@ Le Bloc Control va piloter le comportement des actionneurs (Moteurs, etc...), le
 
 
 
-![alt text](https://github.com/Artpel1805/Beerator/blob/40e50b92cf9172d4fdbbb3cd463ca5d588f9cea2/Diagramme/DiagramBloc.png)
+![](BLOC_Diagram)
 
 ## Technical Diagram
 
