@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-10-03T07:35:15.531Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Safari/605.1.15" etag="l5hLY_6bp897e54EPMgx" version="20.3.7" type="github" pages="5">
+<mxfile host="app.diagrams.net" modified="2022-10-03T07:43:07.113Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" etag="DhW1u0g8vJF6uSI64F4q" version="20.4.0" type="github" pages="5">
   <diagram id="_jEmHj2mFV9FXTg2HRN9" name="Global Schemas">
-    <mxGraphModel dx="1083" dy="740" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2307" dy="1236" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -818,7 +818,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="LgT5LgbWfMtcP0gajrun" name="Alimentation">
-    <mxGraphModel dx="2722" dy="1295" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="3134" dy="1236" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1072,7 +1072,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="I1oRLa1JB8xOTJrdsd35" name="Sensors">
-    <mxGraphModel dx="1263" dy="2032" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1597" dy="2024" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -2169,7 +2169,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="l50F4vhHmdVrwldeTPvY" name="Control">
-    <mxGraphModel dx="903" dy="483" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="989" dy="530" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -2424,17 +2424,8 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="QhYj1dp9ZvpxPoyXtWPU-13" value="&lt;span style=&quot;font-size: 7px;&quot;&gt;In Phase A motor&amp;nbsp;1&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="284" y="186.5" width="63" height="23" as="geometry" />
-        </mxCell>
-        <mxCell id="QhYj1dp9ZvpxPoyXtWPU-17" value="&lt;span style=&quot;font-size: 7px;&quot;&gt;In Phase B motor&amp;nbsp;1&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="284" y="196" width="63" height="23" as="geometry" />
-        </mxCell>
-        <mxCell id="QhYj1dp9ZvpxPoyXtWPU-18" value="&lt;span style=&quot;font-size: 7px;&quot;&gt;In Phase A motor 2&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="284" y="205" width="63" height="23" as="geometry" />
-        </mxCell>
-        <mxCell id="QhYj1dp9ZvpxPoyXtWPU-19" value="&lt;span style=&quot;font-size: 7px;&quot;&gt;In Phase B motor 2&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="284" y="216" width="63" height="23" as="geometry" />
+        <mxCell id="QhYj1dp9ZvpxPoyXtWPU-13" value="&lt;span style=&quot;font-size: 7px;&quot;&gt;EXTI Phase A motor&amp;nbsp;1&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="282" y="186" width="76" height="23" as="geometry" />
         </mxCell>
         <mxCell id="kTJFWnusSo2qTsrG0jq6-2" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.458;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -2461,6 +2452,68 @@
         </mxCell>
         <mxCell id="wNWMMGgWlyogNA00efch-2" value="&lt;font style=&quot;font-size: 7px;&quot;&gt;Sortie PWM 3 (servo)&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="398" y="115" width="71.5" height="23" as="geometry" />
+        </mxCell>
+        <mxCell id="dTFzXaUglpd87tSVL191-2" value="&lt;span style=&quot;font-size: 7px;&quot;&gt;EXTI Phase B motor&amp;nbsp;1&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="282" y="196" width="76" height="23" as="geometry" />
+        </mxCell>
+        <mxCell id="dTFzXaUglpd87tSVL191-3" value="&lt;span style=&quot;font-size: 7px;&quot;&gt;EXTI Phase A motor&amp;nbsp;2&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="282" y="206" width="76" height="23" as="geometry" />
+        </mxCell>
+        <mxCell id="dTFzXaUglpd87tSVL191-4" value="&lt;span style=&quot;font-size: 7px;&quot;&gt;EXTI Phase B motor&amp;nbsp;2&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="282" y="216" width="76" height="23" as="geometry" />
+        </mxCell>
+        <mxCell id="xPBa-00RuXLgzyDLP-Ij-5" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="220" y="261" as="sourcePoint" />
+            <mxPoint x="280" y="261" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="240" y="261.08" />
+              <mxPoint x="260" y="261.08" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xPBa-00RuXLgzyDLP-Ij-6" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="220" y="281" as="sourcePoint" />
+            <mxPoint x="280" y="281" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="240" y="281.08" />
+              <mxPoint x="260" y="281.08" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xPBa-00RuXLgzyDLP-Ij-7" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=7;" vertex="1" parent="1">
+          <mxGeometry x="210" y="267.93" width="20" height="4" as="geometry" />
+        </mxCell>
+        <mxCell id="xPBa-00RuXLgzyDLP-Ij-8" value="" style="endArrow=none;html=1;rounded=0;fontSize=7;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="210" y="273.93" as="sourcePoint" />
+            <mxPoint x="230" y="273.93" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xPBa-00RuXLgzyDLP-Ij-9" value="" style="endArrow=none;html=1;rounded=0;fontSize=7;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="210" y="265.93000000000006" as="sourcePoint" />
+            <mxPoint x="230" y="265.93000000000006" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xPBa-00RuXLgzyDLP-Ij-14" value="" style="endArrow=none;html=1;rounded=0;fontSize=7;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="219.93" y="266" as="sourcePoint" />
+            <mxPoint x="220" y="261" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xPBa-00RuXLgzyDLP-Ij-15" value="" style="endArrow=none;html=1;rounded=0;fontSize=7;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="220" y="281" as="sourcePoint" />
+            <mxPoint x="220" y="274" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xPBa-00RuXLgzyDLP-Ij-16" value="&lt;span style=&quot;font-size: 7px;&quot;&gt;OSC_IN&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="260" y="248.93" width="76" height="23" as="geometry" />
+        </mxCell>
+        <mxCell id="xPBa-00RuXLgzyDLP-Ij-17" value="&lt;span style=&quot;font-size: 7px;&quot;&gt;OSC_OUT&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="264" y="267.93" width="76" height="23" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
