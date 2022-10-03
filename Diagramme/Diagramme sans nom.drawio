@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-10-03T06:11:16.042Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Safari/605.1.15" etag="oz8o_ezrW8KSLHE8bAwB" version="20.3.7" type="github" pages="4">
+<mxfile host="app.diagrams.net" modified="2022-10-03T06:57:38.086Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.79 Safari/537.36" etag="imUxgSWvxsV52Q6gk7GU" version="20.4.0" type="github" pages="4">
   <diagram id="_jEmHj2mFV9FXTg2HRN9" name="Global Schemas">
-    <mxGraphModel dx="2166" dy="1480" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1422" dy="755" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -818,7 +818,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="LgT5LgbWfMtcP0gajrun" name="Alimentation">
-    <mxGraphModel dx="3859" dy="2072" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2249" dy="755" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1072,7 +1072,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="I1oRLa1JB8xOTJrdsd35" name="Sensors">
-    <mxGraphModel dx="1895" dy="2464" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1391" dy="2074" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1085,12 +1085,12 @@
         <mxCell id="s6RGil1KS2IcCCHOgPJL-1" value="&lt;h1&gt;Bloc capteurs&lt;br&gt;&lt;/h1&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="40" y="51" width="190" height="40" as="geometry" />
         </mxCell>
-        <UserObject label="Capteur de Proximité&lt;br&gt;" treeRoot="1" id="19dVOWBT5KVekfGaguJR-1">
+        <UserObject label="Capteur TOF&lt;br&gt;&lt;br&gt;VL53L0X" treeRoot="1" id="19dVOWBT5KVekfGaguJR-1">
           <mxCell style="whiteSpace=wrap;html=1;align=center;treeFolding=1;treeMoving=1;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;};fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" parent="1" vertex="1">
             <mxGeometry x="720" y="370" width="280" height="340" as="geometry" />
           </mxCell>
         </UserObject>
-        <UserObject label="Capteur TOF" treeRoot="1" id="19dVOWBT5KVekfGaguJR-2">
+        <UserObject label="&lt;span style=&quot;color: rgb(51, 51, 51); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(248, 249, 250); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;Capteur de Proximité IR&lt;br&gt;&lt;br&gt;GP2Y0D805Z0F&lt;br&gt;&lt;/span&gt;" treeRoot="1" id="19dVOWBT5KVekfGaguJR-2">
           <mxCell style="whiteSpace=wrap;html=1;align=center;treeFolding=1;treeMoving=1;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;};fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" parent="1" vertex="1">
             <mxGeometry x="720" width="270" height="340" as="geometry" />
           </mxCell>
