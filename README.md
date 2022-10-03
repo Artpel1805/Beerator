@@ -1,5 +1,11 @@
 # Beerator
-This project aims to create a robot capable of picking a colored can and to put it in the right area
+Le projet consiste à designer l'électronique d'un robot ramasse-canette (de bière ? 😶). 
+
+Le robot devra répondre à un certain nombre de contrainte et devra pouvoir effectuer différentes taches détaillées ci-dessous.
+
+Voici un model 3D de ce à quoi pourrais ressembler le robot:
+
+[alt](/Beerator-3D.png)
 
 ## General Informations
 
