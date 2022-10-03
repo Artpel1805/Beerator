@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name "Sensors")(type "KiCad")(uri "${KIPRJMOD}/Sensors.kicad_sym")(options "")(descr ""))
+  (lib (name "Sensors_Beerator")(type "KiCad")(uri "${KIPRJMOD}/Sensors_Beerator.kicad_sym")(options "")(descr ""))
+)
