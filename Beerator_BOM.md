@@ -15,6 +15,7 @@
 * Color sensor (REF: (DfRobot) SEN0101)
 * Servo (REF: XL320)
 * 2.54mm JST Connectors
-* LEDs (0603 housing)
+* On/Off LED (0603 housing) (REF: SM0603UBWC) (3V 20mA)
+* 210 Ohm Resistor (for the On/Off LED) (REF: RMCF0603FT215R)
 
 // Après verifications, ajouter diode Zener, condensateurs de découplages, résistances, etc... 
