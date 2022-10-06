@@ -141,6 +141,12 @@
     (path "/f50cfffb-37b8-4d41-a554-4ec7110af5e8/f641b998-f131-4429-9961-8df57c239109"
       (reference "#PWR0119") (unit 1) (value "GND") (footprint "")
     )
+    (path "/15bcef62-32cd-4ba0-bcb3-75bd9158a815/3ba59e37-ed8e-41b8-a6b5-15b53322dba9"
+      (reference "#PWR?") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/15bcef62-32cd-4ba0-bcb3-75bd9158a815/7cc6d10a-693b-4119-8e03-78b4d4b6b320"
+      (reference "#PWR?") (unit 1) (value "GND") (footprint "")
+    )
     (path "/4c631467-50bd-449d-9780-82e7272a44ec/4fd7e725-685b-4f7d-b4b9-e483ed8ebe31"
       (reference "C1") (unit 1) (value "10uF") (footprint "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder")
     )
@@ -167,6 +173,12 @@
     )
     (path "/f50cfffb-37b8-4d41-a554-4ec7110af5e8/0e91056f-af96-4df9-adc2-571fefe8a2ba"
       (reference "C205") (unit 1) (value "10µF") (footprint "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder")
+    )
+    (path "/15bcef62-32cd-4ba0-bcb3-75bd9158a815/b18cd1d2-91d8-4e7d-b488-d53c32bca6b0"
+      (reference "C?") (unit 1) (value "C_Small") (footprint "")
+    )
+    (path "/15bcef62-32cd-4ba0-bcb3-75bd9158a815/bcd2f172-8b42-43c7-bc6a-af974c8893f4"
+      (reference "C?") (unit 1) (value "C_Small") (footprint "")
     )
     (path "/4c631467-50bd-449d-9780-82e7272a44ec/8333cb0e-f2c3-420f-9044-275c84894ecf"
       (reference "JBat1") (unit 1) (value "Conn_01x02_Female") (footprint "Connector_JST:JST_XH_B2B-XH-AM_1x02_P2.50mm_Vertical")
@@ -219,11 +231,17 @@
     (path "/4c631467-50bd-449d-9780-82e7272a44ec/a177e56a-7e73-4a42-931c-5a8dfbd61958"
       (reference "R2") (unit 1) (value "1,5meg") (footprint "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder")
     )
+    (path "/15bcef62-32cd-4ba0-bcb3-75bd9158a815/adf10a6d-1e8d-458a-bca5-29c4cdb1d319"
+      (reference "R?") (unit 1) (value "R_Small") (footprint "")
+    )
     (path "/4c631467-50bd-449d-9780-82e7272a44ec/2fd89a9c-cdc5-4e55-af5f-fa34e27b7ea0"
       (reference "REG3-3") (unit 1) (value "MCP1802x-xx02xOT") (footprint "Package_TO_SOT_SMD:SOT-23-5")
     )
     (path "/4c631467-50bd-449d-9780-82e7272a44ec/e6207f59-aba6-4808-9e16-dcb8d5152a28"
       (reference "REG5") (unit 1) (value "AZ1117-5.0") (footprint "Package_TO_SOT_SMD:SOT-223")
+    )
+    (path "/4c631467-50bd-449d-9780-82e7272a44ec/d2e3bb7f-e57b-471e-b80c-ae7794fc0846"
+      (reference "SW?") (unit 1) (value "SW_DPDT_x2") (footprint "")
     )
     (path "/f50cfffb-37b8-4d41-a554-4ec7110af5e8/0f6c71da-e03e-41af-9c15-679d7deadd5f"
       (reference "U5") (unit 1) (value "Servo") (footprint "")
@@ -254,6 +272,9 @@
     )
     (path "/45181d97-1a14-4cfc-bb9b-021de1681191/bb46963f-34ab-4efc-98f6-258d0d87099b"
       (reference "UTOF0") (unit 1) (value "TOF-SENSOR-VL53LX") (footprint "")
+    )
+    (path "/15bcef62-32cd-4ba0-bcb3-75bd9158a815/4fae6faf-ba79-4bde-a5b5-36d334ab501f"
+      (reference "Y?") (unit 1) (value "Crystal_Small") (footprint "")
     )
   )
 )
