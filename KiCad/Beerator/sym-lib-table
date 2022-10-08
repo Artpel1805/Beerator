@@ -1,4 +1,5 @@
 (sym_lib_table
   (lib (name "Sensors")(type "KiCad")(uri "${KIPRJMOD}/Sensors.kicad_sym")(options "")(descr ""))
   (lib (name "Sensors_Beerator")(type "KiCad")(uri "${KIPRJMOD}/Sensors_Beerator.kicad_sym")(options "")(descr ""))
+  (lib (name "STM32G070RBT6")(type "KiCad")(uri "/Users/arthurpellegrin/Downloads/Beerator/STM32G070RBT6.kicad_sym")(options "")(descr ""))
 )
