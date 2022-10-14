@@ -24,6 +24,7 @@
 | PinHeader Connectors   | 1        |  02x07      |           |             |
 | LED                    | 1        |   3V, 20mA  |           |             |
 | Capacitor              | 9        |   10uF      |           |             |
+| Capacitor              | 9        |   100uF     |RS:711-1731|             |
 | Capacitor              | 1        |   22uF      |           |             |
 | Capacitor              | 2        |   0,1uF     |           |             |
 | Capacitor              | 2        |   15pF      |           |             |
