@@ -17,7 +17,9 @@ Vous trouverez dans ce repo bon nombre de dossier.
 
 - Après cela nous avons architecturer la partie électronique du projet dans le dossier [Diagramme](Diagramme)
 
-- Une fois l'architecture satisfaisante nous avons modéliser le projet sous KiCaD vous trouverez le projet dans le dossier [KiCad/Beerator](KiCad/Beerator)
+- Une fois l'architecture satisfaisante nous avons modéliser la carte électronique sous KiCaD vous trouverez le projet dans le dossier [KiCad/Beerator](KiCad/Beerator). Vous pourrez aussi trouver la BOM dans le fichier
+
+- Nous avons en parallele esssayé d'améliorer le modele 3D du robot. Des choix ont été fait afin d'amméliorer la répartition des masses dans le robots et avoir une meilleure disposition des capteurs.
 
 
 
