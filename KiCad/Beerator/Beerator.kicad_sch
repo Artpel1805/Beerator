@@ -524,10 +524,10 @@
       (reference "JCOLOR_402") (unit 1) (value "Conn_01x05_Female") (footprint "")
     )
     (path "/45181d97-1a14-4cfc-bb9b-021de1681191/ca903385-fdec-454b-94fe-6e6c486d7b61"
-      (reference "JCOLOR_403") (unit 1) (value "Conn_01x05_Female") (footprint "Connector_JST:JST_XH_B5B-XH-AM_1x05_P2.50mm_Vertical")
+      (reference "JCOLOR_403") (unit 1) (value "Conn_01x05_Female") (footprint "")
     )
     (path "/45181d97-1a14-4cfc-bb9b-021de1681191/130c41f3-0118-41a8-9a74-781a1cf4f7c5"
-      (reference "JCOLOR_404") (unit 1) (value "Conn_01x05_Female") (footprint "")
+      (reference "JCOLOR_404") (unit 1) (value "Conn_01x05_Female") (footprint "Connector_JST:JST_XH_B5B-XH-AM_1x05_P2.50mm_Vertical")
     )
     (path "/45181d97-1a14-4cfc-bb9b-021de1681191/0095fd36-71e3-4286-84fc-638c997f2762"
       (reference "JDistance0_401") (unit 1) (value "Conn_01x03_Female") (footprint "Connector_JST:JST_XH_B3B-XH-AM_1x03_P2.50mm_Vertical")
@@ -650,7 +650,7 @@
       (reference "UMCC1_501") (unit 1) (value "FIT0521") (footprint "")
     )
     (path "/15bcef62-32cd-4ba0-bcb3-75bd9158a815/2a2b63c6-e4a4-4bd8-8037-20a36394d289"
-      (reference "USTM301") (unit 1) (value "STM32G070RBT6") (footprint "Package_QFP:LQFP-64-1EP_10x10mm_P0.5mm_EP6.5x6.5mm")
+      (reference "USTM301") (unit 1) (value "STM32G070RBT6") (footprint "Package_QFP:LQFP-64_10x10mm_P0.5mm")
     )
     (path "/45181d97-1a14-4cfc-bb9b-021de1681191/fe0d086f-04a4-4acb-b39c-e9205c63ad74"
       (reference "UTOF401") (unit 1) (value "TOF-SENSOR-VL53LX") (footprint "")
