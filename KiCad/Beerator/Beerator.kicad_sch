@@ -325,11 +325,14 @@
     (path "/15bcef62-32cd-4ba0-bcb3-75bd9158a815/c1a33de2-bc56-4cb3-ac3d-61a2f36a3a82"
       (reference "#PWR0303") (unit 1) (value "+3.3V") (footprint "")
     )
-    (path "/15bcef62-32cd-4ba0-bcb3-75bd9158a815/ddb91dbf-6940-4aae-b603-8edce432c872"
+    (path "/15bcef62-32cd-4ba0-bcb3-75bd9158a815/542fbedd-d53b-4d59-b13e-d1ff34cfe995"
       (reference "#PWR0304") (unit 1) (value "GND") (footprint "")
     )
+    (path "/15bcef62-32cd-4ba0-bcb3-75bd9158a815/ddb91dbf-6940-4aae-b603-8edce432c872"
+      (reference "#PWR0305") (unit 1) (value "GND") (footprint "")
+    )
     (path "/15bcef62-32cd-4ba0-bcb3-75bd9158a815/073524fb-15ae-4c09-af52-61165bc75255"
-      (reference "#PWR0305") (unit 1) (value "+3.3V") (footprint "")
+      (reference "#PWR0306") (unit 1) (value "+3.3V") (footprint "")
     )
     (path "/45181d97-1a14-4cfc-bb9b-021de1681191/58670a6f-b356-4813-b29b-ed61b9663880"
       (reference "#PWR0401") (unit 1) (value "+5V") (footprint "")
@@ -427,10 +430,10 @@
     (path "/f50cfffb-37b8-4d41-a554-4ec7110af5e8/609fea8f-95e1-4b3e-86a4-c53dc83a9f5d"
       (reference "#PWR0519") (unit 1) (value "GND") (footprint "")
     )
-    (path "/f50cfffb-37b8-4d41-a554-4ec7110af5e8/aa7c9801-56bb-4cd0-9196-d020f73835af"
-      (reference "#PWR0520") (unit 1) (value "+5V") (footprint "")
+    (path "/f50cfffb-37b8-4d41-a554-4ec7110af5e8/cd5c4c1f-3c82-4b4b-911d-48178a3da7c3"
+      (reference "#PWR0520") (unit 1) (value "+3.3V") (footprint "")
     )
-    (path "/f50cfffb-37b8-4d41-a554-4ec7110af5e8/fe2060c4-ed8d-4bc2-aaed-2047a583a118"
+    (path "/f50cfffb-37b8-4d41-a554-4ec7110af5e8/aa7c9801-56bb-4cd0-9196-d020f73835af"
       (reference "#PWR0521") (unit 1) (value "+5V") (footprint "")
     )
     (path "/f50cfffb-37b8-4d41-a554-4ec7110af5e8/27694576-57aa-4e36-9c6d-e76623d6ca8e"
@@ -542,34 +545,34 @@
       (reference "JDistance1_402") (unit 1) (value "Conn_01x03_Female") (footprint "")
     )
     (path "/f50cfffb-37b8-4d41-a554-4ec7110af5e8/638916b4-653b-4e75-b19e-a2dc4923a57a"
-      (reference "JMCC0_502") (unit 1) (value "Conn_01x06_Female") (footprint "Connector_JST:JST_XH_B6B-XH-AM_1x06_P2.50mm_Vertical")
+      (reference "JMCC0_501") (unit 1) (value "Conn_01x06_Female") (footprint "Connector_JST:JST_XH_B6B-XH-AM_1x06_P2.50mm_Vertical")
     )
     (path "/f50cfffb-37b8-4d41-a554-4ec7110af5e8/79005ffa-eaf1-4c6e-996e-9f2a8b921f02"
-      (reference "JMCC0_504") (unit 1) (value "Conn_01x06_Female") (footprint "")
+      (reference "JMCC0_502") (unit 1) (value "Conn_01x06_Female") (footprint "")
     )
     (path "/f50cfffb-37b8-4d41-a554-4ec7110af5e8/e880d6d4-f4df-4740-8169-63ea1024323e"
       (reference "JMCC1_501") (unit 1) (value "Conn_01x06_Female") (footprint "Connector_JST:JST_XH_B6B-XH-AM_1x06_P2.50mm_Vertical")
     )
     (path "/f50cfffb-37b8-4d41-a554-4ec7110af5e8/fb41e6dd-d12c-41e6-a0c5-f7668d09b3b8"
-      (reference "JMCC1_503") (unit 1) (value "Conn_01x06_Female") (footprint "")
+      (reference "JMCC1_502") (unit 1) (value "Conn_01x06_Female") (footprint "")
     )
     (path "/15bcef62-32cd-4ba0-bcb3-75bd9158a815/fbddfd90-0315-40a0-98d1-b3024cbe367c"
-      (reference "JP301") (unit 1) (value "SolderJumper_2_Open") (footprint "Jumper:SolderJumper-3_P2.0mm_Open_TrianglePad1.0x1.5mm")
+      (reference "JP301") (unit 1) (value "SolderJumper_2_Open") (footprint "Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm")
     )
     (path "/15bcef62-32cd-4ba0-bcb3-75bd9158a815/b8107dd0-3356-4a03-a833-45ee917b514c"
-      (reference "JP302") (unit 1) (value "SolderJumper_2_Open") (footprint "Jumper:SolderJumper-3_P2.0mm_Open_TrianglePad1.0x1.5mm")
+      (reference "JP302") (unit 1) (value "SolderJumper_2_Open") (footprint "Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm")
     )
     (path "/f50cfffb-37b8-4d41-a554-4ec7110af5e8/e4324981-8ebc-4b45-beb2-139da8592ba9"
-      (reference "JP501") (unit 1) (value "SolderJumper_2_Open") (footprint "Jumper:SolderJumper-3_P2.0mm_Open_TrianglePad1.0x1.5mm")
+      (reference "JP501") (unit 1) (value "SolderJumper_2_Open") (footprint "Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm")
     )
     (path "/f50cfffb-37b8-4d41-a554-4ec7110af5e8/7408536e-cf86-4fe5-9629-0703249fdcb1"
-      (reference "JP502") (unit 1) (value "SolderJumper_2_Open") (footprint "Jumper:SolderJumper-3_P2.0mm_Open_TrianglePad1.0x1.5mm")
+      (reference "JP502") (unit 1) (value "SolderJumper_2_Open") (footprint "Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm")
     )
     (path "/f50cfffb-37b8-4d41-a554-4ec7110af5e8/7309ba65-e4c6-4f4b-b826-7c61145d71e5"
-      (reference "JP503") (unit 1) (value "SolderJumper_2_Open") (footprint "Jumper:SolderJumper-3_P2.0mm_Open_TrianglePad1.0x1.5mm")
+      (reference "JP503") (unit 1) (value "SolderJumper_2_Open") (footprint "Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm")
     )
     (path "/f50cfffb-37b8-4d41-a554-4ec7110af5e8/105d86dd-f9fc-4783-8a29-bfaa5d2af023"
-      (reference "JP504") (unit 1) (value "SolderJumper_2_Open") (footprint "Jumper:SolderJumper-3_P2.0mm_Open_TrianglePad1.0x1.5mm")
+      (reference "JP504") (unit 1) (value "SolderJumper_2_Open") (footprint "Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm")
     )
     (path "/f50cfffb-37b8-4d41-a554-4ec7110af5e8/a99a0c1e-2296-463b-a26c-a6629503c0ac"
       (reference "JSERVO501") (unit 1) (value "Conn_01x03_Female") (footprint "Connector_JST:JST_XH_B3B-XH-AM_1x03_P2.50mm_Vertical")
@@ -581,16 +584,16 @@
       (reference "JSTLINK301") (unit 1) (value "Conn_02x07_Odd_Even") (footprint "Connector_PinHeader_1.27mm:PinHeader_2x07_P1.27mm_Vertical_SMD")
     )
     (path "/45181d97-1a14-4cfc-bb9b-021de1681191/bd469d55-3660-4632-bb05-8b098928219c"
-      (reference "JTOF0_402") (unit 1) (value "Conn_01x06_Female") (footprint "Connector_JST:JST_XH_B6B-XH-AM_1x06_P2.50mm_Vertical")
+      (reference "JTOF0_401") (unit 1) (value "Conn_01x06_Female") (footprint "Connector_JST:JST_XH_B6B-XH-AM_1x06_P2.50mm_Vertical")
     )
     (path "/45181d97-1a14-4cfc-bb9b-021de1681191/3d43626a-401a-4f45-af54-12479ac83b3c"
-      (reference "JTOF0_404") (unit 1) (value "Conn_01x06_Female") (footprint "")
+      (reference "JTOF0_402") (unit 1) (value "Conn_01x06_Female") (footprint "")
     )
     (path "/45181d97-1a14-4cfc-bb9b-021de1681191/029f430b-ae65-4c21-9b64-721423c4eac2"
       (reference "JTOF1_401") (unit 1) (value "Conn_01x06_Female") (footprint "Connector_JST:JST_XH_B6B-XH-AM_1x06_P2.50mm_Vertical")
     )
     (path "/45181d97-1a14-4cfc-bb9b-021de1681191/6079c0cf-7fc9-48db-bbaa-050f90f70c66"
-      (reference "JTOF1_403") (unit 1) (value "Conn_01x06_Female") (footprint "")
+      (reference "JTOF1_402") (unit 1) (value "Conn_01x06_Female") (footprint "")
     )
     (path "/4c631467-50bd-449d-9780-82e7272a44ec/f6adddb0-0f3f-4e0d-9d35-2f4cdce0b080"
       (reference "R201") (unit 1) (value "4,2k") (footprint "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder")
@@ -619,11 +622,11 @@
     (path "/4c631467-50bd-449d-9780-82e7272a44ec/2fd89a9c-cdc5-4e55-af5f-fa34e27b7ea0"
       (reference "REG3-201") (unit 1) (value "MCP1802x-xx02xOT") (footprint "Package_TO_SOT_SMD:SOT-23-5")
     )
-    (path "/4c631467-50bd-449d-9780-82e7272a44ec/e6207f59-aba6-4808-9e16-dcb8d5152a28"
-      (reference "REG201") (unit 1) (value "AZ1117-5.0") (footprint "Package_TO_SOT_SMD:SOT-223")
-    )
     (path "/4c631467-50bd-449d-9780-82e7272a44ec/d2e3bb7f-e57b-471e-b80c-ae7794fc0846"
       (reference "SW201") (unit 1) (value "SW_DPDT_x2") (footprint "SamacSys_Parts:NE555DR")
+    )
+    (path "/4c631467-50bd-449d-9780-82e7272a44ec/b324bb7b-96b5-48cf-a224-e6d214bea73c"
+      (reference "U201") (unit 1) (value "REG-5") (footprint "Package_TO_SOT_SMD:SOT-223")
     )
     (path "/f50cfffb-37b8-4d41-a554-4ec7110af5e8/0f6c71da-e03e-41af-9c15-679d7deadd5f"
       (reference "U501") (unit 1) (value "Servo") (footprint "")
@@ -644,7 +647,7 @@
       (reference "UDistance402") (unit 1) (value "Distance-Sensor-GP2Y0D805Z0F") (footprint "")
     )
     (path "/f50cfffb-37b8-4d41-a554-4ec7110af5e8/5b226ed6-3e63-4bef-b132-a7f9a2843d45"
-      (reference "UMCC0_502") (unit 1) (value "FIT0521") (footprint "")
+      (reference "UMCC0_501") (unit 1) (value "FIT0521") (footprint "")
     )
     (path "/f50cfffb-37b8-4d41-a554-4ec7110af5e8/39d12ebb-bc7d-4fff-80df-3358d9f8148f"
       (reference "UMCC1_501") (unit 1) (value "FIT0521") (footprint "")
@@ -658,8 +661,8 @@
     (path "/45181d97-1a14-4cfc-bb9b-021de1681191/bb46963f-34ab-4efc-98f6-258d0d87099b"
       (reference "UTOF402") (unit 1) (value "TOF-SENSOR-VL53LX") (footprint "")
     )
-    (path "/15bcef62-32cd-4ba0-bcb3-75bd9158a815/4fae6faf-ba79-4bde-a5b5-36d334ab501f"
-      (reference "Y301") (unit 1) (value "16MHz") (footprint "Crystal:Crystal_SMD_0603-4Pin_6.0x3.5mm")
+    (path "/15bcef62-32cd-4ba0-bcb3-75bd9158a815/e007ea40-2c6e-4ad4-8a8a-3c92a0e3448a"
+      (reference "Y301") (unit 1) (value "Crystal_GND23") (footprint "Crystal:Crystal_SMD_EuroQuartz_MT-4Pin_3.2x2.5mm")
     )
   )
 )
