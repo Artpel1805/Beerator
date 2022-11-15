@@ -202,7 +202,8 @@ Dans cette partie, on se basera sur le choix des composants et leur protocole de
 ### TCS3200 - Capteur de Couleur
 
 Le capteur VEML3328 détecte les couleurs rouge, le vert, le bleu en incorporant des photodiodes, des amplificateurs et des circuits analogiques/numériques dans une seule puce CMOS. Avec ce capteur, la luminosité et la température de couleur d'un rétroéclairage d'affichage peuvent être ajusté en fonction de la source de lumière ambiante, et il peutdifférencier les environnements d'éclairage intérieurs des environnements d'éclairage extérieurs.Il existe une relation entre la sortie et l'intensité lumineuse. La gamme de  sortie est typique de 2hz à 500Khz.
-Ce dispositif utilise une communication I2C qui convient à notre module pour son fonctionnement correct.
+Ce dispositif utilise une liaison direct avec le microcontrôleur.
+Puisque le diapositif nous fournit comme output un signal variant en fréquence , on a utilisé la fonction du Timer : Input capture mode , qui permet de détecter chaque front montant et en calculant la différence on peut avoir la fréquence.
 
 <p align="center"><img src="Photos_RAM/RAM_1.png" width="400"></p>
 
@@ -210,7 +211,16 @@ Ce dispositif utilise une communication I2C qui convient à notre module pour so
 
 Pour calibrer le capteur, nous avons besoin d'un objet blanc.On place un objet blanc près du capteur. Après le calibrage, si on garde l'objet blanc devant le capteur, on voit la valeur de 255 pour chacune des trois couleurs rouge, verte et bleue. La fonction Calibrate puis on crée une fonction Calibrate() qui  calcule et stocke les changements maximum et minimum de la fréquence de sortie du capteur dans un environnement non coloré et de couleur blanche. Ensuite,on mappe la plage de changement de couleur sur 0-255 .
 
+[PREMIER BOUT CODE]
 
+Le dispositif dispose de deux broches en changeant leur état permet de choisir la couleur qu’on veut détecter en faisant appel la fonction Calibration() à chaque interruption.
+
+[SECOND BOUT CODE]
+
+Le capteur nous fournit un signal carré comme sortie variant en fréquence en fonction de la distance entre l’objet et le capteur  , c’est pour cela qu' on a utilisé la fonction Input Capture Mode du Timer qui permet de détecter chaque front montant . 
+En utilisant cette fonctionnalité , on pourra calculer la fréquence en calculant la différence entre deux fronts montants et l'horloge de référence est calculée en fonction de la configuration que nous avons effectuée . puis en disant l’horloge de référence par la différence précédente.
+
+[TROISIEME BOUT CODE]
 
 ### VL53L0X - Capteur de distance TOF
 
