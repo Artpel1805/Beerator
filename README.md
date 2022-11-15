@@ -36,7 +36,7 @@ Les différents travaux effectués sont détaillés dans les parties qui suivent
 
 ### Architecture de la carte
 
-Pour notre robot, nous avons décidé d’avoir cette architecture de la carte:
+Pour notre robot, nous proposons l'architecture suivante pour la carte:
 
 ![img](Photos_CHE/CHE_1.png)
 
@@ -129,7 +129,7 @@ Prendre en compte les problèmes de compatibilité électgromagnétique
 
 Grâce au logiciel STM32CubeMx nous avons pu placer les broches sur des pins répondant aux besoins.
 
-<img src="Photos_PEL/PEL_4.png" width="500">
+<p align="center"><img src="Photos_PEL/PEL_4.png" width="500"></p>
 
 Nous devons aussi alimenter le STM32 et il ne faut surtout pas oublier les capacités de découplage car l’alimentation doit être la plus stable possible.
 
