@@ -1,4 +1,4 @@
-### Beerator
+<div align="center"># Beerator
 ## Introduction
 
 Le but du projet est de réaliser intégralement un robot capable de se déplacer, de chercher et d’attraper une canette (de bière ? 😶), relever sa couleur, puis de la déposer dans la zone de couleur correspondante.
