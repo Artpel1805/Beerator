@@ -122,10 +122,10 @@ On peut voir ci dessous le Stack-Up de notre carte
 [color=yellow]3,3V (Jaune)[/color]
 [color=blue]GND (Bleu)[/color]
 
-<img src="Photos_PEL/PEL_9.png" width="400">
-<img src="Photos_PEL/PEL_10.png" width="400">
-<img src="Photos_PEL/PEL_11.png" width="400">
-<img src="Photos_PEL/PEL_12.png" width="400">
+![img](Photos_PEL/PEL_9.png)
+![img](Photos_PEL/PEL_10.png)
+![img](Photos_PEL/PEL_11.png)
+![img](Photos_PEL/PEL_12.png)
 
 JLC PCB, le fabricant de nos carte nous impose aussi des contraintes de conception que nous devons renseigner.
 
