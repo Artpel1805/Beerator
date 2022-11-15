@@ -122,14 +122,14 @@ On peut voir ci dessous le Stack-Up de notre carte
 [color=yellow]3,3V (Jaune)[/color]
 [color=blue]GND (Bleu)[/color]
 
-![img](Photos_PEL/PEL_9.png)
-![img](Photos_PEL/PEL_10.png)
-![img](Photos_PEL/PEL_11.png)
-![img](Photos_PEL/PEL_12.png)
+<img src="Photos_PEL/PEL_9.png" width="400">
+<img src="Photos_PEL/PEL_10.png" width="400">
+<img src="Photos_PEL/PEL_11.png" width="400">
+<img src="Photos_PEL/PEL_12.png" width="400">
 
 JLC PCB, le fabricant de nos carte nous impose aussi des contraintes de conception que nous devons renseigner.
 
-<img src="Photos_PEL/PEL_13.png" width="500">
+<img src="Photos_PEL/PEL_13.png" width="400">
 
 La prochaine est le placement des composants sur le PCB.
 Nous essayons de regrouper les composants au maximum par groupe pour que le routage soit le plus simple possible
