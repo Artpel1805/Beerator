@@ -290,4 +290,3 @@ Comme expliqué plus haut, la pince s’articule en trois mords synchronisés, d
 Le servomoteur fait passer la pince entre ses états fermés et ouverts sur une course de 90°. Deux mouvements proches mais opposés en sens ferment les deux crochets de pince arrondis, pendant que la troisième composante de la pince s’avance pour refermer l’emprise du robot sur sa bière et la soulever légèrement du sol, pour la vider pour ne pas qu’elle frotte. Cela peut paraître superflu, mais peut jouer un rôle important sur une surface non plane ou rugueuse.
 
 <p align="center"><img src="Photos_LEN/LEN_pince_eclate.png" width="450"></p>
-
