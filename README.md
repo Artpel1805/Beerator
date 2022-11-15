@@ -138,7 +138,7 @@ On décide aussi de placer le STM32 au centre car c’est lui qui possède le pl
 
 On voit ci dessous en vert tous les composants relatif au contrôle, en rouge tous le bloc actionneurs, en bleu le bloc alimentation et en jaune le bloc capteur
 
-![img](Photos_PEL/PEL_8.png)
+<img src="Photos_PEL/PEL_8.png" width="500">
 
 Nous relions ensuite tous les composants électriquement. Nous veillerons aussi à utiliser les pistes les plus larges possible surtout pour la partie puissance. 
 Cela permet de laisser passer le courant nécessaire et d’éviter des problèmes de CEM.
@@ -150,12 +150,12 @@ Il faut essayer de respecter une distance entre les pistes
 
 Voici ce à quoi ressemblent nos deux plans avec des pistes.
 
-![img](Photos_PEL/PEL_14.png)
-![img](Photos_PEL/PEL_15.png)
+<img src="Photos_PEL/PEL_14.png" width="500">
+<img src="Photos_PEL/PEL_15.png" width="500">
 
 Et enfin notre carte modélisé en 3D
 
-![img](Photos_PEL/PEL_16.png)
+<img src="Photos_PEL/PEL_16.png" width="500">
 
 
 ## Partie III - [partie "I" Nassim]
