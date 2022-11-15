@@ -208,15 +208,15 @@ Le tout confère au robot une allure de scorpion.
 
 Les deux capteurs infrarouges anti-chute sont situés sur les côtés, juste devant les roues, de façon à toujours détecter la chute potentielle à temps et à pouvoir faire revenir le robot sur ses pas si nécessaire.
 
-<img src="Photos_LEN/LEN_IR.png" width="500">
+<img src="Photos_LEN/LEN_IR.png" width="400">
 
 Le capteur de couleur est placé juste sous la pince, avec la même orientation, afin de lire au plus proche la couleur de la canette saisie, car ce type de capteur ne fonctionne pas de façon fiable au delà d’une distance de quelques centimètres.
 
-<img src="Photos_LEN/LEN_color.png" width="500">
+<img src="Photos_LEN/LEN_color.png" width="400">
 
 Le capteur de distance ‘TOF’ est quant à lui placé sur un plan vertical, sur le front du robot, afin de lire sans obstruction la distance avec les obstacles/cibles rencontré(e)s.
 
-<img src="Photos_LEN/LEN_TOF.png" width="500">
+<img src="Photos_LEN/LEN_TOF.png" width="400">
 
 ### Dimensions des pièces
 
