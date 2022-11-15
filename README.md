@@ -92,7 +92,7 @@ Prendre en compte les problèmes de compatibilité électgromagnétique
 
 Grâce au logiciel STM32CubeMx nous avons pu placer les broches sur des pins répondant aux besoins.
 
-![img](Photos_PEL/PEL_4.png)
+<img src="Photos_PEL/PEL_4.png" width="200">
 
 Nous devons aussi alimenter le STM32 et il ne faut surtout pas oublier les capacités de découplage car l’alimentation doit être la plus stable possible.
 
