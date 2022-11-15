@@ -51,7 +51,7 @@ Nous avons ensuite décidé de rajouter des témoins d’alimentation sur la bat
 Comme ce sont uniquement des témoins (Nous n’avons pas besoin de beaucoup de luminosité) et que le 3.3V ne peut pas fournir une trop grande intensité nous avons choisis de réduire le courant maximal à 1mA. 
 Nous dimensionnons donc les résistances en conséquence, avec une loi d’ohm sachant que les LEDs sont en 3V. 
 
-[PHOTO_A1]
+![img](Photos_PEL/PEL_1.png)
 
 ### CAPTEURS
 
@@ -63,7 +63,7 @@ Nous avons quand même dû ici respecter la géométrie des capteurs afin que le
 
 Des résistances de Pull-Up ont dû être ajoutées, pour l’I2C car cela est nécessaire pour que ce protocole fonctionne correctement.
 
-[PHOTO_A2]
+![img](Photos_PEL/PEL_2.png)
 
 
 ### ACTIONNEURS
@@ -75,7 +75,7 @@ Cette partie du projet est assez délicate. Nous décidons donc de mettre des So
 
 Le Servo quant à lui suit un protocole particulier, il sera branché sur un port USART en mode Half-Duplex du uP nécessitant une résistance de Pull-Up.
 
-[PHOTO_A3]
+![img](Photos_PEL/PEL_3.png)
 
 ### CONTRÔLEUR
 
@@ -92,7 +92,7 @@ Prendre en compte les problèmes de compatibilité électgromagnétique
 
 Grâce au logiciel STM32CubeMx nous avons pu placer les broches sur des pins répondant aux besoins.
 
-[PHOTO_A4]
+![img](Photos_PEL/PEL_4.png)
 
 Nous devons aussi alimenter le STM32 et il ne faut surtout pas oublier les capacités de découplage car l’alimentation doit être la plus stable possible.
 
@@ -100,18 +100,19 @@ Nous choisissons aussi de rajouter un Quartz externe, car l’horloge est plus p
 
 Il ne faut pas oublier de rajouter, les branchements pour le STLink car c’est lui qui nous permettra de programmer le STM32.
 
-[PHOTO_A5]
+![img](Photos_PEL/PEL_5.png)
 
 Enfin nous réalisons une analyse électrique de notre circuit pour savoir s’il comporte des erreurs et nous les corrigeons jusqu’à ce qu’il n’y en ai plus.
 
-[PHOTO_A6]
+![img](Photos_PEL/PEL_6.png)
 
 
 ### Production du PCB
 
 La prochaine étape est d’assigner les empreintes correspondants aux composants. Nous utiliserons des composants SMD 0603. Pour les connecteurs nous avons utilisé des connecteurs JST de type JST HX 2.54mm.
 On peut remarquer que certains composants ne sont pas assignés, en effet ce sont les composants qui seront directement soudé au capteur donc ils ne doivent pas être présent sur notre PCB
-[PHOTO_A7]
+
+![img](Photos_PEL/PEL_7.png)
 
 Nous travaillons sur un PCB 4 couches, on décide donc d’y placer 2 plans de potentiels séparés par 2 plans de masses pour d'obscures raisons de CEM.
 On peut voir ci dessous le Stack-Up de notre carte
@@ -121,11 +122,14 @@ On peut voir ci dessous le Stack-Up de notre carte
 [color=yellow]3,3V (Jaune)[/color]
 [color=blue]GND (Bleu)[/color]
 
-[PHOTO_A9_A10_A11_A12]
+![img](Photos_PEL/PEL_9.png)
+![img](Photos_PEL/PEL_10.png)
+![img](Photos_PEL/PEL_11.png)
+![img](Photos_PEL/PEL_12.png)
 
 JLC PCB, le fabricant de nos carte nous impose aussi des contraintes de conception que nous devons renseigner.
 
-[PHOTO_A13]
+![img](Photos_PEL/PEL_13.png)
 
 La prochaine est le placement des composants sur le PCB.
 Nous essayons de regrouper les composants au maximum par groupe pour que le routage soit le plus simple possible
@@ -134,7 +138,7 @@ On décide aussi de placer le STM32 au centre car c’est lui qui possède le pl
 
 On voit ci dessous en vert tous les composants relatif au contrôle, en rouge tous le bloc actionneurs, en bleu le bloc alimentation et en jaune le bloc capteur
 
-[Photo_A8]
+![img](Photos_PEL/PEL_8.png)
 
 Nous relions ensuite tous les composants électriquement. Nous veillerons aussi à utiliser les pistes les plus larges possible surtout pour la partie puissance. 
 Cela permet de laisser passer le courant nécessaire et d’éviter des problèmes de CEM.
@@ -146,9 +150,12 @@ Il faut essayer de respecter une distance entre les pistes
 
 Voici ce à quoi ressemblent nos deux plans avec des pistes.
 
-[PHOTO_A15_A14]
+![img](Photos_PEL/PEL_14.png)
+![img](Photos_PEL/PEL_15.png)
+
 Et enfin notre carte modélisé en 3D
-[PHOTO_A16]
+
+![img](Photos_PEL/PEL_16.png)
 
 
 ## Partie III - [partie "I" Nassim]
