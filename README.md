@@ -162,35 +162,93 @@ Et enfin notre carte modélisé en 3D
 
 Dans cette partie, on se basera sur le choix des composants et leur protocole de communication ainsi que leur fonctionnalité pour atteindre les objectifs demandés par le cahier de charge afin que le robot puisse fonctionner correctement.
 
-### TCS3200 - Capteur de Couleur:
+### TCS3200 - Capteur de Couleur
 
 Le capteur VEML3328 détecte les couleurs rouge, le vert, le bleu en incorporant des photodiodes, des amplificateurs et des circuits analogiques/numériques dans une seule puce CMOS. Avec ce capteur, la luminosité et la température de couleur d'un rétroéclairage d'affichage peuvent être ajusté en fonction de la source de lumière ambiante, et il peutdifférencier les environnements d'éclairage intérieurs des environnements d'éclairage extérieurs.Il existe une relation entre la sortie et l'intensité lumineuse. La gamme de  sortie est typique de 2hz à 500Khz.
 Ce dispositif utilise une communication I2C qui convient à notre module pour son fonctionnement correct.
 
 <img src="Photos_RAM/RAM_1.png" width="500">
 
-#### Calibration:
+#### Calibration
+
 Pour calibrer le capteur, nous avons besoin d'un objet blanc.On place un objet blanc près du capteur. Après le calibrage, si on garde l'objet blanc devant le capteur, on voit la valeur de 255 pour chacune des trois couleurs rouge, verte et bleue. La fonction Calibrate puis on crée une fonction Calibrate() qui  calcule et stocke les changements maximum et minimum de la fréquence de sortie du capteur dans un environnement non coloré et de couleur blanche. Ensuite,on mappe la plage de changement de couleur sur 0-255 .
 
 
 
-### VL53L0X - Capteur de distance TOF:
+### VL53L0X - Capteur de distance TOF
 
 Il s'agit d'un capteur ToF (Time-of-Flight), c'est-à-dire que la distance est mesurée en mesurant le temps de vol. Le capteur vérifie combien de temps il faut à la lumière pour atteindre l'objet, rebondir dessus et revenir au capteur de réception (Réflexion). Le capteur communique avec l'hôte via l'interface I²C. Outre les broches de bus standard, une sortie d'interruption et une entrée pour l'arrêt du capteur sont également disponibles.
 
 <img src="Photos_RAM/RAM_2.png" width="500">
 
-#### Programmation:
+#### Programmation
 
 ST ajoute une bibliothèque complète au capteur  Elle contient tout ce qui peut être fait avec le système.
 On a testé la bibliothèque pour extraire les données du capteur sauf que la bibliothèque est universellement écrite et  elle prend donc beaucoup de code,ce qui représente beaucoup de mémoire Flash.
 Pour cela on est obligé de créer notre propre drivers pour extraire les données et communiquer avec le capteur.
 
 
-### Sharp GP2Y0D805Z0F - Capteur de Proximité Infrarouge : 
+### Sharp GP2Y0D805Z0F - Capteur de Proximité Infrarouge
 
 Ce capteur de proximité infrarouge de Pololu permet de détecter sans contact tout objet entre 0,5 et 5 cm . Sur la carte électronique,on retrouve 3 broches : la pastille carrée est la masse, la pastille du milieu est l'alimentation Vin (entre 2.7 et 6.2 V) et la dernière pastille est la sortie du capteur de proximité infrarouge.On peut améliorer la performance du capteur en plaçant une capacité (>10uF) entre l'alimentation et la masse.
 
 <img src="Photos_RAM/RAM_3.png" width="500">
 
-## Partie IV - [partie "IV" Adrien]
+## Architecture matérielle, Modélisation
+
+### Généralités
+
+Afin de pouvoir intégrer les éléments imposés du projet sur le robot, nous avons dû modéliser un châssis qui reprend la forme proposée en incluant les capteurs. Pour maximiser la fiabilité de ce robot en termes de trajectoire et faciliter sa commande/son asservissement, nous avons voulu modifier sa géométrie en plaçant entre autres son centre de gravité en aval de son centre de poussée (pour la marche avant), et en rendant quasi parfaitement symétrique el robot, que sa pince soit ouverte ou fermée. Ainsi les batteries se retrouvent à l’arrière, les moteurs contrôlent la rotation des roues directement à l’avant, le troisième point d'appui omni-directionnel est juste derrière les batteries, et la pince à l’opposé, tout à l’avant en porte à faux. Elle opère en un mouvement synchronisé de trois mords qui serrent et soulèvent légèrement du sol la canette interceptée, grâce à une légère inclinaison du système, comme on peut le voir ci-dessous.
+
+[PHOTO_chassis_pince]
+
+Le tout confère au robot une allure de scorpion.
+
+### Placement des capteurs
+
+Les deux capteurs infrarouges anti-chute sont situés sur les côtés, juste devant les roues, de façon à toujours détecter la chute potentielle à temps et à pouvoir faire revenir le robot sur ses pas si nécessaire.
+
+[PHOTO_capteur_IR]
+
+Le capteur de couleur est placé juste sous la pince, avec la même orientation, afin de lire au plus proche la couleur de la canette saisie, car ce type de capteur ne fonctionne pas de façon fiable au delà d’une distance de quelques centimètres.
+
+[PHOTO_capteur_Couleur]
+
+Le capteur de distance ‘TOF’ est quant à lui placé sur un plan vertical, sur le front du robot, afin de lire sans obstruction la distance avec les obstacles/cibles rencontré(e)s.
+
+[PHOTO_capteur_TOF]
+
+### Dimensions des pièces
+
+Les capteurs et actionneurs utilisés par le robot sont à l’origine de sa géométrie, et dans le souci de bâtir un modèle correspondant au mieux aux critères énoncés plus haut, il fallait à présent recenser les dimensions physiques de chaque élément. Ce recueil apparaît ci-après.
+
+Canette (33 cL standard) | Ø: 66 mm, H: 115 mm
+Canette (50 cL standard) | Ø: 66 mm, H: 168 mm
+Batterie (avec assez de marge pour les fils) | l: 48 mm; L: 95 mm; H: 15 mm
+Moteurs avec codeur (sans l’axe) | Ø: 25 mm, L: 59 mm
+Servomoteur (pris aux centres des points de fixation) | l: 24 mm; L: 18 mm; H: 12 mm
+Capteur IR | l: 8.9 mm; L: 21.6 mm; H: xx mm
+Capteur de couleurs | l: 28.4 mm; L: 28.4 mm; H: xx mm
+Capteur TOF | l: 12.7 mm; L: 17.8 mm; H: xx mm
+PCB (pris aux centres des points de fixation) | l: 40 mm; L: 100 mm
+Bille (Roulement omnidirectionnel) | Ø: 22.9 mm, H: 20.9 mm
+Roues avec support | Ø: 40 mm, H: 8 mm
+
+### Cable management
+
+Tous les câbles parcourent le chemin le plus court pour parvenir à la carte, en s'immisçant dans des sillons et fentes prévus à cet effet dans le châssis.
+
+[PHOTO_Fentes]
+
+Ainsi on évite les erreurs de branchement, les croisement et les fils trop exposés.
+
+### Le système de pince
+
+Comme expliqué plus haut, la pince s’articule en trois mords synchronisés, deux maintiennent la canette, le troisième la soulève.
+
+[PHOTO_Pince_seule]
+
+Le servomoteur fait passer la pince entre ses états fermés et ouverts sur une course de 90°. Deux mouvements proches mais opposés en sens ferment les deux crochets de pince arrondis, pendant que la troisième composante de la pince s’avance pour refermer l’emprise du robot sur sa bière et la soulever légèrement du sol, pour la vider pour ne pas qu’elle frotte. Cela peut paraître superflu, mais peut jouer un rôle important sur une surface non plane ou rugueuse.
+
+[PHOTO_Pince_morceaux_eclate]
+
