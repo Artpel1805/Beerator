@@ -38,12 +38,12 @@ Les différents travaux effectués sont détaillés dans les parties qui suivent
 
 Pour notre robot, nous avons décidé d’avoir cette architecture de la carte:
 
-[PHOTO_DIAGRAMME_CARTE]
+![img](Photos_CHE/CHE_1.png)
 
 
 Et pour les capteurs:
 
-[PHOTO_DIAGRAMME_CAPTEURS]
+![img](Photos_CHE/CHE_2.png)
 
 * Les deux capteurs IR serviront à détecter les bordures, l’un sera placé à l’avant gauche du robot tandis que l’autre sera à l’avant droit. Ceci évitera au robot de tomber lorsque la distance entre la table et le robot sera supérieur à 5-10 cm environ. Ces deux capteurs IR sont respectivement connectés à une PIN de la STM32, un PIN ADC permettant de recueillir la distance à laquelle se situe la bordure. Le tout étant relié à un régulateur 3.3V permettant de contrôler l’intensité du courant et la tension de sortie.
 
@@ -57,7 +57,7 @@ Et pour les capteurs:
 
 Voici l’architecture de l’alimentation:
 
-[PHOTO_DIAGRAMME_ALIM]
+![img](Photos_CHE/CHE_3.png)
 
 Dans un premier temps, la batterie de 7.2V va nous permettre d’alimenter nos différents régulateurs qui vont à leur tour alimenter les composants de notre robot.
 
@@ -68,7 +68,7 @@ De même, pour le capteur de couleur, nous utilisons un régulateur 5V.
 
 Voici le diagramme d’état du robot qui spécifie les réactions du robots à différents évènements qui pourraient avoir lieu. Le but du robot est d'abord de détecter la canette ou les canettes présente sur la table, pour se diriger vers elle, la saisir puis la déposer dans la zone qui correspond à sa couleur. Ces étapes sont développées dans le diagramme d’état ci-contre.
 
-[PHOTO_DIAG_ETAT]
+![img](Photos_CHE/CHE_4.png)
 
 
 ## Planification du circuit, Création du PCB
