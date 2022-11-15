@@ -222,17 +222,17 @@ Le capteur de distance ‘TOF’ est quant à lui placé sur un plan vertical, s
 
 Les capteurs et actionneurs utilisés par le robot sont à l’origine de sa géométrie, et dans le souci de bâtir un modèle correspondant au mieux aux critères énoncés plus haut, il fallait à présent recenser les dimensions physiques de chaque élément. Ce recueil apparaît ci-après.
 
-Canette (33 cL standard) | Ø: 66 mm, H: 115 mm
-Canette (50 cL standard) | Ø: 66 mm, H: 168 mm
-Batterie (avec assez de marge pour les fils) | l: 48 mm; L: 95 mm; H: 15 mm
-Moteurs avec codeur (sans l’axe) | Ø: 25 mm, L: 59 mm
-Servomoteur (pris aux centres des points de fixation) | l: 24 mm; L: 18 mm; H: 12 mm
-Capteur IR | l: 8.9 mm; L: 21.6 mm; H: xx mm
-Capteur de couleurs | l: 28.4 mm; L: 28.4 mm; H: xx mm
-Capteur TOF | l: 12.7 mm; L: 17.8 mm; H: xx mm
-PCB (pris aux centres des points de fixation) | l: 40 mm; L: 100 mm
-Bille (Roulement omnidirectionnel) | Ø: 22.9 mm, H: 20.9 mm
-Roues avec support | Ø: 40 mm, H: 8 mm
+* Canette (33 cL standard) | Ø: 66 mm, H: 115 mm
+* Canette (50 cL standard) | Ø: 66 mm, H: 168 mm
+* Batterie (avec assez de marge pour les fils) | l: 48 mm; L: 95 mm; H: 15 mm
+* Moteurs avec codeur (sans l’axe) | Ø: 25 mm, L: 59 mm
+* Servomoteur (pris aux centres des points de fixation) | l: 24 mm; L: 18 mm; H: 12 mm
+* Capteur IR | l: 8.9 mm; L: 21.6 mm; H: xx mm
+* Capteur de couleurs | l: 28.4 mm; L: 28.4 mm; H: xx mm
+* Capteur TOF | l: 12.7 mm; L: 17.8 mm; H: xx mm
+* PCB (pris aux centres des points de fixation) | l: 40 mm; L: 100 mm
+* Bille (Roulement omnidirectionnel) | Ø: 22.9 mm, H: 20.9 mm
+* Roues avec support | Ø: 40 mm, H: 8 mm
 
 ### Cable management
 
