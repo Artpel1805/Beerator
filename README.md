@@ -167,6 +167,8 @@ Dans cette partie, on se basera sur le choix des composants et leur protocole de
 Le capteur VEML3328 détecte les couleurs rouge, le vert, le bleu en incorporant des photodiodes, des amplificateurs et des circuits analogiques/numériques dans une seule puce CMOS. Avec ce capteur, la luminosité et la température de couleur d'un rétroéclairage d'affichage peuvent être ajusté en fonction de la source de lumière ambiante, et il peutdifférencier les environnements d'éclairage intérieurs des environnements d'éclairage extérieurs.Il existe une relation entre la sortie et l'intensité lumineuse. La gamme de  sortie est typique de 2hz à 500Khz.
 Ce dispositif utilise une communication I2C qui convient à notre module pour son fonctionnement correct.
 
+<img src="Photos_RAM/RAM_1.png" width="500">
+
 #### Calibration:
 Pour calibrer le capteur, nous avons besoin d'un objet blanc.On place un objet blanc près du capteur. Après le calibrage, si on garde l'objet blanc devant le capteur, on voit la valeur de 255 pour chacune des trois couleurs rouge, verte et bleue. La fonction Calibrate puis on crée une fonction Calibrate() qui  calcule et stocke les changements maximum et minimum de la fréquence de sortie du capteur dans un environnement non coloré et de couleur blanche. Ensuite,on mappe la plage de changement de couleur sur 0-255 .
 
@@ -176,6 +178,7 @@ Pour calibrer le capteur, nous avons besoin d'un objet blanc.On place un objet b
 
 Il s'agit d'un capteur ToF (Time-of-Flight), c'est-à-dire que la distance est mesurée en mesurant le temps de vol. Le capteur vérifie combien de temps il faut à la lumière pour atteindre l'objet, rebondir dessus et revenir au capteur de réception (Réflexion). Le capteur communique avec l'hôte via l'interface I²C. Outre les broches de bus standard, une sortie d'interruption et une entrée pour l'arrêt du capteur sont également disponibles.
 
+<img src="Photos_RAM/RAM_2.png" width="500">
 
 #### Programmation:
 
@@ -186,7 +189,8 @@ Pour cela on est obligé de créer notre propre drivers pour extraire les donné
 
 ### Sharp GP2Y0D805Z0F - Capteur de Proximité Infrarouge : 
 
-Ce capteur de proximité infrarouge de Pololu permet de détecter sans contact tout objet entre 0,5 et 5 cm . Sur la carte électronique,on retrouve 3 broches : la pastille carrée est la masse, la pastille du milieu est l'alimentation Vin (entre 2.7 et 6.2 V) et la dernière pastille est la sortie du capteur de proximité infrarouge.On peut améliorer la performance du capteur en plaçant une capacité (>10uF) entre l'alimentation et la masse. 
+Ce capteur de proximité infrarouge de Pololu permet de détecter sans contact tout objet entre 0,5 et 5 cm . Sur la carte électronique,on retrouve 3 broches : la pastille carrée est la masse, la pastille du milieu est l'alimentation Vin (entre 2.7 et 6.2 V) et la dernière pastille est la sortie du capteur de proximité infrarouge.On peut améliorer la performance du capteur en plaçant une capacité (>10uF) entre l'alimentation et la masse.
 
+<img src="Photos_RAM/RAM_3.png" width="500">
 
 ## Partie IV - [partie "IV" Adrien]
