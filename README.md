@@ -200,7 +200,7 @@ Ce capteur de proximité infrarouge de Pololu permet de détecter sans contact t
 
 Afin de pouvoir intégrer les éléments imposés du projet sur le robot, nous avons dû modéliser un châssis qui reprend la forme proposée en incluant les capteurs. Pour maximiser la fiabilité de ce robot en termes de trajectoire et faciliter sa commande/son asservissement, nous avons voulu modifier sa géométrie en plaçant entre autres son centre de gravité en aval de son centre de poussée (pour la marche avant), et en rendant quasi parfaitement symétrique el robot, que sa pince soit ouverte ou fermée. Ainsi les batteries se retrouvent à l’arrière, les moteurs contrôlent la rotation des roues directement à l’avant, le troisième point d'appui omni-directionnel est juste derrière les batteries, et la pince à l’opposé, tout à l’avant en porte à faux. Elle opère en un mouvement synchronisé de trois mords qui serrent et soulèvent légèrement du sol la canette interceptée, grâce à une légère inclinaison du système, comme on peut le voir ci-dessous.
 
-[PHOTO_chassis_pince]
+![img](Photos_LEN/LEN_1.png)
 
 Le tout confère au robot une allure de scorpion.
 
@@ -208,15 +208,15 @@ Le tout confère au robot une allure de scorpion.
 
 Les deux capteurs infrarouges anti-chute sont situés sur les côtés, juste devant les roues, de façon à toujours détecter la chute potentielle à temps et à pouvoir faire revenir le robot sur ses pas si nécessaire.
 
-[PHOTO_capteur_IR]
+<img src="Photos_LEN/LEN_IR.png" width="500">
 
 Le capteur de couleur est placé juste sous la pince, avec la même orientation, afin de lire au plus proche la couleur de la canette saisie, car ce type de capteur ne fonctionne pas de façon fiable au delà d’une distance de quelques centimètres.
 
-[PHOTO_capteur_Couleur]
+<img src="Photos_LEN/LEN_color.png" width="500">
 
 Le capteur de distance ‘TOF’ est quant à lui placé sur un plan vertical, sur le front du robot, afin de lire sans obstruction la distance avec les obstacles/cibles rencontré(e)s.
 
-[PHOTO_capteur_TOF]
+<img src="Photos_LEN/LEN_TOF.png" width="500">
 
 ### Dimensions des pièces
 
@@ -238,7 +238,8 @@ Roues avec support | Ø: 40 mm, H: 8 mm
 
 Tous les câbles parcourent le chemin le plus court pour parvenir à la carte, en s'immisçant dans des sillons et fentes prévus à cet effet dans le châssis.
 
-[PHOTO_Fentes]
+![img](Photos_LEN/LEN_fentes1.png)
+![img](Photos_LEN/LEN_fentes2.png)
 
 Ainsi on évite les erreurs de branchement, les croisement et les fils trop exposés.
 
@@ -246,9 +247,10 @@ Ainsi on évite les erreurs de branchement, les croisement et les fils trop expo
 
 Comme expliqué plus haut, la pince s’articule en trois mords synchronisés, deux maintiennent la canette, le troisième la soulève.
 
-[PHOTO_Pince_seule]
+![img](Photos_LEN/LEN_Pincea.png)
+![img](Photos_LEN/LEN_pinceb.png)
 
 Le servomoteur fait passer la pince entre ses états fermés et ouverts sur une course de 90°. Deux mouvements proches mais opposés en sens ferment les deux crochets de pince arrondis, pendant que la troisième composante de la pince s’avance pour refermer l’emprise du robot sur sa bière et la soulever légèrement du sol, pour la vider pour ne pas qu’elle frotte. Cela peut paraître superflu, mais peut jouer un rôle important sur une surface non plane ou rugueuse.
 
-[PHOTO_Pince_morceaux_eclate]
+<img src="Photos_LEN/LEN_pince_eclate.png" width="500">
 
