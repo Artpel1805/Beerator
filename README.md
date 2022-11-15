@@ -92,7 +92,7 @@ Prendre en compte les problèmes de compatibilité électgromagnétique
 
 Grâce au logiciel STM32CubeMx nous avons pu placer les broches sur des pins répondant aux besoins.
 
-<img src="Photos_PEL/PEL_4.png" width="200">
+<img src="Photos_PEL/PEL_4.png" width="500">
 
 Nous devons aussi alimenter le STM32 et il ne faut surtout pas oublier les capacités de découplage car l’alimentation doit être la plus stable possible.
 
@@ -104,7 +104,7 @@ Il ne faut pas oublier de rajouter, les branchements pour le STLink car c’est 
 
 Enfin nous réalisons une analyse électrique de notre circuit pour savoir s’il comporte des erreurs et nous les corrigeons jusqu’à ce qu’il n’y en ai plus.
 
-![img](Photos_PEL/PEL_6.png)
+<img src="Photos_PEL/PEL_6.png" width="500">
 
 
 ### Production du PCB
@@ -112,7 +112,7 @@ Enfin nous réalisons une analyse électrique de notre circuit pour savoir s’i
 La prochaine étape est d’assigner les empreintes correspondants aux composants. Nous utiliserons des composants SMD 0603. Pour les connecteurs nous avons utilisé des connecteurs JST de type JST HX 2.54mm.
 On peut remarquer que certains composants ne sont pas assignés, en effet ce sont les composants qui seront directement soudé au capteur donc ils ne doivent pas être présent sur notre PCB
 
-![img](Photos_PEL/PEL_7.png)
+<img src="Photos_PEL/PEL_7.png" width="500">
 
 Nous travaillons sur un PCB 4 couches, on décide donc d’y placer 2 plans de potentiels séparés par 2 plans de masses pour d'obscures raisons de CEM.
 On peut voir ci dessous le Stack-Up de notre carte
@@ -129,7 +129,7 @@ On peut voir ci dessous le Stack-Up de notre carte
 
 JLC PCB, le fabricant de nos carte nous impose aussi des contraintes de conception que nous devons renseigner.
 
-![img](Photos_PEL/PEL_13.png)
+<img src="Photos_PEL/PEL_13.png" width="500">
 
 La prochaine est le placement des composants sur le PCB.
 Nous essayons de regrouper les composants au maximum par groupe pour que le routage soit le plus simple possible
