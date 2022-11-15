@@ -141,7 +141,7 @@ Il ne faut pas oublier de rajouter, les branchements pour le STLink car c’est 
 
 Enfin nous réalisons une analyse électrique de notre circuit pour savoir s’il comporte des erreurs et nous les corrigeons jusqu’à ce qu’il n’y en ai plus.
 
-<img src="Photos_PEL/PEL_6.png" width="500">
+<p align="center"><img src="Photos_PEL/PEL_6.png" width="500"></p>
 
 
 ### Production du PCB
@@ -149,7 +149,7 @@ Enfin nous réalisons une analyse électrique de notre circuit pour savoir s’i
 La prochaine étape est d’assigner les empreintes correspondants aux composants. Nous utiliserons des composants SMD 0603. Pour les connecteurs nous avons utilisé des connecteurs JST de type JST HX 2.54mm.
 On peut remarquer que certains composants ne sont pas assignés, en effet ce sont les composants qui seront directement soudé au capteur donc ils ne doivent pas être présent sur notre PCB
 
-<img src="Photos_PEL/PEL_7.png" width="500">
+<p align="center"><img src="Photos_PEL/PEL_7.png" width="500"></p>
 
 Nous travaillons sur un PCB 4 couches, on décide donc d’y placer 2 plans de potentiels séparés par 2 plans de masses pour d'obscures raisons de CEM.
 On peut voir ci dessous le Stack-Up de notre carte
@@ -166,7 +166,7 @@ On peut voir ci dessous le Stack-Up de notre carte
 
 JLC PCB, le fabricant de nos carte nous impose aussi des contraintes de conception que nous devons renseigner.
 
-<img src="Photos_PEL/PEL_13.png" width="400">
+<p align="center"><img src="Photos_PEL/PEL_13.png" width="400"></p>
 
 La prochaine est le placement des composants sur le PCB.
 Nous essayons de regrouper les composants au maximum par groupe pour que le routage soit le plus simple possible
@@ -175,7 +175,7 @@ On décide aussi de placer le STM32 au centre car c’est lui qui possède le pl
 
 On voit ci dessous en vert tous les composants relatif au contrôle, en rouge tous le bloc actionneurs, en bleu le bloc alimentation et en jaune le bloc capteur
 
-<img src="Photos_PEL/PEL_8.png" width="500">
+<p align="center"><img src="Photos_PEL/PEL_8.png" width="500"></p>
 
 Nous relions ensuite tous les composants électriquement. Nous veillerons aussi à utiliser les pistes les plus larges possible surtout pour la partie puissance. 
 Cela permet de laisser passer le courant nécessaire et d’éviter des problèmes de CEM.
@@ -187,12 +187,12 @@ Il faut essayer de respecter une distance entre les pistes
 
 Voici ce à quoi ressemblent nos deux plans avec des pistes.
 
-<img src="Photos_PEL/PEL_14.png" width="500">
-<img src="Photos_PEL/PEL_15.png" width="500">
+<p align="center"><img src="Photos_PEL/PEL_14.png" width="500"></p>
+<p align="center"><img src="Photos_PEL/PEL_15.png" width="500"></p>
 
 Et enfin notre carte modélisé en 3D
 
-<img src="Photos_PEL/PEL_16.png" width="500">
+<p align="center"><img src="Photos_PEL/PEL_16.png" width="500"></p>
 
 
 ## Capteurs, spécificités software
@@ -204,7 +204,7 @@ Dans cette partie, on se basera sur le choix des composants et leur protocole de
 Le capteur VEML3328 détecte les couleurs rouge, le vert, le bleu en incorporant des photodiodes, des amplificateurs et des circuits analogiques/numériques dans une seule puce CMOS. Avec ce capteur, la luminosité et la température de couleur d'un rétroéclairage d'affichage peuvent être ajusté en fonction de la source de lumière ambiante, et il peutdifférencier les environnements d'éclairage intérieurs des environnements d'éclairage extérieurs.Il existe une relation entre la sortie et l'intensité lumineuse. La gamme de  sortie est typique de 2hz à 500Khz.
 Ce dispositif utilise une communication I2C qui convient à notre module pour son fonctionnement correct.
 
-<img src="Photos_RAM/RAM_1.png" width="500">
+<p align="center"><img src="Photos_RAM/RAM_1.png" width="500"></p>
 
 #### Calibration
 
@@ -216,7 +216,7 @@ Pour calibrer le capteur, nous avons besoin d'un objet blanc.On place un objet b
 
 Il s'agit d'un capteur ToF (Time-of-Flight), c'est-à-dire que la distance est mesurée en mesurant le temps de vol. Le capteur vérifie combien de temps il faut à la lumière pour atteindre l'objet, rebondir dessus et revenir au capteur de réception (Réflexion). Le capteur communique avec l'hôte via l'interface I²C. Outre les broches de bus standard, une sortie d'interruption et une entrée pour l'arrêt du capteur sont également disponibles.
 
-<img src="Photos_RAM/RAM_2.png" width="500">
+<p align="center"><img src="Photos_RAM/RAM_2.png" width="500"></p>
 
 #### Programmation
 
@@ -229,7 +229,7 @@ Pour cela on est obligé de créer notre propre drivers pour extraire les donné
 
 Ce capteur de proximité infrarouge de Pololu permet de détecter sans contact tout objet entre 0,5 et 5 cm . Sur la carte électronique,on retrouve 3 broches : la pastille carrée est la masse, la pastille du milieu est l'alimentation Vin (entre 2.7 et 6.2 V) et la dernière pastille est la sortie du capteur de proximité infrarouge.On peut améliorer la performance du capteur en plaçant une capacité (>10uF) entre l'alimentation et la masse.
 
-<img src="Photos_RAM/RAM_3.png" width="500">
+<p align="center"><img src="Photos_RAM/RAM_3.png" width="500"></p>
 
 ## Architecture matérielle, Modélisation
 
@@ -245,15 +245,15 @@ Le tout confère au robot une allure de scorpion.
 
 Les deux capteurs infrarouges anti-chute sont situés sur les côtés, juste devant les roues, de façon à toujours détecter la chute potentielle à temps et à pouvoir faire revenir le robot sur ses pas si nécessaire.
 
-<img src="Photos_LEN/LEN_IR.png" width="400">
+<p align="center"><img src="Photos_LEN/LEN_IR.png" width="400"></p>
 
 Le capteur de couleur est placé juste sous la pince, avec la même orientation, afin de lire au plus proche la couleur de la canette saisie, car ce type de capteur ne fonctionne pas de façon fiable au delà d’une distance de quelques centimètres.
 
-<img src="Photos_LEN/LEN_color.png" width="400">
+<p align="center"><img src="Photos_LEN/LEN_color.png" width="400"></p>
 
 Le capteur de distance ‘TOF’ est quant à lui placé sur un plan vertical, sur le front du robot, afin de lire sans obstruction la distance avec les obstacles/cibles rencontré(e)s.
 
-<img src="Photos_LEN/LEN_TOF.png" width="400">
+<p align="center"><img src="Photos_LEN/LEN_TOF.png" width="400"></p>
 
 ### Dimensions des pièces
 
@@ -289,5 +289,5 @@ Comme expliqué plus haut, la pince s’articule en trois mords synchronisés, d
 
 Le servomoteur fait passer la pince entre ses états fermés et ouverts sur une course de 90°. Deux mouvements proches mais opposés en sens ferment les deux crochets de pince arrondis, pendant que la troisième composante de la pince s’avance pour refermer l’emprise du robot sur sa bière et la soulever légèrement du sol, pour la vider pour ne pas qu’elle frotte. Cela peut paraître superflu, mais peut jouer un rôle important sur une surface non plane ou rugueuse.
 
-<img src="Photos_LEN/LEN_pince_eclate.png" width="500">
+<p align="center"><img src="Photos_LEN/LEN_pince_eclate.png" width="500"></p>
 
