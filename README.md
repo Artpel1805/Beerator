@@ -211,16 +211,16 @@ Puisque le diapositif nous fournit comme output un signal variant en fréquence 
 
 Pour calibrer le capteur, nous avons besoin d'un objet blanc.On place un objet blanc près du capteur. Après le calibrage, si on garde l'objet blanc devant le capteur, on voit la valeur de 255 pour chacune des trois couleurs rouge, verte et bleue. La fonction Calibrate puis on crée une fonction Calibrate() qui  calcule et stocke les changements maximum et minimum de la fréquence de sortie du capteur dans un environnement non coloré et de couleur blanche. Ensuite,on mappe la plage de changement de couleur sur 0-255 .
 
-[PREMIER BOUT CODE]
+![img](Photos_RAM/RAM_code_1.png)
 
 Le dispositif dispose de deux broches en changeant leur état permet de choisir la couleur qu’on veut détecter en faisant appel la fonction Calibration() à chaque interruption.
 
-[SECOND BOUT CODE]
+![img](Photos_RAM/RAM_code_2.png)
 
 Le capteur nous fournit un signal carré comme sortie variant en fréquence en fonction de la distance entre l’objet et le capteur  , c’est pour cela qu' on a utilisé la fonction Input Capture Mode du Timer qui permet de détecter chaque front montant . 
 En utilisant cette fonctionnalité , on pourra calculer la fréquence en calculant la différence entre deux fronts montants et l'horloge de référence est calculée en fonction de la configuration que nous avons effectuée . puis en disant l’horloge de référence par la différence précédente.
 
-[TROISIEME BOUT CODE]
+![img](Photos_RAM/RAM_code_3.png)
 
 ### VL53L0X - Capteur de distance TOF
 
