@@ -204,7 +204,7 @@ Dans cette partie, on se basera sur le choix des composants et leur protocole de
 Le capteur VEML3328 détecte les couleurs rouge, le vert, le bleu en incorporant des photodiodes, des amplificateurs et des circuits analogiques/numériques dans une seule puce CMOS. Avec ce capteur, la luminosité et la température de couleur d'un rétroéclairage d'affichage peuvent être ajusté en fonction de la source de lumière ambiante, et il peutdifférencier les environnements d'éclairage intérieurs des environnements d'éclairage extérieurs.Il existe une relation entre la sortie et l'intensité lumineuse. La gamme de  sortie est typique de 2hz à 500Khz.
 Ce dispositif utilise une communication I2C qui convient à notre module pour son fonctionnement correct.
 
-<p align="center"><img src="Photos_RAM/RAM_1.png" width="500"></p>
+<p align="center"><img src="Photos_RAM/RAM_1.png" width="400"></p>
 
 #### Calibration
 
@@ -216,7 +216,7 @@ Pour calibrer le capteur, nous avons besoin d'un objet blanc.On place un objet b
 
 Il s'agit d'un capteur ToF (Time-of-Flight), c'est-à-dire que la distance est mesurée en mesurant le temps de vol. Le capteur vérifie combien de temps il faut à la lumière pour atteindre l'objet, rebondir dessus et revenir au capteur de réception (Réflexion). Le capteur communique avec l'hôte via l'interface I²C. Outre les broches de bus standard, une sortie d'interruption et une entrée pour l'arrêt du capteur sont également disponibles.
 
-<p align="center"><img src="Photos_RAM/RAM_2.png" width="500"></p>
+<p align="center"><img src="Photos_RAM/RAM_2.png" width="400"></p>
 
 #### Programmation
 
@@ -229,7 +229,7 @@ Pour cela on est obligé de créer notre propre drivers pour extraire les donné
 
 Ce capteur de proximité infrarouge de Pololu permet de détecter sans contact tout objet entre 0,5 et 5 cm . Sur la carte électronique,on retrouve 3 broches : la pastille carrée est la masse, la pastille du milieu est l'alimentation Vin (entre 2.7 et 6.2 V) et la dernière pastille est la sortie du capteur de proximité infrarouge.On peut améliorer la performance du capteur en plaçant une capacité (>10uF) entre l'alimentation et la masse.
 
-<p align="center"><img src="Photos_RAM/RAM_3.png" width="500"></p>
+<p align="center"><img src="Photos_RAM/RAM_3.png" width="400"></p>
 
 ## Architecture matérielle, Modélisation
 
@@ -237,7 +237,7 @@ Ce capteur de proximité infrarouge de Pololu permet de détecter sans contact t
 
 Afin de pouvoir intégrer les éléments imposés du projet sur le robot, nous avons dû modéliser un châssis qui reprend la forme proposée en incluant les capteurs. Pour maximiser la fiabilité de ce robot en termes de trajectoire et faciliter sa commande/son asservissement, nous avons voulu modifier sa géométrie en plaçant entre autres son centre de gravité en aval de son centre de poussée (pour la marche avant), et en rendant quasi parfaitement symétrique el robot, que sa pince soit ouverte ou fermée. Ainsi les batteries se retrouvent à l’arrière, les moteurs contrôlent la rotation des roues directement à l’avant, le troisième point d'appui omni-directionnel est juste derrière les batteries, et la pince à l’opposé, tout à l’avant en porte à faux. Elle opère en un mouvement synchronisé de trois mords qui serrent et soulèvent légèrement du sol la canette interceptée, grâce à une légère inclinaison du système, comme on peut le voir ci-dessous.
 
-![img](Photos_LEN/LEN_1.png)
+<p align="center"><img src="Photos_LEN/LEN_1.png" width="800"></p>
 
 Le tout confère au robot une allure de scorpion.
 
@@ -245,15 +245,15 @@ Le tout confère au robot une allure de scorpion.
 
 Les deux capteurs infrarouges anti-chute sont situés sur les côtés, juste devant les roues, de façon à toujours détecter la chute potentielle à temps et à pouvoir faire revenir le robot sur ses pas si nécessaire.
 
-<p align="center"><img src="Photos_LEN/LEN_IR.png" width="400"></p>
+<p align="center"><img src="Photos_LEN/LEN_IR.png" width="350"></p>
 
 Le capteur de couleur est placé juste sous la pince, avec la même orientation, afin de lire au plus proche la couleur de la canette saisie, car ce type de capteur ne fonctionne pas de façon fiable au delà d’une distance de quelques centimètres.
 
-<p align="center"><img src="Photos_LEN/LEN_color.png" width="400"></p>
+<p align="center"><img src="Photos_LEN/LEN_color.png" width="300"></p>
 
 Le capteur de distance ‘TOF’ est quant à lui placé sur un plan vertical, sur le front du robot, afin de lire sans obstruction la distance avec les obstacles/cibles rencontré(e)s.
 
-<p align="center"><img src="Photos_LEN/LEN_TOF.png" width="400"></p>
+<p align="center"><img src="Photos_LEN/LEN_TOF.png" width="350"></p>
 
 ### Dimensions des pièces
 
@@ -289,5 +289,5 @@ Comme expliqué plus haut, la pince s’articule en trois mords synchronisés, d
 
 Le servomoteur fait passer la pince entre ses états fermés et ouverts sur une course de 90°. Deux mouvements proches mais opposés en sens ferment les deux crochets de pince arrondis, pendant que la troisième composante de la pince s’avance pour refermer l’emprise du robot sur sa bière et la soulever légèrement du sol, pour la vider pour ne pas qu’elle frotte. Cela peut paraître superflu, mais peut jouer un rôle important sur une surface non plane ou rugueuse.
 
-<p align="center"><img src="Photos_LEN/LEN_pince_eclate.png" width="500"></p>
+<p align="center"><img src="Photos_LEN/LEN_pince_eclate.png" width="450"></p>
 
