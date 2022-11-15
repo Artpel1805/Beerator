@@ -117,8 +117,8 @@ On peut remarquer que certains composants ne sont pas assignés, en effet ce son
 Nous travaillons sur un PCB 4 couches, on décide donc d’y placer 2 plans de potentiels séparés par 2 plans de masses pour d'obscures raisons de CEM.
 On peut voir ci dessous le Stack-Up de notre carte
 
-[color=red]5V (Rouge)[/color]
-[color=green]GND (Vert)[/color]
+<color=red>5V (Rouge)</color>
+[color=green] GND (Vert) [/color]
 [color=yellow]3,3V (Jaune)[/color]
 [color=blue]GND (Bleu)[/color]
 
