@@ -657,3 +657,6 @@
 2022-11-16 11:59:53,450 [INFO] ProjectBuilder:4285 - Time for Generating toolchain IDE Files: 3432mS.
 2022-11-16 11:59:53,451 [INFO] ProjectBuilder:2790 - Time for Copy CMSIS : 1mS.
 2022-11-16 11:59:53,452 [INFO] ProjectBuilder:2790 - Time for Copy CMSIS : 0mS.
+2022-11-16 13:33:48,472 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-11-16 13:33:48,481 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-11-16 13:33:48,482 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
