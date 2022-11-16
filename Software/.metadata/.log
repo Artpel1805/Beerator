@@ -1,0 +1,16 @@
+!SESSION 2022-11-16 11:20:54.019 -----------------------------------------------
+eclipse.buildId=Version 1.10.1
+java.version=11.0.14.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=fr_FR
+Framework arguments:  -keyring /Users/arthurpellegrin/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -keyring /Users/arthurpellegrin/.eclipse_keyring
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2022-11-16 11:21:42.332
+!MESSAGE Log4j initialized with config file /Users/arthurpellegrin/Desktop/ESE/Beerator/Software/.metadata/.log4j.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2022-11-16 11:21:47.332
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2022-11-16 11:24:30.856
+!MESSAGE Indexed 'Beerator' (20 sources, 83 headers) in 4.55 sec: 4,313 declarations; 17,975 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.009%)
