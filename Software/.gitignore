@@ -1,6 +1,7 @@
 #Debug/
 .metadata/
 .Beerator/settings/
+.Beerator/Debug/
 
 #RemoteSystemsTempFiles/
 *.chm
