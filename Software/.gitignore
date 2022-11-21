@@ -1,0 +1,12 @@
+#Debug/
+.metadata/
+.Beerator/settings/
+
+#RemoteSystemsTempFiles/
+*.chm
+*.settings.xml
+
+*.xml
+*.launch
+
+
