@@ -4,6 +4,8 @@
 *.ini
 *.index
 *.prefs
+*.resources
+*.snap
 
 # Object files
 *.o
