@@ -1,11 +1,16 @@
 # Prerequisites
 *.d
-*.log
-*.ini
-*.index
-*.prefs
-*.resources
-*.snap
+#Debug/
+.metadata/
+.settings/
+#RemoteSystemsTempFiles/
+ 
+*.chm
+*.settings.xml
+ 
+*.xml
+*.launch
+
 
 # Object files
 *.o
