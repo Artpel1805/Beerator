@@ -59,8 +59,10 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define IR1_OUT_Pin GPIO_PIN_11
 #define IR1_OUT_GPIO_Port GPIOC
+#define IR1_OUT_EXTI_IRQn EXTI4_15_IRQn
 #define IR2_OUT_Pin GPIO_PIN_12
 #define IR2_OUT_GPIO_Port GPIOC
+#define IR2_OUT_EXTI_IRQn EXTI4_15_IRQn
 #define LED_GREEN_Pin GPIO_PIN_3
 #define LED_GREEN_GPIO_Port GPIOC
 #define TOF1_EXTI_Pin GPIO_PIN_2
@@ -102,7 +104,8 @@ void Error_Handler(void);
 #define PWM_M2_Pin GPIO_PIN_9
 #define PWM_M2_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
-
+#define IDLE 0
+#define DONE 1
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus
