@@ -1,6 +1,9 @@
 # Prerequisites
 *.d
 *.log
+*.ini
+*.index
+*.prefs
 
 # Object files
 *.o
