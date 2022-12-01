@@ -103,6 +103,7 @@ void Error_Handler(void);
 #define PWM_M1_GPIO_Port GPIOB
 #define PWM_M2_Pin GPIO_PIN_9
 #define PWM_M2_GPIO_Port GPIOB
+
 /* USER CODE BEGIN Private defines */
 #define IDLE 0
 #define DONE 1

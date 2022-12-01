@@ -1,0 +1,9 @@
+**/.metadata/
+
+*.o
+*.su
+*.d
+*.mk
+*.ld
+/Software/Beerator/Debug
+/Software/Beerator/.settings
