@@ -32,8 +32,7 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-#define TIMCLOCK   90000000
-#define PRESCALAR  90
+
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -74,7 +73,6 @@ int __io_putchar(int chr)
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-	printf("=========Beerator Starting==========");
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -105,7 +103,11 @@ int main(void)
   MX_USART1_UART_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-  HAL_TIM_IC_Start_IT(&htim14, TIM_CHANNEL_1);
+	printf("=========Beerator Initialized==========\r\n");
+	for(;;){
+		HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin);
+		HAL_Delay(1000);
+	}
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */
@@ -117,7 +119,6 @@ int main(void)
   /* We should never get here as control is now taken by the scheduler */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-	printf("=========Beerator Initialized entering the loop==========");
 	while (1)
 	{
     /* USER CODE END WHILE */
@@ -174,71 +175,27 @@ void SystemClock_Config(void)
 
 /* USER CODE BEGIN 4 */
 
-/* IR CALLBACK*/
-void HAL_GPIO_EXTI_Rising_Callback(uint16_t GPIO_PIN){
-	if(GPIO_PIN == IR1_OUT_Pin){
-
+void HAL_GPIO_EXTI_Rising_Callback(uint16_t GPIO_Pin){
+	if(GPIO_Pin == IR1_OUT_Pin){
+		printf("/! Floor 1 NOK ! !/ \r\n");
 	}
-
-	if(GPIO_PIN == IR2_OUT_Pin){
-
+	if(GPIO_Pin == IR2_OUT_Pin){
+		printf("/! Floor 2 NOK ! !/ \r\n");
 	}
-
 }
 
-
-
-void HAL_GPIO_EXTI_Falling_Callback(uint16_t GPIO_PIN){
-	if(GPIO_PIN == IR1_OUT_Pin){
-
+void HAL_GPIO_EXTI_Falling_Callback(uint16_t GPIO_Pin){
+	if(GPIO_Pin == IR1_OUT_Pin){
+		printf("Floor 1 OK \r\n");
 	}
-
-	if(GPIO_PIN == IR2_OUT_Pin){
-
+	if(GPIO_Pin == IR2_OUT_Pin){
+		printf("Floor 2 OK \r\n");
 	}
 }
 
 
 /*TCS CallBack*/
-int frequency_first_mesure_state = 0;
-uint32_t frequency_t1 = 0;
-uint32_t frequency_t2 = 0;
-uint32_t frequency_period=0;
-uint32_t frequency = 0;
 
-
-void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
-  {
-  	if (htim == &htim14)
-  	{
-  		if (frequency_first_mesure_state == IDLE) // if the first rising edge is not captured
-  		{
-  			frequency_t1 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1); // read the first value
-  			frequency_first_mesure_state = DONE;  // set the first captured as true
-  		}
-
-  		else   // If the first rising edge is captured, now we will capture the second edge
-  		{
-  			frequency_t2 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1);  // read second value
-
-  			if (frequency_t2 > frequency_t1)
-  			{
-  				frequency_period = frequency_t2-frequency_t1;
-  			}
-
-  			else if (frequency_t1 > frequency_t2)
-  			{
-  				frequency_period = (0xfffff - frequency_t1) + frequency_t2;
-  			}
-
-  			float refClock = TIMCLOCK/(PRESCALAR);
-
-  			frequency = refClock/frequency_period;
-  			__HAL_TIM_SET_COUNTER(htim, 0);  // reset the counter
-  			frequency_first_mesure_state = IDLE; // set it back to false
-  		}
-  	}
-  }
 
 /* USER CODE END 4 */
 
