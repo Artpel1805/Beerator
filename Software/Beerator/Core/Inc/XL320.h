@@ -47,6 +47,31 @@ typedef enum
 	fast_bulk_read = 0x9A
 } XL320_instructions;
 
+typedef enum
+{
+	SEND_SERVO_Ok = 1,
+	SEND_SERVO_ERROR = -1,
+	SERVO_Ok = 1,
+	SERVO_ERROR = -1,
+	PING_SERVO_OK = 1,
+	PING_SERVO_ERROR = -1,
+	READ_SERVO_Ok = 1,
+	READ_SERVO_ERROR = -1,
+	WRITE_SERVO_Ok = 1,
+	WRITE_SERVO_ERROR = -1,
+	TORQUE_SERVO_Ok  = 1,
+	TORQUE_SERVO_ERROR = -1,
+	SPEED_SERVO_Ok  = 1,
+	SPEED_SERVO_ERROR = -1,
+	GOAL_SERVO_Ok  = 1,
+	GOAL_SERVO_ERROR = -1,
+
+
+
+} XL320_error_handler;
+
+
+
 typedef struct statusINFO
 {
 	uint8_t params;
@@ -67,7 +92,7 @@ typedef struct h_XL320_t
 
 } h_XL320_t;
 
-void XL320_send_packet(h_XL320_t * XL320, uint8_t id, XL320_instructions inst, uint8_t *params, uint16_t params_length,uint8_t Rx_packet_length);
+uint8_t XL320_send_packet(h_XL320_t * XL320, uint8_t id, XL320_instructions inst, uint8_t *params, uint16_t params_length,uint8_t Rx_packet_length);
 
 uint8_t XL320_parse_status_packet(uint8_t *packet, uint32_t packet_length, uint8_t *id, uint8_t *params, uint16_t *params_length, uint8_t *error, uint8_t *crc_check);
 
@@ -81,14 +106,15 @@ uint16_t XL320_read_position(h_XL320_t * XL320, uint8_t id);
 
 uint8_t XL320_ping(h_XL320_t * XL320, uint8_t id,uint16_t *model_number,uint8_t *firmware_version);
 
-void XL320_set_goal_position(h_XL320_t * XL320, uint8_t id, uint16_t position);
+uint8_t XL320_set_goal_position(h_XL320_t * XL320, uint8_t id, uint16_t position);
 
-void XL320_set_speed_position(h_XL320_t * XL320, uint8_t id, uint16_t speed);
+uint8_t XL320_set_speed_position(h_XL320_t * XL320, uint8_t id, uint16_t speed);
 
-void XL320_set_torque_enable(h_XL320_t * XL320, uint8_t id, uint8_t enable);
+uint8_t XL320_set_torque_enable(h_XL320_t * XL320, uint8_t id, uint8_t enable);
 
 uint8_t XL320_read(h_XL320_t * XL320, uint8_t id, uint16_t address, uint16_t data_length, statusINFO rxinfo, uint8_t *returnedDATA);
 
 uint16_t XL_320read_present_position(uint8_t id);
+uint8_t XL320_write(h_XL320_t * XL320, uint8_t id, uint16_t address, uint8_t *data, uint16_t data_length);
 
 
