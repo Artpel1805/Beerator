@@ -331,5 +331,15 @@ uint8_t XL320_set_goal_position(h_XL320_t * XL320, uint8_t id, uint16_t position
 	else
 		return GOAL_SERVO_ERROR;
 }
+uint8_t XL320_Init(uint16_t speed,h_XL320_t * XL320)
+{
+	if((XL320_set_torque_enable(&XL320, 0x01, 1)== TORQUE_SERVO_Ok ) && (XL320_set_speed_position(&XL320, 0x01, speed)==SPEED_SERVO_Ok))
+	{
+		return INIT_SERVO_OK;
+
+	}
+	else
+		return INIT_SERVO_EROOR;
+}
 
 

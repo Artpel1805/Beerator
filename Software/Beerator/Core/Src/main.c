@@ -163,6 +163,15 @@ int Motor_X_Stop_Shell(h_shell_t * h_shell, int argc, char ** argv){
 	}
 	return 0;
 }
+int XL320_set_init(h_shell_t * h_shell, int argc, char ** argv)
+{
+	if( XL320_Init(atoi(argv[1]),&XL320)== INIT_SERVO_OK)
+	{
+		return 1;
+	}
+	else
+		return -1;
+}
 /* USER CODE END 0 */
 
 /**
@@ -230,6 +239,7 @@ int main(void)
 	shell_add(&h_shell,'t', XL320_Set_Torque_Shell,"Set Torque");
 	shell_add(&h_shell,'K',XL320_Set_Position_Shell,"Open  XXXX ");
 	shell_add(&h_shell,'s',XL320_Set_Speed_Shell,"Speed  XXXX ");
+	shell_add(&h_shell,'i',XL320_set_init,"Initialisation du torque et la vitesse ");
 
 
 	printf("+++++++++++ Berator Configured +++++++++ \r\n\n\n");
