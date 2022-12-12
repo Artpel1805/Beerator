@@ -28,6 +28,13 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "motor_drive.h"
+#include "shell.h"
+#include "drv_uart1.h"
+#include "XL320.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -48,6 +55,18 @@
 
 /* USER CODE BEGIN PV */
 
+//Shell
+h_shell_t h_shell;
+
+// Motors
+h_motor_t motor1;
+h_motor_t motor2;
+h_motors_t motors;
+
+// Servo
+
+h_XL320_t XL320;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -61,8 +80,88 @@ void MX_FREERTOS_Init(void);
 /* USER CODE BEGIN 0 */
 int __io_putchar(int chr)
 {
-	HAL_UART_Transmit(&huart1, (uint8_t*)&chr, 1, HAL_MAX_DELAY);
+	HAL_UART_Transmit(&UART_DEVICE, (uint8_t*)&chr, 1, HAL_MAX_DELAY);
 	return chr;
+}
+
+int Test_Shell(h_shell_t * h_shell, int argc, char ** argv)
+{
+	int size = snprintf (h_shell->print_buffer, BUFFER_SIZE, "Je suis une fonction bidon\r\n");
+	h_shell->drv.transmit(h_shell->print_buffer, size);
+	return 0;
+}
+
+int XL320_Ping_Shell(h_shell_t * h_shell, int argc, char ** argv)
+{
+	if(XL320_ping(&XL320, 0x01, &XL320.model_number, &XL320.firmware_version )==1)
+	{
+		sprintf ((char *)XL320.msg, "model_number= 0x%04x \r\n", XL320.model_number);
+		printf((char *)XL320.msg);
+		sprintf ((char *)XL320.msg, "firmware_version= 0x%04x \r\n", XL320.firmware_version);
+		printf((char *)XL320.msg);
+		return 1;
+	}
+	int size = snprintf (h_shell->print_buffer, BUFFER_SIZE, "Ping NOK | An Error Occurred \r\n");
+	h_shell->drv.transmit(h_shell->print_buffer, size);
+	return 0;
+}
+
+int XL320_Reset_Position_Shell(h_shell_t * h_shell, int argc, char ** argv)
+{
+	XL320_set_goal_position(&XL320, 0x01, 0);
+	return 1;
+
+}
+
+int XL320_Set_Position_Shell(h_shell_t * h_shell, int argc, char ** argv)
+{
+	printf("Setting Position at %s", argv[1]);
+	XL320_set_goal_position(&XL320, 0x01,atoi(argv[1]));
+	return 1;
+
+}
+
+int XL320_Set_Torque_Shell(h_shell_t * h_shell, int argc, char ** argv)
+{
+	printf("Enable Torque");
+	XL320_set_torque_enable(&XL320, 0x01, 1);
+	return 1;
+
+}
+
+int XL320_Set_Speed_Shell(h_shell_t * h_shell, int argc, char ** argv)
+{
+	printf("Set Speed Enable");
+	XL320_set_speed_position(&XL320, 0x01, atoi(argv[1]));
+	return 1;
+}
+
+int Motor_X_Run_Forward_Shell(h_shell_t * h_shell, int argc, char ** argv){
+	if(strcmp(argv[1], "1")){
+		motor_start_forward(&motor1);
+		return 1;
+	} else if (strcmp(argv[1], "2")){
+		motor_start_forward(&motor2);
+		return 1;
+	} else {
+		printf("only 2 motors");
+		return -1;
+	}
+	return 0;
+}
+
+int Motor_X_Stop_Shell(h_shell_t * h_shell, int argc, char ** argv){
+	if(strcmp(argv[1], "1")){
+		motor_stop(&motor1);
+		return 1;
+	} else if (strcmp(argv[1], "2")){
+		motor_stop(&motor2);
+		return 1;
+	} else {
+		printf("only 2 motors");
+		return -1;
+	}
+	return 0;
 }
 /* USER CODE END 0 */
 
@@ -103,11 +202,39 @@ int main(void)
   MX_USART1_UART_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-	printf("=========Beerator Initialized==========\r\n");
-	for(;;){
-		HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin);
-		HAL_Delay(1000);
-	}
+
+	// Init Motor
+	motor1.channel_motor = MOTOR1_CHANNEL;
+	motor1.htim_motor = MOTOR1_TIM;
+	motor2.channel_motor = MOTOR2_CHANNEL;
+	motor2.htim_motor = MOTOR2_TIM;
+	motors.motor1 = &motor1;
+	motors.motor2 = &motor2;
+
+	//Init Shell
+	h_shell.drv.receive = drv_uart1_receive;
+	h_shell.drv.transmit = drv_uart1_transmit;
+
+	// Init XL320
+	XL320.firmware_version = 0;
+	XL320.model_number = 0;
+	XL320.uart = &huart2;
+
+
+	//Shell Configuration
+	shell_init(&h_shell);
+	shell_add(&h_shell, 'f', Motor_X_Run_Forward_Shell, "Run Motor X Forward");
+	shell_add(&h_shell, 'X', Motor_X_Stop_Shell, "Stop Motor X");
+	shell_add(&h_shell, 'p', XL320_Ping_Shell, "Ping XL320");
+	shell_add(&h_shell,'0', XL320_Reset_Position_Shell,"Position 0 // closed");
+	shell_add(&h_shell,'t', XL320_Set_Torque_Shell,"Set Torque");
+	shell_add(&h_shell,'K',XL320_Set_Position_Shell,"Open  XXXX ");
+	shell_add(&h_shell,'s',XL320_Set_Speed_Shell,"Speed  XXXX ");
+
+
+	printf("+++++++++++ Berator Configured +++++++++ \r\n\n\n");
+	shell_run(&h_shell);
+
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */
@@ -192,9 +319,6 @@ void HAL_GPIO_EXTI_Falling_Callback(uint16_t GPIO_Pin){
 		printf("Floor 2 OK \r\n");
 	}
 }
-
-
-/*TCS CallBack*/
 
 
 /* USER CODE END 4 */
