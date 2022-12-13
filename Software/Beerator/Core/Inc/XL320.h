@@ -7,6 +7,7 @@
 
 #include "main.h"
 #include "stdio.h"
+#include "cmsis_os.h"
 
 
 #ifndef INC_XL320_H_
@@ -91,6 +92,7 @@ typedef struct h_XL320_t
 	uint16_t model_number;
 	uint8_t firmware_version;
 	UART_HandleTypeDef * uart;
+	SemaphoreHandle_t sem_packet;
 
 } h_XL320_t;
 
