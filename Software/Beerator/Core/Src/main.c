@@ -311,6 +311,16 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+	if (huart->Instance == USART2)
+	{
+		BaseType_t pxHigherPriorityTaskWoken = pdFALSE;
+		xSemaphoreGiveFromISR(XL320.sem_packet, &pxHigherPriorityTaskWoken);
+		portYIELD_FROM_ISR(pxHigherPriorityTaskWoken);
+	}
+
+}
 
 void HAL_GPIO_EXTI_Rising_Callback(uint16_t GPIO_Pin){
 	if(GPIO_Pin == IR1_OUT_Pin){

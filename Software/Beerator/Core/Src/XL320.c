@@ -9,6 +9,7 @@
 #include "main.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include "cmsis_os.h"
 
 static uint8_t bufRX[BUFFER_LENGTH] = {0};
 
@@ -100,6 +101,7 @@ uint8_t XL320_send_packet(h_XL320_t * XL320, uint8_t id, XL320_instructions inst
 	{
 		HAL_HalfDuplex_EnableReceiver(XL320->uart);
 		HAL_UART_Receive_IT(XL320->uart, bufRX, Rx_packet_length);
+		xSemaphoreTake(XL320->sem_packet, portMAX_DELAY);
 		printf("\r\nData transmitted successfully\r\n");
 
 		return SEND_SERVO_Ok;
@@ -333,13 +335,31 @@ uint8_t XL320_set_goal_position(h_XL320_t * XL320, uint8_t id, uint16_t position
 }
 uint8_t XL320_Init(uint16_t speed,h_XL320_t * XL320)
 {
-	if((XL320_set_torque_enable(&XL320, 0x01, 1)== TORQUE_SERVO_Ok ) && (XL320_set_speed_position(&XL320, 0x01, speed)==SPEED_SERVO_Ok))
+	XL320->sem_packet=xSemaphoreCreateBinary();
+	if (XL320->sem_packet == NULL)
 	{
-		return INIT_SERVO_OK;
-
+		printf("Error  Creating Semaphore Servo\r\n");
+		while(1);
 	}
-	else
-		return INIT_SERVO_EROOR;
+	if(XL320_ping(XL320, 0x01, &(XL320->model_number), &(XL320->firmware_version ))==1)
+		{
+			printf ("model_number= 0x%04x \r\n", XL320->model_number);
+			printf ("firmware_version= 0x%04x \r\n", XL320->firmware_version);
+
+			if((XL320_set_torque_enable(XL320, 0x01, 1)== TORQUE_SERVO_Ok ) && (XL320_set_speed_position(XL320, 0x01, speed)==SPEED_SERVO_Ok))
+				{
+				   printf("torque enabled && Position is Set \r\n");
+
+					return INIT_SERVO_OK;
+
+				}
+				else
+					return INIT_SERVO_EROOR;
+
+		}
+	return 1;
+
+
 }
 
 
