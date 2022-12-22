@@ -65,6 +65,8 @@ typedef enum
 	SPEED_SERVO_ERROR = -1,
 	GOAL_SERVO_Ok  = 1,
 	GOAL_SERVO_ERROR = -1,
+	INIT_SERVO_OK = 1,
+	INIT_SERVO_EROOR = -1
 
 
 
@@ -116,5 +118,5 @@ uint8_t XL320_read(h_XL320_t * XL320, uint8_t id, uint16_t address, uint16_t dat
 
 uint16_t XL_320read_present_position(uint8_t id);
 uint8_t XL320_write(h_XL320_t * XL320, uint8_t id, uint16_t address, uint8_t *data, uint16_t data_length);
-
+uint8_t XL320_Init(uint16_t speed,h_XL320_t * XL320);
 
