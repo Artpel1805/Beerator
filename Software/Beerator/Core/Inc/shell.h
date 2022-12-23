@@ -9,6 +9,7 @@
 #define INC_LIB_SHELL_SHELL_H_
 
 #include <stdint.h>
+#include "cmsis_os.h"
 
 #define UART_DEVICE huart1
 
@@ -38,14 +39,28 @@ typedef struct drv_shell_struct
 typedef struct h_shell_struct
 {
 	int func_list_size;
+	char RxBuffer;
+	int pos;
+
 	shell_func_t func_list[SHELL_FUNC_LIST_MAX_SIZE];
+
 	char print_buffer[BUFFER_SIZE];
 	char cmd_buffer[BUFFER_SIZE];
+
 	drv_shell_t drv;
+
+	TaskHandle_t xHandleShell;
+
 } h_shell_t;
 
-void shell_init(h_shell_t * h_shell);
+typedef enum Shell_Status {
+	SHELL_OK = 1,
+	SHELL_ERROR = -1,
+} Shell_Status;
+
+int shell_init(h_shell_t * h_shell);
 int shell_add(h_shell_t * h_shell, char c, shell_func_pointer_t pfunc, char * description);
 int shell_run(h_shell_t * h_shell);
+int shell_Rx_CallBack(h_shell_t * h_shell);
 
 #endif /* INC_LIB_SHELL_SHELL_H_ */
