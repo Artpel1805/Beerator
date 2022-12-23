@@ -6,6 +6,7 @@
  */
 
 #include "shell.h"
+#include "main.h"
 
 #include <stdio.h>
 
@@ -14,21 +15,26 @@ static int sh_help(h_shell_t * h_shell, int argc, char ** argv) {
 	for(i = 0 ; i < h_shell->func_list_size ; i++) {
 		int size;
 		size = snprintf (h_shell->print_buffer, BUFFER_SIZE, "%c: %s\r\n", h_shell->func_list[i].c, h_shell->func_list[i].description);
-		h_shell->drv.transmit(h_shell->print_buffer, size);
+		if( h_shell->drv.transmit(h_shell->print_buffer, size) != HAL_OK ){
+			return SHELL_ERROR;
+		}
 	}
 
-	return 0;
+	return SHELL_OK;
 }
 
-void shell_init(h_shell_t * h_shell) {
+int shell_init(h_shell_t * h_shell) {
 	int size = 0;
 
 	h_shell->func_list_size = 0;
 
 	size = snprintf (h_shell->print_buffer, BUFFER_SIZE, "\r\n\r\n===== Beerator Shell =====\r\n");
-	h_shell->drv.transmit(h_shell->print_buffer, size);
 
+	if( h_shell->drv.transmit(h_shell->print_buffer, size) != HAL_OK ){
+		return SHELL_ERROR;
+	}
 	shell_add(h_shell, 'h', sh_help, "Help");
+	return SHELL_OK;
 }
 
 int shell_add(h_shell_t * h_shell, char c, shell_func_pointer_t pfunc, char * description) {
@@ -78,48 +84,48 @@ static const char backspace[] = "\b \b";
 static const char prompt[] = "> ";
 
 int shell_run(h_shell_t * h_shell) {
-	int reading = 0;
-	int pos = 0;
-
+	h_shell->drv.transmit(prompt, 2);
 	while (1) {
-		h_shell->drv.transmit(prompt, 2);
-		reading = 1;
+		h_shell->drv.receive(&h_shell->RxBuffer, 1);
+		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+		shell_Rx_CallBack(h_shell);
+	}
+	return 0;
+}
 
-		while(reading) {
-			char c;
-			h_shell->drv.receive(&c, 1);
-			int size;
 
-			switch (c) {
-			//process RETURN key
-			case '\r':
-				//case '\n':
-				size = snprintf (h_shell->print_buffer, BUFFER_SIZE, "\r\n");
-				h_shell->drv.transmit(h_shell->print_buffer, size);
-				h_shell->cmd_buffer[pos++] = 0;     //add \0 char at end of string
-				size = snprintf (h_shell->print_buffer, BUFFER_SIZE, ":%s\r\n", h_shell->cmd_buffer);
-				h_shell->drv.transmit(h_shell->print_buffer, size);
-				reading = 0;        //exit read loop
-				pos = 0;            //reset buffer
-				break;
-				//backspace
-			case '\b':
-				if (pos > 0) {      //is there a char to delete?
-					pos--;          //remove it in buffer
-
-					h_shell->drv.transmit(backspace, 3);	// delete the char on the terminal
-				}
-				break;
-				//other characters
-			default:
-				//only store characters if buffer has space
-				if (pos < BUFFER_SIZE) {
-					h_shell->drv.transmit(&c, 1);
-					h_shell->cmd_buffer[pos++] = c; //store
-				}
-			}
-		}
+int shell_Rx_CallBack(h_shell_t * h_shell){
+	int size;
+	switch (h_shell->RxBuffer) {
+	//process RETURN key
+	case '\r':
+		//case '\n':
+		size = snprintf (h_shell->print_buffer, BUFFER_SIZE, "\r\n");
+		h_shell->drv.transmit(h_shell->print_buffer, size);
+		h_shell->cmd_buffer[h_shell->pos++] = 0;     //add \0 char at end of string
+		size = snprintf (h_shell->print_buffer, BUFFER_SIZE, ":%s\r\n", h_shell->cmd_buffer);
+		h_shell->drv.transmit(h_shell->print_buffer, size);
+		h_shell->pos = 0;
 		shell_exec(h_shell, h_shell->cmd_buffer);
+		h_shell->drv.transmit(prompt, 2);
+		//exit read loop
+		//reset buffer
+		break;
+		//backspace
+	case '\b':
+		if (h_shell->pos > 0) {      //is there a char to delete?
+			h_shell->pos--;          //remove it in buffer
+
+			h_shell->drv.transmit(backspace, 3);	// delete the char on the terminal
+		}
+		break;
+		//other characters
+	default:
+		//only store characters if buffer has space
+		if (h_shell->pos < BUFFER_SIZE) {
+			h_shell->drv.transmit(&h_shell->RxBuffer, 1);
+			h_shell->cmd_buffer[h_shell->pos++] = h_shell->RxBuffer; //store
+		}
 	}
 	return 0;
 }
