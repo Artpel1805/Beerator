@@ -66,7 +66,7 @@ uint16_t XL320_CRC(uint16_t crc_accum, uint8_t *data_blk_ptr, uint16_t data_blk_
 
 
 
-uint8_t XL320_send_packet(h_XL320_t * XL320, uint8_t id, XL320_instructions inst, uint8_t *params, uint16_t params_length,uint8_t Rx_packet_length)
+uint8_t XL320_send_packet(h_XL320_t * XL320, XL320_instructions inst, uint8_t *params, uint16_t params_length,uint8_t Rx_packet_length)
 {
 	uint32_t packet_length = packet_length_init + params_length;
 	uint8_t packet[packet_length];
@@ -74,7 +74,7 @@ uint8_t XL320_send_packet(h_XL320_t * XL320, uint8_t id, XL320_instructions inst
 	packet[1] = 0xFF; /* Hedaer 2. */
 	packet[2] = 0xFD; /* Hedaer 3. */
 	packet[3] = 0x00; /* Reserved. */
-	packet[4] = id; /* Packet ID. */
+	packet[4] = XL320->id; /* Packet ID. */
 
 	/* Length = Parameter length + 3. */
 
@@ -92,56 +92,42 @@ uint8_t XL320_send_packet(h_XL320_t * XL320, uint8_t id, XL320_instructions inst
 	uint16_t crc=XL320_CRC(0, packet, packet_length - 2);
 	packet[packet_length-2]=XL320_GET_LO_BYTE(crc);
 	packet[packet_length-1]=XL320_GET_HO_BYTE(crc);
-	printf("\r\n Send Packet \r\n");
-	XL320_Display_Packet(packet,packet_length);
-
 
 	HAL_HalfDuplex_EnableTransmitter(XL320->uart);
-	if (HAL_UART_Transmit(XL320->uart, packet, packet_length, 0xFFFF)==HAL_OK)
+	if (HAL_UART_Transmit(XL320->uart, packet, packet_length, 0xFFFF) == HAL_OK)
 	{
 		HAL_HalfDuplex_EnableReceiver(XL320->uart);
-		HAL_UART_Receive_IT(XL320->uart, bufRX, Rx_packet_length);
-		xSemaphoreTake(XL320->sem_packet, portMAX_DELAY);
-		printf("\r\nData transmitted successfully\r\n");
-
-		return SEND_SERVO_Ok;
+		HAL_UART_Receive(XL320->uart, bufRX, Rx_packet_length, 4000);
+		return XL320_OK;
 	}
 	else
 	{
-		printf("Data is not transmitted\r\n");
-		return SEND_SERVO_ERROR;
+		return XL320_ERROR;
 	}
 }
 
 
-uint8_t XL320_ping(h_XL320_t * XL320, uint8_t id,uint16_t *model_number,uint8_t *firmware_version)
+uint8_t XL320_ping(h_XL320_t * XL320,uint16_t *model_number,uint8_t *firmware_version)
 {
 
 	statusINFO rxINFO;
 	uint8_t returnedDATA[64];
 
-
-
 	XL320_Clear_rxBUF();
-	if(XL320_send_packet(XL320, id, ping, NULL, 0, ping_statut_packet_length)==SEND_SERVO_Ok)
+	if(XL320_send_packet(XL320, ping, NULL, 0, ping_statut_packet_length)==XL320_OK)
 	{
-		printf("\r\nReceived Ping Packet \r\n");
-		XL320_Display_Packet(bufRX, ping_statut_packet_length);
-		if(XL320_check_status(bufRX,rxINFO,returnedDATA)== SERVO_Ok )
+		if(XL320_check_status(bufRX,rxINFO,returnedDATA)== XL320_OK )
 		{
-
 			*model_number = returnedDATA[0]+(returnedDATA[1]<<8);
 			*firmware_version = returnedDATA[2];
-            return PING_SERVO_OK;
+			return XL320_OK;
 		}
 		else{
-			return PING_SERVO_ERROR;
+			return XL320_ERROR;
 		}
-
-
 	}
 	else{
-		return SEND_SERVO_ERROR;
+		return XL320_ERROR;
 	}
 
 
@@ -162,9 +148,9 @@ uint8_t XL320_check_status(uint8_t *receiveDATA,statusINFO rxINFO,uint8_t *retur
 			returnedDATA[i] = receiveDATA[i + 9];
 		}
 
-		return SERVO_Ok;
+		return XL320_OK;
 	}
-	return SERVO_ERROR ;
+	return XL320_ERROR ;
 }
 
 void XL320_Clear_rxBUF()
@@ -198,7 +184,8 @@ void XL320_Display_Packet(uint8_t * packet,uint8_t size)
 	}
 }
 
-uint8_t XL320_read(h_XL320_t * XL320, uint8_t id, uint16_t address, uint16_t data_length, statusINFO rxinfo, uint8_t *returnedDATA)
+
+uint8_t XL320_read(h_XL320_t * XL320, uint16_t address, uint16_t data_length, statusINFO rxinfo, uint8_t *returnedDATA)
 {
 	uint8_t params[4];
 
@@ -212,56 +199,58 @@ uint8_t XL320_read(h_XL320_t * XL320, uint8_t id, uint16_t address, uint16_t dat
 	params[3] = XL320_GET_HO_BYTE(data_length);
 
 	XL320_Clear_rxBUF();
-	if(XL320_send_packet(XL320,id, read, params, 4, 15)== SEND_SERVO_Ok)
+	if(XL320_send_packet(XL320, read, params, 4, 15)== XL320_OK)
 	{
-		if(XL320_check_status(bufRX,rxinfo,returnedDATA)== SERVO_Ok )
+		if(XL320_check_status(bufRX,rxinfo,returnedDATA)== XL320_OK )
 		{
-			return READ_SERVO_Ok;
+			return XL320_OK;
 		}
 		else {
-			return READ_SERVO_ERROR;
+			return XL320_ERROR;
 
 		}
 	}
 	else
-		return SEND_SERVO_ERROR;
+		return XL320_ERROR;
 
 
 	return 1 ;
 
 }
 
-uint16_t XL320_read_position(h_XL320_t * XL320, uint8_t id)
+uint16_t XL320_read_position(h_XL320_t * XL320)
 {
 	uint16_t address = XL320_PRESENT_POSITION;
 	uint8_t return_data[2];
 	statusINFO rxinfo;
 
-	if(XL320_read(XL320, id, address, 2, rxinfo,return_data)== READ_SERVO_Ok)
+	if(XL320_read(XL320, address, 2, rxinfo,return_data)== XL320_OK)
 	{
 		uint16_t position = return_data[0] + ((return_data[1] << 8) & 0xFF00);
 		return position;
 	}
-	else
-		return READ_SERVO_ERROR;
+	else{
+		return XL320_ERROR;
+	}
 }
 
-uint16_t XL320_read_present_position(h_XL320_t * XL320, uint8_t id)
+uint16_t XL320_read_load(h_XL320_t * XL320)
 {
-	uint16_t address = XL320_PRESENT_POSITION;
+	uint16_t address = XL320_PRESENT_LOAD;
 	uint8_t return_data[2];
 	statusINFO rxinfo;
 
-	if(XL320_read(XL320, id, address, 2, rxinfo,return_data)== READ_SERVO_Ok)
+	if(XL320_read(XL320, address, 2, rxinfo,return_data)== XL320_OK)
 	{
-		uint16_t position = return_data[0] + ((return_data[1] << 8) & 0xFF00);
-		return position;
+		uint16_t load = return_data[0] + ((return_data[1] << 8) & 0xFF00);
+		return load;
 	}
-	else
-		return READ_SERVO_ERROR;
+	else{
+		return XL320_ERROR;
+	}
 }
 
-uint8_t XL320_write(h_XL320_t * XL320, uint8_t id, uint16_t address, uint8_t *data, uint16_t data_length)
+uint8_t XL320_write(h_XL320_t * XL320, uint16_t address, uint8_t *data, uint16_t data_length)
 {
 	uint32_t params_length = data_length + 2 ; // 2 byte pour l'adresse
 	uint8_t params[params_length];
@@ -275,91 +264,101 @@ uint8_t XL320_write(h_XL320_t * XL320, uint8_t id, uint16_t address, uint8_t *da
 	{
 		params[2 + i] = data[i];
 	}
-	printf("\r\n Write packet \r\n");
 	XL320_Clear_rxBUF();
-	if(XL320_send_packet(XL320, id, write, params, params_length,11)==SEND_SERVO_Ok)
+	if(XL320_send_packet(XL320, write, params, params_length,11)==XL320_OK)
 	{
-		printf("\r\n Received Write packet \r\n");
-		XL320_Display_Packet(bufRX,11);
-		return WRITE_SERVO_Ok;
+		return XL320_OK;
 	}
 	else
-		return WRITE_SERVO_ERROR;
-
-
-
-
+	{
+		return XL320_ERROR;
+	}
 }
 
-uint8_t XL320_set_torque_enable(h_XL320_t * XL320, uint8_t id, uint8_t enable)
+uint8_t XL320_set_torque_enable(h_XL320_t * XL320, uint8_t enable)
 {
 	uint16_t address = XL320_TORQUE_ENABLE;
 	uint8_t data = enable ;
-	if(XL320_write(XL320, id, address, &data, 1)==WRITE_SERVO_Ok)
+	if(XL320_write(XL320, address, &data, 1)==XL320_OK)
 	{
-		return TORQUE_SERVO_Ok;
+		return XL320_OK;
 	}
-	else
-		return TORQUE_SERVO_ERROR;
-
+	else{
+		return XL320_ERROR;
+	}
 }
 
-uint8_t XL320_set_speed_position(h_XL320_t * XL320,uint8_t id, uint16_t speed)
+uint8_t XL320_set_speed_position(h_XL320_t * XL320, uint16_t speed)
 {
 	uint16_t address = XL320_MOVING_SPEED;
 	uint8_t data[2];
 	data[0] = (uint8_t)(speed & 0xFF);
 	data[1] = (uint8_t)((speed >> 8) & 0xFF);
 
-	if(XL320_write(XL320, id, address, data, 2)== WRITE_SERVO_Ok)
+	if(XL320_write(XL320, address, data, 2)== XL320_OK)
 	{
-		return SPEED_SERVO_Ok;
+		return XL320_OK;
 	}
 	else
-		return SPEED_SERVO_ERROR;
+		return XL320_ERROR;
 }
 
-uint8_t XL320_set_goal_position(h_XL320_t * XL320, uint8_t id, uint16_t position)
+uint8_t XL320_set_goal_position(h_XL320_t * XL320, uint16_t position)
 {
 	uint16_t address = XL320_GOAL_POSITION;
 	uint8_t data[2];
 	data[0] = (uint8_t)(position & 0xFF);
 	data[1] = (uint8_t)((position >> 8) & 0xFF);
 
-	if(XL320_write(XL320, id, address, data, 2)== WRITE_SERVO_Ok)
+	if(XL320_write(XL320, address, data, 2)== XL320_OK)
 	{
-		return GOAL_SERVO_Ok;
+		return XL320_OK;
 	}
 	else
-		return GOAL_SERVO_ERROR;
+		return XL320_ERROR;
 }
-uint8_t XL320_Init(uint16_t speed,h_XL320_t * XL320)
+
+
+
+
+// Utils
+
+
+uint8_t XL320_Init(h_XL320_t * XL320)
 {
-	XL320->sem_packet=xSemaphoreCreateBinary();
-	if (XL320->sem_packet == NULL)
+	if(XL320_ping(XL320, &(XL320->model_number), &(XL320->firmware_version )) == XL320_OK)
 	{
-		printf("Error  Creating Semaphore Servo\r\n");
-		while(1);
+		printf ("model_number= 0x%04x \r\n", XL320->model_number);
+		printf ("firmware_version= 0x%04x \r\n", XL320->firmware_version);
+
+		if((XL320_set_torque_enable(XL320, 1)== XL320_OK ) && (XL320_set_speed_position(XL320, 200)==XL320_OK)) return XL320_OK;
+		else return XL320_ERROR;
+
+
 	}
-	if(XL320_ping(XL320, 0x01, &(XL320->model_number), &(XL320->firmware_version ))==1)
-		{
-			printf ("model_number= 0x%04x \r\n", XL320->model_number);
-			printf ("firmware_version= 0x%04x \r\n", XL320->firmware_version);
+	return XL320_ERROR;
+}
 
-			if((XL320_set_torque_enable(XL320, 0x01, 1)== TORQUE_SERVO_Ok ) && (XL320_set_speed_position(XL320, 0x01, speed)==SPEED_SERVO_Ok))
-				{
-				   printf("torque enabled && Position is Set \r\n");
 
-					return INIT_SERVO_OK;
+uint8_t XL320_Catch(h_XL320_t * XL320){
+	int i=0;
 
-				}
-				else
-					return INIT_SERVO_EROOR;
+	if(XL320_set_goal_position(XL320, XL320_OPEN_ANGLE)!= XL320_OK) return XL320_ERROR;
 
+
+	for(i=150; i<XL320_OPEN_ANGLE-XL320_CLOSE_ANGLE; i=i+25){
+
+		if(XL320_set_goal_position(XL320, XL320_OPEN_ANGLE - i) != XL320_OK) return XL320_ERROR;
+		uint16_t load = XL320_read_load(XL320);
+		if(load > CCW_LOAD_MIN_VALUE) continue;
+		if(load > CATCHED_LOAD){
+			printf("CATCHED !!!! \r\n");
+			return XL320_OK;
 		}
-	return 1;
-
-
+	}
+	printf("Not Catched \r\n");
+	if(XL320_set_goal_position(XL320, XL320_OPEN_ANGLE)!= XL320_OK) return XL320_ERROR;
+	return XL320_NOT_FOUND;
 }
 
 
