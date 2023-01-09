@@ -7,70 +7,68 @@
 
 
 #include "motor_drive.h"
-#include <stdio.h>
 
 
 // CONTROL MOTOR
 
 
-void motor_start_forward(h_motor_t * motor){
-	HAL_TIMEx_PWMN_Stop(motor->htim_motor, motor->channel_motor);
-	HAL_TIM_PWM_Start(motor->htim_motor, motor->channel_motor);
+int motor_run_forward(h_motor_t * motor){
+
+	if(motor->isReverse == 1){
+		if(	HAL_TIM_PWM_Stop_IT(motor->htim_motor, motor->Channel_Motor_Forward) != HAL_OK){
+			return MOTOR_UNKNOWN_ERROR;
+		}
+		if(	HAL_TIMEx_PWMN_Start_IT(motor->htim_motor, motor->Channel_Motor_Reverse) != HAL_OK){
+			return MOTOR_UNKNOWN_ERROR;
+		}
+		return MOTOR_OK;
+	}
+
+
+	if(HAL_TIMEx_PWMN_Stop_IT(motor->htim_motor, motor->Channel_Motor_Reverse) != HAL_OK){
+		return MOTOR_UNKNOWN_ERROR;
+	}
+	if(HAL_TIM_PWM_Start_IT(motor->htim_motor, motor->Channel_Motor_Forward) != HAL_OK){
+		return MOTOR_UNKNOWN_ERROR;
+	}
+	return MOTOR_OK;
 }
 
-void motor_start_reverse(h_motor_t * motor){
-	HAL_TIM_PWM_Stop(motor->htim_motor, motor->channel_motor);
-	HAL_TIMEx_PWMN_Start(motor->htim_motor, motor->channel_motor);
+int motor_run_reverse(h_motor_t * motor){
+	if(motor->isReverse == 1){
+		if(HAL_TIMEx_PWMN_Stop_IT(motor->htim_motor, motor->Channel_Motor_Reverse) != HAL_OK){
+			return MOTOR_UNKNOWN_ERROR;
+		}
+		if(HAL_TIM_PWM_Start_IT(motor->htim_motor, motor->Channel_Motor_Forward) != HAL_OK){
+			return MOTOR_UNKNOWN_ERROR;
+		}
+		return MOTOR_OK;
+	}
+	if(	HAL_TIM_PWM_Stop_IT(motor->htim_motor, motor->Channel_Motor_Forward) != HAL_OK){
+		return MOTOR_UNKNOWN_ERROR;
+	}
+	if(	HAL_TIMEx_PWMN_Start_IT(motor->htim_motor, motor->Channel_Motor_Reverse) != HAL_OK){
+		return MOTOR_UNKNOWN_ERROR;
+	}
+	return MOTOR_OK;
 }
 
-void motor_stop(h_motor_t * motor){
-	HAL_TIM_PWM_Stop(motor->htim_motor, motor->channel_motor);
-	HAL_TIMEx_PWMN_Stop(motor->htim_motor, motor->channel_motor);
-
-}
-
-void motors_stop(h_motors_t * motors){
-	motor_stop(motors->motor1);
-	motor_stop(motors->motor2);
+int motor_stop(h_motor_t * motor){
+	if(	HAL_TIM_PWM_Stop_IT(motor->htim_motor, motor->Channel_Motor_Forward) != HAL_OK){
+		return MOTOR_UNKNOWN_ERROR;
+	}
+	if(	HAL_TIMEx_PWMN_Stop_IT(motor->htim_motor, motor->Channel_Motor_Reverse) != HAL_OK){
+		return MOTOR_UNKNOWN_ERROR;
+	}
+	return MOTOR_OK;
 }
 
 //
 
-void motors_init(h_motors_t * motors_struc){
-
+int motor_change_dutyCycle(h_motor_t * motor, int newDutyCycle){
+	if((newDutyCycle > MAX_DUTY) || (newDutyCycle < MIN_DUTY)){
+		return OUT_OF_RANGE;
+	}
+	motor->dutyCycle = newDutyCycle;
+	return MOTOR_OK;
 }
-
-
-
-//
-//static void change_speed(TIM_HandleTypeDef *htim, int dutyCycle){
-//	int goalCCR = get_ccr_value(htim, dutyCycle);
-//	if(goalCCR == -1){
-//		return;
-//	}
-//	if( goalCCR > htim -> Instance -> CCR1){
-//		while(htim -> Instance -> CCR1 != goalCCR){
-//			htim -> Instance -> CCR1 ++;
-//		}
-//		return;
-//	}
-//	if( goalCCR < htim -> Instance -> CCR1){
-//		while(htim -> Instance -> CCR1 != goalCCR){
-//			htim -> Instance -> CCR1 --;
-//		}
-//		return;
-//	}
-//}
-//
-//static int get_ccr_value(TIM_HandleTypeDef *htim, int dutyCycle){
-//	if(dutyCycle > MAX_DUTY){
-//			return -1;
-//		}
-//		if(dutyCycle< MIN_DUTY){
-//			return -1;
-//		}
-//		int arr = htim->Instance->ARR;
-//		return (dutyCycle * arr) / 100;
-//}
-
-

@@ -44,7 +44,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define STACK_SIZE 200
+#define STACK_SIZE 300
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -67,6 +67,12 @@ h_motors_t motors;
 
 // Servo
 h_XL320_t XL320;
+
+//Handlers
+
+TaskHandle_t xOpenXL320Handle = NULL;
+TaskHandle_t xCloseXL320Handle = NULL;
+TaskHandle_t xBorderDetectionHandle = NULL;
 
 /* USER CODE END PV */
 
@@ -95,18 +101,33 @@ void Start_Shell(void* pvParameters){
 }
 
 void XL320_Open(void * pvParameterts){
-	if(XL320_set_goal_position(&XL320, XL320_OPEN_ANGLE) != XL320_OK){
-		printf("Error Opening XL320 \r\n");
-		Error_Handler();
-	};
+	for(;;){
+		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+		if(XL320_set_goal_position(&XL320, XL320_OPEN_ANGLE) != XL320_OK){
+			printf("Error Opening XL320 \r\n");
+			Error_Handler();
+		};
+	}
 	vTaskDelete(NULL);
 }
 
 void XL320_Catch_Task(void * pvParameterts){
-	uint16_t XL320_Response = XL320_Catch(&XL320);
-	if(XL320_Response == XL320_ERROR){
-		printf("Error Catching XL320 \r\n");
-		Error_Handler();
+	for(;;){
+		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+		uint16_t XL320_Response = XL320_Catch(&XL320);
+		if(XL320_Response == XL320_ERROR){
+			printf("Error Catching XL320 \r\n");
+			Error_Handler();
+		}
+	}
+	vTaskDelete(NULL);
+}
+
+void Border_Detected(void * PvParameters){
+	for(;;){
+		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+		motor_stop(&motor2);
+		motor_stop(&motor1);
 	}
 	vTaskDelete(NULL);
 }
@@ -115,23 +136,13 @@ void XL320_Catch_Task(void * pvParameterts){
 
 int XL320_Open_Shell(h_shell_t * h_shell, int argc, char ** argv)
 {
-	TaskHandle_t xOpenXL320Handle = NULL;
-	BaseType_t xReturned = xTaskCreate(XL320_Open, "XL320_OPEN", STACK_SIZE, NULL, tskIDLE_PRIORITY + 1 ,&xOpenXL320Handle);
-	if(xReturned != pdPASS){
-		printf("Error Creating the task \r\n");
-		return SHELL_ERROR;
-	}
+	xTaskNotifyGive(xOpenXL320Handle);
 	return SHELL_OK;
 }
 
 int XL320_Catch_Shell(h_shell_t * h_shell, int argc, char ** argv)
 {
-	TaskHandle_t xCloseXL320Handle = NULL;
-	BaseType_t xReturned = xTaskCreate(XL320_Catch_Task, "XL320_Close", STACK_SIZE, NULL, tskIDLE_PRIORITY + 1 ,&xCloseXL320Handle);
-	if(xReturned != pdPASS){
-		printf("Error Creating the task \r\n");
-		return SHELL_ERROR;
-	}
+	xTaskNotifyGive(xCloseXL320Handle);
 	return SHELL_OK;
 }
 
@@ -193,6 +204,34 @@ int main(void)
 
 	printf("Initialisation XL320 Successful \r\n\n");
 
+	printf("Initialisation Motors ... \r\n");
+
+	motor1.htim_motor = MOTOR1_TIM;
+	motor1.Channel_Motor_Forward = MOTOR1_CHANNEL_FORWARD;
+	motor1.Channel_Motor_Reverse = MOTOR1_CHANNEL_REVERSE;
+	motor1.counter = 0;
+	motor1.dutyCycle = 30;
+	motor1.isReverse = 0;
+	motor1.period = DEFAULT_PERIOD;
+	motor1.status = MOTOR_PAUSED;
+
+	motor2.htim_motor = MOTOR2_TIM;
+	motor2.Channel_Motor_Forward = MOTOR2_CHANNEL_FORWARD;
+	motor2.Channel_Motor_Reverse = MOTOR2_CHANNEL_REVERSE;
+	motor2.counter = 0;
+	motor2.dutyCycle = 30;
+	motor2.isReverse = 1;
+	motor2.period = DEFAULT_PERIOD;
+	motor2.status = MOTOR_PAUSED;
+
+	HAL_TIM_Encoder_Start_IT(ENCODER_MOTOR_1_TIM, TIM_CHANNEL_ALL);
+	HAL_TIM_Encoder_Start_IT(ENCODER_MOTOR_2_TIM, TIM_CHANNEL_ALL);
+
+
+	motor_run_forward(&motor1);
+	motor_run_forward(&motor2);
+
+	printf("Initialisation Motors Successful \r\n\n");
 
 
 	//Shell Configuration
@@ -206,9 +245,29 @@ int main(void)
 	shell_add(&h_shell, 'O', XL320_Open_Shell, "Open XL320");
 	shell_add(&h_shell, 'C', XL320_Catch_Shell, "Catch XL320");
 
-	BaseType_t xReturned = xTaskCreate(Start_Shell, "StartShell", STACK_SIZE, NULL, tskIDLE_PRIORITY, &h_shell.xHandleShell);
+
+	// Creating Tasks
+
+	BaseType_t xReturned;
+
+	xReturned = xTaskCreate(XL320_Catch_Task, "XL320_Close", STACK_SIZE, NULL, tskIDLE_PRIORITY + 1 ,&xCloseXL320Handle);
 	if(xReturned != pdPASS){
-		printf("Error Creating the task");
+		printf("Error Creating the task \r\n");
+	}
+
+	xReturned = xTaskCreate(XL320_Open, "XL320_OPEN", STACK_SIZE, NULL, tskIDLE_PRIORITY + 1 ,&xOpenXL320Handle);
+	if(xReturned != pdPASS){
+		printf("Error Creating the task \r\n");
+	}
+
+	xReturned = xTaskCreate(Border_Detected, "Border Detection", STACK_SIZE, NULL, tskIDLE_PRIORITY + 2 ,&xBorderDetectionHandle);
+	if(xReturned != pdPASS){
+		printf("Error Creating the task \r\n");
+	}
+
+	xReturned = xTaskCreate(Start_Shell, "StartShell", STACK_SIZE, NULL, tskIDLE_PRIORITY, &h_shell.xHandleShell);
+	if(xReturned != pdPASS){
+		printf("Error Creating the task \r\n");
 	}
 
 	vTaskStartScheduler();
@@ -288,24 +347,18 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 
 }
 
+void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim){
+
+}
 
 void HAL_GPIO_EXTI_Rising_Callback(uint16_t GPIO_Pin){
-	if(GPIO_Pin == IR1_OUT_Pin){
-		printf("/! Floor 1 NOK ! !/ \r\n");
-	}
-	if(GPIO_Pin == IR2_OUT_Pin){
-		printf("/! Floor 2 NOK ! !/ \r\n");
+	BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+	if((GPIO_Pin == IR1_OUT_Pin) || (GPIO_Pin == IR2_OUT_Pin)){
+		vTaskNotifyGiveFromISR(xBorderDetectionHandle, &xHigherPriorityTaskWoken);
+		portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 	}
 }
 
-void HAL_GPIO_EXTI_Falling_Callback(uint16_t GPIO_Pin){
-	if(GPIO_Pin == IR1_OUT_Pin){
-		printf("Floor 1 OK \r\n");
-	}
-	if(GPIO_Pin == IR2_OUT_Pin){
-		printf("Floor 2 OK \r\n");
-	}
-}
 
 
 /* USER CODE END 4 */
@@ -329,11 +382,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	/* USER CODE BEGIN Callback 1 */
 
 	/* USER CODE END Callback 1 */
-}
-
-void vApplicationStackOverflowHook(xTaskHandle xTask, signed char *pcTaskName)
-{
-   printf("StackOverFlow Detected in Task : %s \r\n", pcTaskName);
 }
 
 /**

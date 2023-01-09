@@ -58,13 +58,12 @@ void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOA, TOF1_XSHUT_Pin|TOF2_XSHUT_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, TCS_S3_Pin|TCS_S2_Pin|TCS_LED_Pin|NPWM_M1_Pin
-                          |NPWM_M2_Pin|PWM_M1_Pin|PWM_M2_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, TCS_S3_Pin|TCS_S2_Pin|TCS_LED_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : PCPin PCPin */
   GPIO_InitStruct.Pin = IR1_OUT_Pin|IR2_OUT_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
-  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PtPin */
@@ -87,10 +86,8 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PBPin PBPin PBPin PBPin
-                           PBPin PBPin PBPin */
-  GPIO_InitStruct.Pin = TCS_S3_Pin|TCS_S2_Pin|TCS_LED_Pin|NPWM_M1_Pin
-                          |NPWM_M2_Pin|PWM_M1_Pin|PWM_M2_Pin;
+  /*Configure GPIO pins : PBPin PBPin PBPin */
+  GPIO_InitStruct.Pin = TCS_S3_Pin|TCS_S2_Pin|TCS_LED_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;

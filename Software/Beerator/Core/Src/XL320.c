@@ -341,22 +341,15 @@ uint8_t XL320_Init(h_XL320_t * XL320)
 
 
 uint8_t XL320_Catch(h_XL320_t * XL320){
-	int i=0;
-
 	if(XL320_set_goal_position(XL320, XL320_OPEN_ANGLE)!= XL320_OK) return XL320_ERROR;
 
+	if(XL320_set_goal_position(XL320, XL320_CLOSE_ANGLE) != XL320_OK) return XL320_ERROR;
 
-	for(i=150; i<XL320_OPEN_ANGLE-XL320_CLOSE_ANGLE; i=i+25){
+	uint16_t load = XL320_read_load(XL320);
 
-		if(XL320_set_goal_position(XL320, XL320_OPEN_ANGLE - i) != XL320_OK) return XL320_ERROR;
-		uint16_t load = XL320_read_load(XL320);
-		if(load > CCW_LOAD_MIN_VALUE) continue;
-		if(load > CATCHED_LOAD){
-			printf("CATCHED !!!! \r\n");
-			return XL320_OK;
-		}
+	if(load > CATCHED_LOAD){
+		return XL320_OK;
 	}
-	printf("Not Catched \r\n");
 	if(XL320_set_goal_position(XL320, XL320_OPEN_ANGLE)!= XL320_OK) return XL320_ERROR;
 	return XL320_NOT_FOUND;
 }

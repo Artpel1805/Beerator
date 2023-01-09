@@ -32,7 +32,7 @@
 #define XL320_GOAL_POSITION 30
 
 #define XL320_OPEN_ANGLE 500
-#define XL320_CLOSE_ANGLE 250
+#define XL320_CLOSE_ANGLE 350
 
 typedef enum
 {
