@@ -53,6 +53,7 @@ void TIM1_BRK_UP_TRG_COM_IRQHandler(void);
 void TIM1_CC_IRQHandler(void);
 void TIM3_IRQHandler(void);
 void TIM6_IRQHandler(void);
+void TIM14_IRQHandler(void);
 void TIM16_IRQHandler(void);
 void TIM17_IRQHandler(void);
 void USART1_IRQHandler(void);

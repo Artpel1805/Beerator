@@ -75,10 +75,10 @@ void Error_Handler(void);
 #define TCS_OUT_GPIO_Port GPIOB
 #define BAT_SENSE_Pin GPIO_PIN_10
 #define BAT_SENSE_GPIO_Port GPIOB
-#define TCS_S3_Pin GPIO_PIN_13
-#define TCS_S3_GPIO_Port GPIOB
-#define TCS_S2_Pin GPIO_PIN_14
-#define TCS_S2_GPIO_Port GPIOB
+#define S3_Pin GPIO_PIN_13
+#define S3_GPIO_Port GPIOB
+#define S2_Pin GPIO_PIN_14
+#define S2_GPIO_Port GPIOB
 #define TCS_LED_Pin GPIO_PIN_15
 #define TCS_LED_GPIO_Port GPIOB
 #define TOF_I2C_SCL_Pin GPIO_PIN_11

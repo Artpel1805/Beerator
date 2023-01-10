@@ -134,7 +134,7 @@ void MX_TIM14_Init(void)
 
   /* USER CODE END TIM14_Init 1 */
   htim14.Instance = TIM14;
-  htim14.Init.Prescaler = 0;
+  htim14.Init.Prescaler = 64-1;
   htim14.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim14.Init.Period = 65535;
   htim14.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
@@ -362,6 +362,9 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* tim_baseHandle)
     GPIO_InitStruct.Alternate = GPIO_AF0_TIM14;
     HAL_GPIO_Init(TCS_OUT_GPIO_Port, &GPIO_InitStruct);
 
+    /* TIM14 interrupt Init */
+    HAL_NVIC_SetPriority(TIM14_IRQn, 3, 0);
+    HAL_NVIC_EnableIRQ(TIM14_IRQn);
   /* USER CODE BEGIN TIM14_MspInit 1 */
 
   /* USER CODE END TIM14_MspInit 1 */
@@ -509,6 +512,8 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* tim_baseHandle)
     */
     HAL_GPIO_DeInit(TCS_OUT_GPIO_Port, TCS_OUT_Pin);
 
+    /* TIM14 interrupt Deinit */
+    HAL_NVIC_DisableIRQ(TIM14_IRQn);
   /* USER CODE BEGIN TIM14_MspDeInit 1 */
 
   /* USER CODE END TIM14_MspDeInit 1 */
