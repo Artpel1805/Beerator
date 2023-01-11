@@ -47,6 +47,7 @@ typedef struct h_motor_t {
 	int isReverse;
 	MOTOR_STATUS_TYPE status;
 	TIM_HandleTypeDef * htim_motor;
+	TIM_HandleTypeDef * htim_encoder;
 	uint32_t Channel_Motor_Forward;
 	uint32_t Channel_Motor_Reverse;
 } h_motor_t;

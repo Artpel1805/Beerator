@@ -35,6 +35,7 @@
 #include "shell.h"
 #include "drv_uart1.h"
 #include "XL320.h"
+#include "asserv.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -73,7 +74,7 @@ h_XL320_t XL320;
 TaskHandle_t xOpenXL320Handle = NULL;
 TaskHandle_t xCloseXL320Handle = NULL;
 TaskHandle_t xBorderDetectionHandle = NULL;
-
+TaskHandle_t xMotorSpeedControl = NULL;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -132,6 +133,18 @@ void Border_Detected(void * PvParameters){
 	vTaskDelete(NULL);
 }
 
+void Motor_Speed_Control(void * PvParameters){
+	motor_run_forward(&motor2);
+	motor2.htim_motor->Instance->CCR1 = 20;
+	motor_run_forward(&motor1);
+	motor1.htim_motor->Instance->CCR1 = 20;
+	for(;;){
+		pid_vitesse(&motor2);
+		pid_vitesse(&motor1);
+		vTaskDelay(100);
+	}
+	vTaskDelete(NULL);
+}
 // Shell Function Text
 
 int XL320_Open_Shell(h_shell_t * h_shell, int argc, char ** argv)
@@ -187,7 +200,6 @@ int main(void)
 	/* USER CODE BEGIN 2 */
 
 	printf(logo);
-	free(logo);
 
 	// Init XL320
 	printf("Initialisation XL320 ... \r\n");
@@ -207,6 +219,7 @@ int main(void)
 	printf("Initialisation Motors ... \r\n");
 
 	motor1.htim_motor = MOTOR1_TIM;
+	motor1.htim_encoder = ENCODER_MOTOR_1_TIM;
 	motor1.Channel_Motor_Forward = MOTOR1_CHANNEL_FORWARD;
 	motor1.Channel_Motor_Reverse = MOTOR1_CHANNEL_REVERSE;
 	motor1.counter = 0;
@@ -216,6 +229,7 @@ int main(void)
 	motor1.status = MOTOR_PAUSED;
 
 	motor2.htim_motor = MOTOR2_TIM;
+	motor2.htim_encoder = ENCODER_MOTOR_2_TIM;
 	motor2.Channel_Motor_Forward = MOTOR2_CHANNEL_FORWARD;
 	motor2.Channel_Motor_Reverse = MOTOR2_CHANNEL_REVERSE;
 	motor2.counter = 0;
@@ -228,8 +242,7 @@ int main(void)
 	HAL_TIM_Encoder_Start_IT(ENCODER_MOTOR_2_TIM, TIM_CHANNEL_ALL);
 
 
-	motor_run_forward(&motor1);
-	motor_run_forward(&motor2);
+	//	motor_run_forward(&motor2);
 
 	printf("Initialisation Motors Successful \r\n\n");
 
@@ -266,6 +279,11 @@ int main(void)
 	}
 
 	xReturned = xTaskCreate(Start_Shell, "StartShell", STACK_SIZE, NULL, tskIDLE_PRIORITY, &h_shell.xHandleShell);
+	if(xReturned != pdPASS){
+		printf("Error Creating the task \r\n");
+	}
+
+	xReturned = xTaskCreate(Motor_Speed_Control, "SpeedControl", 500, NULL, tskIDLE_PRIORITY + 3, &xMotorSpeedControl);
 	if(xReturned != pdPASS){
 		printf("Error Creating the task \r\n");
 	}
@@ -358,8 +376,6 @@ void HAL_GPIO_EXTI_Rising_Callback(uint16_t GPIO_Pin){
 		portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 	}
 }
-
-
 
 /* USER CODE END 4 */
 
