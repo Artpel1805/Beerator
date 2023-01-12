@@ -138,9 +138,9 @@ void Border_Detected(void * PvParameters){
 }
 
 void Motor_Speed_Control(void * PvParameters){
-	motor_run_forward(&motor2);
+	//motor_run_forward(&motor2);
 	motor2.htim_motor->Instance->CCR1 = 20;
-	motor_run_forward(&motor1);
+	//motor_run_forward(&motor1);
 	motor1.htim_motor->Instance->CCR1 = 20;
 	for(;;){
 		pid_vitesse(&motor2);
@@ -168,12 +168,15 @@ void Avance_Task(void*PvParameters)
 		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
 		float buff=pos.d_theta;
 		motor_run_forward(&motor1);
+		motor_run_forward(&motor2);
+
 		while(abs(buff-pos.d_theta)<distance)
 		{
 			//printf("\r\nDistance %f\r\n",pos.d_theta);
 			//printf("\r\n dL %f\r\n",pos.dL);
 			//printf("\r\n dR %f\r\n",pos.dR);
-			printf("\r\n alpha : %f \r\n",pos.d_alpha);
+			printf("\r\n buf %f \r\n",buff);
+			printf("\r\n theta : %f \r\n",pos.d_theta);
 
 
 
@@ -195,7 +198,8 @@ void Turn_Task(void*PvParameters)
 		motor_run_forward(&motor1);
 		while(abs(buff-pos.alpha)<angle)
 		{
-
+			printf("\r\n buf %f \r\n",buff);
+            printf("\r\n alpha %f \r\n",pos.alpha);
 		}
 		motor_stop(&motor1);
 	}
