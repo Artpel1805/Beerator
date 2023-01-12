@@ -55,6 +55,7 @@ void position(pos_R *pos,h_motor_t * motorR, h_motor_t * motorL)
 	pos->d_alpha =((pos->dR-pos->dL)/L);
 
     pos->alpha=pos->alpha + pos->d_alpha;
+    printf("hahahaha");
 
 
 
