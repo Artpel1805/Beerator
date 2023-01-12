@@ -137,9 +137,9 @@ void Border_Detected(void * PvParameters){
 }
 
 void Motor_Speed_Control(void * PvParameters){
-	//motor_run_forward(&motor2);
+	motor_run_forward(&motor2);
 	motor2.htim_motor->Instance->CCR1 = 20;
-	//motor_run_forward(&motor1);
+	motor_run_forward(&motor1);
 	motor1.htim_motor->Instance->CCR1 = 20;
 	for(;;){
 		pid_vitesse(&motor2);
@@ -169,7 +169,7 @@ void Turn_Task(void*PvParameters)
 		motor_run_forward(&motor1);
 		while(abs(buff-pos.alpha)<angle)
 		{
-          printf("\r\n diff : \r\n%d",abs(buff-pos.alpha));
+
 		}
 		motor_stop(&motor1);
 	}
