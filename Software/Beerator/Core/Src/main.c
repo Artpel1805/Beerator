@@ -78,6 +78,7 @@ TaskHandle_t xBorderDetectionHandle = NULL;
 TaskHandle_t xMotorSpeedControl = NULL;
 TaskHandle_t xTurnHandle = NULL;
 TaskHandle_t  xGetPosHandle=NULL;
+TaskHandle_t xAvanceHandle=NULL;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -157,6 +158,31 @@ void get_pos(void*PvParameters)
 	}
 	vTaskDelete(NULL);
 }
+void Avance_Task(void*PvParameters)
+{
+	float distance =3;
+	pos.dR=0;
+	pos.dL=0;
+	for(;;)
+	{
+		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+		float buff=pos.d_theta;
+		motor_run_forward(&motor1);
+		while(abs(buff-pos.d_theta)<distance)
+		{
+			//printf("\r\nDistance %f\r\n",pos.d_theta);
+			//printf("\r\n dL %f\r\n",pos.dL);
+			//printf("\r\n dR %f\r\n",pos.dR);
+			printf("\r\n alpha : %f \r\n",pos.d_alpha);
+
+
+
+		}
+		motor_stop(&motor1);
+		motor_stop(&motor2);
+	}
+	vTaskDelete(NULL);
+}
 
 void Turn_Task(void*PvParameters)
 {
@@ -193,6 +219,11 @@ int XL320_Catch_Shell(h_shell_t * h_shell, int argc, char ** argv)
 int Turn_shell(h_shell_t * h_shell, int argc, char ** argv)
 {
 	xTaskNotifyGive(xTurnHandle);
+	return SHELL_OK;
+}
+int Avance_shell()
+{
+	xTaskNotifyGive(xAvanceHandle);
 	return SHELL_OK;
 }
 
@@ -299,6 +330,8 @@ int main(void)
 	shell_add(&h_shell, 'O', XL320_Open_Shell, "Open XL320");
 	shell_add(&h_shell, 'C', XL320_Catch_Shell, "Catch XL320");
 	shell_add(&h_shell, 't', Turn_shell, "Turn ");
+	shell_add(&h_shell, 'a', Avance_shell, "Avance ");
+
 
 
 
@@ -336,6 +369,10 @@ int main(void)
 	}
 
 	xReturned = xTaskCreate(Turn_Task, "Turn Task", 500, NULL, tskIDLE_PRIORITY + 2, &xTurnHandle);
+	if(xReturned != pdPASS){
+		printf("Error Creating the task \r\n");
+	}
+	xReturned = xTaskCreate(Avance_Task, "Avance Task", 500, NULL, tskIDLE_PRIORITY + 2, &xAvanceHandle);
 	if(xReturned != pdPASS){
 		printf("Error Creating the task \r\n");
 	}

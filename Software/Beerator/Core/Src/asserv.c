@@ -53,15 +53,17 @@ void position(pos_R *pos,h_motor_t * motorR, h_motor_t * motorL)
 
 	pos->d_theta=(pos->dR+pos->dL)/2;
 	pos->d_alpha =((pos->dR-pos->dL)/L);
+	pos->theta=pos->theta+pos->d_theta;
 
     pos->alpha=pos->alpha + pos->d_alpha;
-    printf("hahahaha");
-
-
+/*
+	printf("\r\n dR : %f\r\n",pos->dR);
+	printf("\r\n dL : %f : \r\n",pos->dL);
+	printf("\r\n d_theta : %f",pos->d_theta);
 
 	//printf("\r\ntheta  en metre : %f \r\n",pos.delta_theta);
 	printf("\r\n aplha %f \r\n",pos->d_alpha);
-
+*/
 
 }
 void Turn(float Angle)

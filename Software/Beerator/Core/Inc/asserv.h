@@ -17,8 +17,8 @@
 #define SAMPLE_RATE_PID 100
 #define SPEED_COMMAND 80 // between 80 and 300
 #define Kp 1/10
-#define Rayon 21.4 // en mm
-#define L 148.8
+#define Rayon 0.0214 // en mm
+#define L 0.1488
 
 typedef struct coordinate {
 	float x;
