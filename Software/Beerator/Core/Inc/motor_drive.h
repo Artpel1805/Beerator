@@ -41,9 +41,8 @@ typedef enum MOTOR_ERRORS {
 } MOTOR_ERROR_TYPE;
 
 typedef struct h_motor_t {
-	int dutyCycle;
-	int period;
-	int counter;
+	int speedInstruction;
+	uint32_t counter;
 	int isReverse;
 	int vitesse;
 	MOTOR_STATUS_TYPE status;

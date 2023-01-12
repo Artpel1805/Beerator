@@ -16,26 +16,19 @@
 #define NUMBER_TICK 2244 * 4
 #define SAMPLE_RATE_PID 100
 #define SPEED_COMMAND 80 // between 80 and 300
+#define STOP_COMMAND 0
 #define Kp 1/10
-#define Rayon 0.0214 // en mm
-#define L 0.1488
+#define Rayon 42.51/2 // mm
+#define L 153.84 // mm
 
 typedef struct coordinate {
-	float x;
-	float y;
-	float d_theta;
 	float d_alpha;
-	float dR;
-	float dL;
-	float d_Left;
-	float d_Right;
-	float dX;
-	float dY;
+	float dR; //mm
+	float dL; //mm
 	float alpha;
-	float theta;
 
 } pos_R;
 
 
 int pid_vitesse(h_motor_t * motor);
-void position(pos_R *pos,h_motor_t * motorR,h_motor_t * motorL);
+void update_position(pos_R *pos,h_motor_t * motor);

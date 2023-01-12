@@ -11,63 +11,40 @@
 #include <stdio.h>
 #include "math.h"
 
-float vr_left_sum=0;
-float vr_right_sum=0;
 
 int pid_vitesse(h_motor_t * motor){
-	//int vitesse;
 	if(motor->isReverse){
-		motor->vitesse = (((motor->htim_encoder->Instance->ARR - motor->htim_encoder->Instance->CNT )%motor->htim_encoder->Instance->ARR) * 60000 * 10 ) / (NUMBER_TICK * SAMPLE_RATE_PID);
+		motor->vitesse = ((int)((motor->counter - motor->htim_encoder->Instance->CNT)) * 60000 * 10 ) / (NUMBER_TICK * SAMPLE_RATE_PID);
+		motor->counter = motor->htim_encoder->Instance->CNT;
 
 	} else {
-		motor->vitesse = (motor->htim_encoder->Instance->CNT * 60000 * 10 ) / (NUMBER_TICK * SAMPLE_RATE_PID);
+		motor->vitesse = ((int)((motor->htim_encoder->Instance->CNT - motor->counter)) * 60000 * 10 ) / (NUMBER_TICK * SAMPLE_RATE_PID);
+		motor->counter = motor->htim_encoder->Instance->CNT;
 	}
-
-
-	int erreur = SPEED_COMMAND - (motor->vitesse);
-
+	int erreur = motor->speedInstruction - (motor->vitesse);
 	motor->htim_motor->Instance->CCR1 += erreur * Kp;
 
 	if(motor->htim_motor->Instance->CCR1 > 100) {
 		motor->htim_motor->Instance->CCR1 = 100;
 	}
-	if(motor->htim_motor->Instance->CCR1 < 20) {
-		motor->htim_motor->Instance->CCR1 = 20;
+	if(motor->htim_motor->Instance->CCR1 < 0) {
+		motor->htim_motor->Instance->CCR1 = 0;
 	}
-	motor->htim_encoder->Instance->CNT=0;
 	return 0;
 }
 
-void position(pos_R *pos,h_motor_t * motorR, h_motor_t * motorL)
+void update_position(pos_R *pos, h_motor_t * motor)
 {
+	float dR0 = pos->dR;
+	float dL0 = pos->dL;
 
-	vr_left_sum+=(motorL->vitesse)*(2*M_PI/60);
-	vr_right_sum+=(motorR->vitesse)*(2*M_PI/60);
-
-	//pos->dR=Rayon*vr_right_sum;
-	//pos->dL=Rayon*vr_left_sum;
-
-	pos->dR+=Rayon*(motorR->vitesse)*(2*M_PI/60)*0.1;
-	pos->dL+=Rayon*(motorL->vitesse)*(2*M_PI/60)*0.1;
-
-
-	pos->d_theta=(pos->dR+pos->dL)/2;
-	pos->d_alpha =((pos->dR-pos->dL)/L);
-	pos->theta=pos->theta+pos->d_theta;
-
-    pos->alpha=pos->alpha + pos->d_alpha;
-/*
-	printf("\r\n dR : %f\r\n",pos->dR);
-	printf("\r\n dL : %f : \r\n",pos->dL);
-	printf("\r\n d_theta : %f",pos->d_theta);
-
-	//printf("\r\ntheta  en metre : %f \r\n",pos.delta_theta);
-	printf("\r\n aplha %f \r\n",pos->d_alpha);
-*/
+	if(motor->isReverse){
+		pos->dR += Rayon*(motor->vitesse)*(2*M_PI/60)*0.05;
+	}else {
+		pos->dL += Rayon*(motor->vitesse)*(2*M_PI/60)*0.05;
+	}
+	pos->d_alpha = ((((dR0-pos->dR)-(dL0-pos->dL))/L)*180)/M_PI;
+    pos->alpha = pos->alpha + pos->d_alpha;
 
 }
-void Turn(float Angle)
-{
 
-
-}
