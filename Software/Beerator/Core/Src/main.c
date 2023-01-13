@@ -70,6 +70,12 @@ pos_R pos;
 // Servo
 h_XL320_t XL320;
 
+//parametre Robot
+
+float angle;
+float distance;
+
+
 //Handlers
 
 TaskHandle_t xOpenXL320Handle = NULL;
@@ -160,7 +166,7 @@ void get_pos(void*PvParameters)
 }
 void Avance_Task(void*PvParameters)
 {
-	float distance =3;
+
 	pos.dR=0;
 	pos.dL=0;
 	for(;;)
@@ -189,10 +195,10 @@ void Avance_Task(void*PvParameters)
 
 void Turn_Task(void*PvParameters)
 {
-	float angle=90;
 
 	for(;;)
 	{
+
 		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
 		float buff=pos.alpha;
 		motor_run_forward(&motor1);
@@ -222,11 +228,13 @@ int XL320_Catch_Shell(h_shell_t * h_shell, int argc, char ** argv)
 
 int Turn_shell(h_shell_t * h_shell, int argc, char ** argv)
 {
+	angle=(float)atoi(argv[1]);
 	xTaskNotifyGive(xTurnHandle);
 	return SHELL_OK;
 }
-int Avance_shell()
+int Avance_shell(h_shell_t * h_shell, int argc, char ** argv)
 {
+	distance=(float)atoi(argv[1]);
 	xTaskNotifyGive(xAvanceHandle);
 	return SHELL_OK;
 }
