@@ -46,6 +46,7 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 #define STACK_SIZE 300
+#define ANGLE_ERROR 5
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -144,10 +145,9 @@ void Border_Detected(void * PvParameters){
 }
 
 void Motor_Speed_Control(void * PvParameters){
-	//motor_run_forward(&motor2);
 	motor2.htim_motor->Instance->CCR1 = 20;
-	//motor_run_forward(&motor1);
 	motor1.htim_motor->Instance->CCR1 = 20;
+
 	for(;;){
 		pid_vitesse(&motor2);
 		pid_vitesse(&motor1);
@@ -155,12 +155,13 @@ void Motor_Speed_Control(void * PvParameters){
 	}
 	vTaskDelete(NULL);
 }
-void get_pos(void*PvParameters)
+void Get_Position(void*PvParameters)
 {
 	for(;;)
 	{
-		position(&pos, &motor2, &motor1);
-		vTaskDelay(100);
+		update_position(&pos, &motor1);
+		update_position(&pos, &motor2);
+		vTaskDelay(50);
 	}
 	vTaskDelete(NULL);
 }
@@ -178,13 +179,6 @@ void Avance_Task(void*PvParameters)
 
 		while(abs(buff-pos.d_theta)<distance)
 		{
-			//printf("\r\nDistance %f\r\n",pos.d_theta);
-			//printf("\r\n dL %f\r\n",pos.dL);
-			//printf("\r\n dR %f\r\n",pos.dR);
-			printf("\r\n buf %f \r\n",buff);
-			printf("\r\n theta : %f \r\n",pos.d_theta);
-
-
 
 		}
 		motor_stop(&motor1);
@@ -202,12 +196,12 @@ void Turn_Task(void*PvParameters)
 		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
 		float buff=pos.alpha;
 		motor_run_forward(&motor1);
-		while(abs(buff-pos.alpha)<angle)
+		while(abs(angle-abs(buff-pos.alpha))>ANGLE_ERROR)
 		{
-			printf("\r\n buf %f \r\n",buff);
-            printf("\r\n alpha %f \r\n",pos.alpha);
+
 		}
 		motor_stop(&motor1);
+
 	}
 	vTaskDelete(NULL);
 
@@ -278,11 +272,6 @@ int main(void)
   MX_USART2_UART_Init();
   MX_TIM17_Init();
   /* USER CODE BEGIN 2 */
-	pos.dR=0;
-	pos.dL=0;
-
-
-
 	printf(logo);
 
 	// Init XL320
@@ -304,28 +293,33 @@ int main(void)
 
 	motor1.htim_motor = MOTOR1_TIM;
 	motor1.htim_encoder = ENCODER_MOTOR_1_TIM;
+	motor1.htim_encoder->Instance->CNT = motor1.htim_encoder->Instance->ARR / 2;
 	motor1.Channel_Motor_Forward = MOTOR1_CHANNEL_FORWARD;
 	motor1.Channel_Motor_Reverse = MOTOR1_CHANNEL_REVERSE;
-	motor1.counter = 0;
-	motor1.dutyCycle = 30;
+	motor1.counter = motor1.htim_encoder->Instance->ARR / 2;
+	motor1.speedInstruction = 0;
 	motor1.isReverse = 0;
-	motor1.period = DEFAULT_PERIOD;
 	motor1.status = MOTOR_PAUSED;
 
 	motor2.htim_motor = MOTOR2_TIM;
 	motor2.htim_encoder = ENCODER_MOTOR_2_TIM;
+	motor2.htim_encoder->Instance->CNT = motor2.htim_encoder->Instance->ARR / 2;
 	motor2.Channel_Motor_Forward = MOTOR2_CHANNEL_FORWARD;
 	motor2.Channel_Motor_Reverse = MOTOR2_CHANNEL_REVERSE;
-	motor2.counter = 0;
-	motor2.dutyCycle = 30;
+	motor2.counter = motor2.htim_encoder->Instance->ARR / 2;
+	motor2.speedInstruction = 0;
 	motor2.isReverse = 1;
-	motor2.period = DEFAULT_PERIOD;
 	motor2.status = MOTOR_PAUSED;
+
+	printf("Initialisation Motor Control ... \r\n");
 
 	HAL_TIM_Encoder_Start_IT(ENCODER_MOTOR_1_TIM, TIM_CHANNEL_ALL);
 	HAL_TIM_Encoder_Start_IT(ENCODER_MOTOR_2_TIM, TIM_CHANNEL_ALL);
 
-
+	pos.dR = 0;
+	pos.dL = 0;
+	pos.d_alpha = 0;
+	pos.alpha = 0;
 	//	motor_run_forward(&motor2);
 
 	printf("Initialisation Motors Successful \r\n\n");
@@ -361,7 +355,7 @@ int main(void)
 		printf("Error Creating the task \r\n");
 	}
 
-	xReturned = xTaskCreate(Border_Detected, "Border Detection", STACK_SIZE, NULL, tskIDLE_PRIORITY + 2 ,&xBorderDetectionHandle);
+	xReturned = xTaskCreate(Border_Detected, "Border Detection", STACK_SIZE, NULL, tskIDLE_PRIORITY + 6 ,&xBorderDetectionHandle);
 	if(xReturned != pdPASS){
 		printf("Error Creating the task \r\n");
 	}
@@ -375,7 +369,7 @@ int main(void)
 	if(xReturned != pdPASS){
 		printf("Error Creating the task \r\n");
 	}
-	xReturned = xTaskCreate(get_pos, "Position", 500, NULL, tskIDLE_PRIORITY + 3, &xGetPosHandle);
+	xReturned = xTaskCreate(Get_Position, "Position", 500, NULL, tskIDLE_PRIORITY + 3, &xGetPosHandle);
 	if(xReturned != pdPASS){
 		printf("Error Creating the task \r\n");
 	}
@@ -466,9 +460,6 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 
 }
 
-void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim){
-
-}
 
 void HAL_GPIO_EXTI_Rising_Callback(uint16_t GPIO_Pin){
 	BaseType_t xHigherPriorityTaskWoken = pdFALSE;
