@@ -239,6 +239,10 @@ void Turn_Reverse_Left_Task(void*PvParameters)
 {
 	float angle=45;
 	for(;;)
+	{
+		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+		float buff=pos.alpha;
+		motor_run_reverse(&motor1);
 		while(abs(angle-abs(buff-pos.alpha))>ANGLE_ERROR)
 		{
 
@@ -246,7 +250,6 @@ void Turn_Reverse_Left_Task(void*PvParameters)
 		motor_stop(&motor1);
 		vTaskDelay(1000);
 		xTaskNotifyGive(xSearchHandle);
-
 	}
 	vTaskDelete(NULL);
 
