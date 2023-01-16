@@ -46,6 +46,7 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 #define STACK_SIZE 300
+#define ANGLE_ERROR 5
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -65,9 +66,16 @@ h_shell_t h_shell;
 h_motor_t motor1;
 h_motor_t motor2;
 h_motors_t motors;
+pos_R pos;
 
 // Servo
 h_XL320_t XL320;
+
+//parametre Robot
+
+float angle;
+float distance;
+
 
 //Handlers
 
@@ -75,6 +83,20 @@ TaskHandle_t xOpenXL320Handle = NULL;
 TaskHandle_t xCloseXL320Handle = NULL;
 TaskHandle_t xBorderDetectionHandle = NULL;
 TaskHandle_t xMotorSpeedControl = NULL;
+TaskHandle_t xTurnHandle = NULL;
+TaskHandle_t xTurnReverseRightHandle = NULL;
+TaskHandle_t xTurnReverseLeftHandle = NULL;
+TaskHandle_t  xGetPosHandle=NULL;
+TaskHandle_t xAvanceHandle=NULL;
+TaskHandle_t xBackHandle=NULL;
+TaskHandle_t xSearchHandle=NULL;
+
+
+//Global
+
+float distance = 100;
+int borderDetected = 0;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -129,19 +151,135 @@ void Border_Detected(void * PvParameters){
 		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
 		motor_stop(&motor2);
 		motor_stop(&motor1);
+		vTaskDelay(1000);
+		xTaskNotifyGive(xBackHandle);
 	}
 	vTaskDelete(NULL);
 }
 
 void Motor_Speed_Control(void * PvParameters){
-	motor_run_forward(&motor2);
 	motor2.htim_motor->Instance->CCR1 = 20;
-	motor_run_forward(&motor1);
 	motor1.htim_motor->Instance->CCR1 = 20;
+	xTaskNotifyGive(xSearchHandle);
 	for(;;){
 		pid_vitesse(&motor2);
 		pid_vitesse(&motor1);
 		vTaskDelay(100);
+	}
+	vTaskDelete(NULL);
+}
+
+void Get_Position(void*PvParameters)
+{
+	for(;;)
+	{
+		update_position(&pos, &motor1);
+		update_position(&pos, &motor2);
+		vTaskDelay(50);
+	}
+	vTaskDelete(NULL);
+}
+
+void Avance_Task(void*PvParameters)
+{
+	for(;;)
+	{
+		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+		float buff_r = pos.dR;
+		float buff_l = pos.dL;
+		motor_run_forward(&motor1);
+		motor_run_forward(&motor2);
+		while((abs(buff_r - pos.dR) < distance) && (abs(buff_l - pos.dL) < distance))
+		{
+			if(abs(buff_r - pos.dR) > distance){
+				motor_stop(&motor1);
+
+			}
+			if(abs(buff_l - pos.dL) > distance){
+				motor_stop(&motor2);
+
+			}
+		}
+		motor_stop(&motor2);
+		motor_stop(&motor1);
+	}
+	vTaskDelete(NULL);
+}
+
+void Back_Task(void* PvParameters)
+{
+	for(;;)
+	{
+		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+		float buff_r = pos.dR;
+		float buff_l = pos.dL;
+		motor_run_reverse(&motor1);
+		motor_run_reverse(&motor2);
+		while((abs(buff_r - pos.dR) < distance) && (abs(buff_l - pos.dL) < distance))
+		{
+			if(abs(buff_r - pos.dR) > distance){
+				motor_stop(&motor1);
+
+			}
+			if(abs(buff_l - pos.dL) > distance){
+				motor_stop(&motor2);
+
+			}
+		}
+		motor_stop(&motor1);
+		motor_stop(&motor2);
+		vTaskDelay(1000);
+		xTaskNotifyGive(xTurnReverseRightHandle);
+
+	}
+	vTaskDelete(NULL);
+}
+
+void Turn_Reverse_Left_Task(void*PvParameters)
+{
+	float angle=45;
+	for(;;)
+	{
+		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+		float buff=pos.alpha;
+		motor_run_reverse(&motor1);
+		while(abs(angle-abs(buff-pos.alpha))>ANGLE_ERROR)
+		{
+
+		}
+		motor_stop(&motor1);
+		vTaskDelay(1000);
+		xTaskNotifyGive(xSearchHandle);
+	}
+	vTaskDelete(NULL);
+
+}
+void Turn_Reverse_Right_Task(void*PvParameters)
+{
+	float angle=45;
+	for(;;)
+	{
+		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+		float buff=pos.alpha;
+		motor_run_reverse(&motor2);
+		while(abs(angle-abs(buff-pos.alpha))>ANGLE_ERROR)
+		{
+
+		}
+		motor_stop(&motor2);
+		vTaskDelay(1000);
+		xTaskNotifyGive(xSearchHandle);
+	}
+	vTaskDelete(NULL);
+
+}
+
+void Search_Task(void* PvParameters){
+	for(;;){
+		borderDetected = 0;
+		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+		motor_run_forward(&motor2);
+		motor_run_forward(&motor1);
 	}
 	vTaskDelete(NULL);
 }
@@ -156,6 +294,24 @@ int XL320_Open_Shell(h_shell_t * h_shell, int argc, char ** argv)
 int XL320_Catch_Shell(h_shell_t * h_shell, int argc, char ** argv)
 {
 	xTaskNotifyGive(xCloseXL320Handle);
+	return SHELL_OK;
+}
+
+int Avance_shell()
+{
+	xTaskNotifyGive(xAvanceHandle);
+	return SHELL_OK;
+}
+
+int Back_shell()
+{
+	xTaskNotifyGive(xBackHandle);
+	return SHELL_OK;
+}
+
+int Turn_shell()
+{
+	xTaskNotifyGive(xTurnReverseLeftHandle);
 	return SHELL_OK;
 }
 
@@ -198,7 +354,6 @@ int main(void)
 	MX_USART2_UART_Init();
 	MX_TIM17_Init();
 	/* USER CODE BEGIN 2 */
-
 	printf(logo);
 
 	// Init XL320
@@ -220,28 +375,33 @@ int main(void)
 
 	motor1.htim_motor = MOTOR1_TIM;
 	motor1.htim_encoder = ENCODER_MOTOR_1_TIM;
+	motor1.htim_encoder->Instance->CNT = motor1.htim_encoder->Instance->ARR / 2;
 	motor1.Channel_Motor_Forward = MOTOR1_CHANNEL_FORWARD;
 	motor1.Channel_Motor_Reverse = MOTOR1_CHANNEL_REVERSE;
-	motor1.counter = 0;
-	motor1.dutyCycle = 30;
+	motor1.counter = motor1.htim_encoder->Instance->ARR / 2;
+	motor1.speedInstruction = 0;
 	motor1.isReverse = 0;
-	motor1.period = DEFAULT_PERIOD;
 	motor1.status = MOTOR_PAUSED;
 
 	motor2.htim_motor = MOTOR2_TIM;
 	motor2.htim_encoder = ENCODER_MOTOR_2_TIM;
+	motor2.htim_encoder->Instance->CNT = motor2.htim_encoder->Instance->ARR / 2;
 	motor2.Channel_Motor_Forward = MOTOR2_CHANNEL_FORWARD;
 	motor2.Channel_Motor_Reverse = MOTOR2_CHANNEL_REVERSE;
-	motor2.counter = 0;
-	motor2.dutyCycle = 30;
+	motor2.counter = motor2.htim_encoder->Instance->ARR / 2;
+	motor2.speedInstruction = 0;
 	motor2.isReverse = 1;
-	motor2.period = DEFAULT_PERIOD;
 	motor2.status = MOTOR_PAUSED;
+
+	printf("Initialisation Motor Control ... \r\n");
 
 	HAL_TIM_Encoder_Start_IT(ENCODER_MOTOR_1_TIM, TIM_CHANNEL_ALL);
 	HAL_TIM_Encoder_Start_IT(ENCODER_MOTOR_2_TIM, TIM_CHANNEL_ALL);
 
-
+	pos.dR = 0;
+	pos.dL = 0;
+	pos.d_alpha = 0;
+	pos.alpha = 0;
 	//	motor_run_forward(&motor2);
 
 	printf("Initialisation Motors Successful \r\n\n");
@@ -257,6 +417,11 @@ int main(void)
 	shell_init(&h_shell);
 	shell_add(&h_shell, 'O', XL320_Open_Shell, "Open XL320");
 	shell_add(&h_shell, 'C', XL320_Catch_Shell, "Catch XL320");
+	shell_add(&h_shell, 'a', Avance_shell, "Avance ");
+	shell_add(&h_shell, 't', Turn_shell, "Recule ");
+
+
+
 
 
 	// Creating Tasks
@@ -273,7 +438,7 @@ int main(void)
 		printf("Error Creating the task \r\n");
 	}
 
-	xReturned = xTaskCreate(Border_Detected, "Border Detection", STACK_SIZE, NULL, tskIDLE_PRIORITY + 2 ,&xBorderDetectionHandle);
+	xReturned = xTaskCreate(Border_Detected, "Border Detection", STACK_SIZE, NULL, tskIDLE_PRIORITY + 6 ,&xBorderDetectionHandle);
 	if(xReturned != pdPASS){
 		printf("Error Creating the task \r\n");
 	}
@@ -287,7 +452,33 @@ int main(void)
 	if(xReturned != pdPASS){
 		printf("Error Creating the task \r\n");
 	}
+	xReturned = xTaskCreate(Get_Position, "Position", 200, NULL, tskIDLE_PRIORITY + 3, &xGetPosHandle);
+	if(xReturned != pdPASS){
+		printf("Error Creating the task \r\n");
+	}
 
+	xReturned = xTaskCreate(Turn_Reverse_Right_Task, "Turn Reverse Right Task", 250, NULL, tskIDLE_PRIORITY + 2, &xTurnReverseRightHandle);
+	if(xReturned != pdPASS){
+		printf("Error Creating the task \r\n");
+	}
+
+	xReturned = xTaskCreate(Turn_Reverse_Left_Task, "Turn Reverse Left Task", 250, NULL, tskIDLE_PRIORITY + 2, &xTurnReverseLeftHandle);
+	if(xReturned != pdPASS){
+		printf("Error Creating the task \r\n");
+	}
+
+	xReturned = xTaskCreate(Avance_Task, "Avance Task", 300, NULL, tskIDLE_PRIORITY + 2, &xAvanceHandle);
+	if(xReturned != pdPASS){
+		printf("Error Creating the task \r\n");
+	}
+	xReturned = xTaskCreate(Back_Task, "Back Task", 300, NULL, tskIDLE_PRIORITY + 2, &xBackHandle);
+	if(xReturned != pdPASS){
+		printf("Error Creating the task \r\n");
+	}
+	xReturned = xTaskCreate(Search_Task, "Search Task", 100, NULL, tskIDLE_PRIORITY + 2, &xSearchHandle);
+	if(xReturned != pdPASS){
+		printf("Error Creating the task \r\n");
+	}
 	vTaskStartScheduler();
 	/* USER CODE END 2 */
 
@@ -365,15 +556,19 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 
 }
 
-void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim){
-
-}
 
 void HAL_GPIO_EXTI_Rising_Callback(uint16_t GPIO_Pin){
-	BaseType_t xHigherPriorityTaskWoken = pdFALSE;
-	if((GPIO_Pin == IR1_OUT_Pin) || (GPIO_Pin == IR2_OUT_Pin)){
-		vTaskNotifyGiveFromISR(xBorderDetectionHandle, &xHigherPriorityTaskWoken);
-		portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+	if(borderDetected != 1){
+		borderDetected = 1;
+		BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+		if((GPIO_Pin == IR1_OUT_Pin)){
+			vTaskNotifyGiveFromISR(xBorderDetectionHandle, &xHigherPriorityTaskWoken);
+			portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+		}
+		if( (GPIO_Pin == IR2_OUT_Pin)){
+			vTaskNotifyGiveFromISR(xBorderDetectionHandle, &xHigherPriorityTaskWoken);
+			portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+		}
 	}
 }
 
