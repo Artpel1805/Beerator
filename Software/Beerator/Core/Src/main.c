@@ -71,6 +71,12 @@ pos_R pos;
 // Servo
 h_XL320_t XL320;
 
+//parametre Robot
+
+float angle;
+float distance;
+
+
 //Handlers
 
 TaskHandle_t xOpenXL320Handle = NULL;
@@ -233,10 +239,6 @@ void Turn_Reverse_Left_Task(void*PvParameters)
 {
 	float angle=45;
 	for(;;)
-	{
-		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
-		float buff=pos.alpha;
-		motor_run_reverse(&motor1);
 		while(abs(angle-abs(buff-pos.alpha))>ANGLE_ERROR)
 		{
 
