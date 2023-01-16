@@ -13,7 +13,6 @@
 
 
 int motor_run_forward(h_motor_t * motor){
-
 	if(motor->isReverse == 1){
 		if(	HAL_TIM_PWM_Stop_IT(motor->htim_motor, motor->Channel_Motor_Forward) != HAL_OK){
 			return MOTOR_UNKNOWN_ERROR;
@@ -45,6 +44,7 @@ int motor_run_reverse(h_motor_t * motor){
 		if(HAL_TIM_PWM_Start_IT(motor->htim_motor, motor->Channel_Motor_Forward) != HAL_OK){
 			return MOTOR_UNKNOWN_ERROR;
 		}
+		motor->speedInstruction = - SPEED_COMMAND;
 		motor->status = MOTOR_REVERSE;
 		return MOTOR_OK;
 	}
@@ -54,7 +54,8 @@ int motor_run_reverse(h_motor_t * motor){
 	if(	HAL_TIMEx_PWMN_Start_IT(motor->htim_motor, motor->Channel_Motor_Reverse) != HAL_OK){
 		return MOTOR_UNKNOWN_ERROR;
 	}
-	motor->status = MOTOR_FORWARD;
+	motor->speedInstruction = - SPEED_COMMAND;
+	motor->status = MOTOR_REVERSE;
 	return MOTOR_OK;
 }
 

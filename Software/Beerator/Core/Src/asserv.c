@@ -22,6 +22,9 @@ int pid_vitesse(h_motor_t * motor){
 		motor->counter = motor->htim_encoder->Instance->CNT;
 	}
 	int erreur = motor->speedInstruction - (motor->vitesse);
+	if(motor->status == MOTOR_REVERSE){
+		erreur = -erreur;
+	}
 	motor->htim_motor->Instance->CCR1 += erreur * Kp;
 
 	if(motor->htim_motor->Instance->CCR1 > 100) {
