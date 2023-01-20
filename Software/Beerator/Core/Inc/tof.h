@@ -41,7 +41,7 @@ typedef struct {
 	char errorBuf[100]; // Current error Status as a String
 } TOF_UserStruct;
 
-void TOF_init(TOF_InitStruct*); // Initialise le capteur TOF, renvoit un code d'erreur entier
+int TOF_init(TOF_InitStruct*); // Initialise le capteur TOF, renvoit un code d'erreur entier
 int TOF_measure(void); // Lance une mesure avec le TOF, resultat en mm entre 0 et MAX_READABLE_DISTANCE, ou -1 si hors de portée
 TOF_UserStruct* TOF_getTOF_UserStruct(void); // Renvoie le pointeur vers la structure TOF_UserStruct utilisée
 int TOF_correctValue(int readValue); // Corrige la lecture faussée du TOF avec une courbe calculée en amont

@@ -98,6 +98,7 @@ TaskHandle_t xBackHandle=NULL;
 TaskHandle_t xSearchHandle=NULL;
 
 
+
 //Global
 
 float distance = 100;
@@ -135,7 +136,6 @@ void Motor_Speed_Control(void * PvParameters){
 	for(;;){
 		pid_vitesse(&motor2);
 		pid_vitesse(&motor1);
-		//		printf("Motor Controled \r\n");
 		vTaskDelay(100);
 	}
 	vTaskDelete(NULL);
@@ -147,8 +147,6 @@ void Get_Position(void*PvParameters)
 	{
 		update_position(&pos, &motor1);
 		update_position(&pos, &motor2);
-		//		printf("Position Updated \r\n");
-
 		vTaskDelay(50);
 	}
 	vTaskDelete(NULL);
@@ -188,8 +186,12 @@ void Border_Detected(void * PvParameters){
 
 		}
 		motor_stop(&motor2);
-		xTaskNotifyGive(xSearchHandle);
+
 		borderDetected = 0 ;
+		printf("Border Avoided \r\n");
+
+		mesure = 0;
+		xTaskNotifyGive(xAvanceHandle);
 	}
 	vTaskDelete(NULL);
 }
@@ -197,6 +199,7 @@ void Border_Detected(void * PvParameters){
 void Search_Task(void* PvParameters){
 	for(;;){
 		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+		printf("Search Task \r\n");
 		int delay = rand() % 5000;
 		motor_stop(&motor2);
 		motor_stop(&motor1);
@@ -213,14 +216,13 @@ void Search_Task(void* PvParameters){
 void TOF_Task(void* PvParameters){
 	for(;;){
 		mesure = TOF_measure();
-		printf("mesure TOF: %d \r\n", mesure);
-		if((mesure != -1) && (mesure > 20)){
+		if((mesure != -1) && (mesure > 30)){
 			motor_stop(&motor1);
 			motor_stop(&motor2);
 			xTaskNotifyGive(xOpenXL320Handle);
 			xTaskNotifyGive(xAvanceHandle);
 		}
-		if((mesure != -1) && (mesure < 20)){
+		if((mesure != -1) && (mesure < 30)){
 			motor_stop(&motor1);
 			motor_stop(&motor2);
 			xTaskNotifyGive(xCloseXL320Handle);
@@ -234,6 +236,7 @@ void Avance_Task(void*PvParameters)
 	for(;;)
 	{
 		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+		printf("Advanced Task \r\n");
 		float buff_r = pos.dR;
 		float buff_l = pos.dL;
 		motor_run_forward(&motor1);
@@ -251,6 +254,7 @@ void Avance_Task(void*PvParameters)
 		}
 		motor_stop(&motor2);
 		motor_stop(&motor1);
+		xTaskNotifyGive(xSearchHandle);
 	}
 	vTaskDelete(NULL);
 }
@@ -258,9 +262,10 @@ void Avance_Task(void*PvParameters)
 void XL320_Open(void * pvParameterts){
 	for(;;){
 		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+		printf("OPEN PINCE \r\n");
+
 		if(XL320_set_goal_position(&XL320, XL320_OPEN_ANGLE) != XL320_OK){
 			printf("Error Opening XL320 \r\n");
-			Error_Handler();
 		};
 	}
 	vTaskDelete(NULL);
@@ -269,10 +274,11 @@ void XL320_Open(void * pvParameterts){
 void XL320_Catch_Task(void * pvParameterts){
 	for(;;){
 		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+		printf("Close Pince \r\n");
+
 		uint16_t XL320_Response = XL320_Catch(&XL320);
 		if(XL320_Response == XL320_ERROR){
 			printf("Error Catching XL320 \r\n");
-			Error_Handler();
 		}
 	}
 	vTaskDelete(NULL);
@@ -403,7 +409,9 @@ int main(void)
 	printf("Initialisation TOF ... \r\n");
 
 	tof.I2cHandle = &hi2c2;
-	TOF_init(&tof);
+	if(TOF_init(&tof) != 1){
+		Error_Handler();
+	};
 
 	printf("Initialisation TOF Successful \r\n\n");
 
@@ -441,7 +449,7 @@ int main(void)
 		printf("Error Creating the task \r\n");
 	}
 
-	xReturned = xTaskCreate(Avance_Task, "Avance Task", 300, NULL, tskIDLE_PRIORITY + 5, &xAvanceHandle);
+	xReturned = xTaskCreate(Avance_Task, "Avance Task", 500, NULL, tskIDLE_PRIORITY + 5, &xAvanceHandle);
 	if(xReturned != pdPASS){
 		printf("Error Creating the task \r\n");
 	}
