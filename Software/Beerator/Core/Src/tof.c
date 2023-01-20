@@ -18,7 +18,7 @@ static TOF_UserStruct TOF_UserStruct_;
 static TOF_UserStruct * pTOF_UserStruct = &TOF_UserStruct_;
 
 
-void TOF_init(TOF_InitStruct* pTOF_InitStruct){
+int TOF_init(TOF_InitStruct* pTOF_InitStruct){
 	uint32_t refSpadCount;
 	uint8_t isApertureSpads;
 	uint8_t VhvSettings;
@@ -38,29 +38,50 @@ void TOF_init(TOF_InitStruct* pTOF_InitStruct){
 
 	// VL53L0X initialization for Single Measurement :
 
-	VL53L0X_WaitDeviceBooted( Dev );
-	VL53L0X_DataInit( Dev );
-	VL53L0X_StaticInit( Dev );
-	VL53L0X_PerformRefCalibration(Dev, &VhvSettings, &PhaseCal);
-	VL53L0X_PerformRefSpadManagement(Dev, &refSpadCount, &isApertureSpads);
+	if(VL53L0X_WaitDeviceBooted( Dev ) != VL53L0X_ERROR_NOT_IMPLEMENTED){
+		return -1;
+	};
+	if(VL53L0X_DataInit( Dev )!= VL53L0X_ERROR_NONE){
+		return -1;
+	};
+	if(VL53L0X_StaticInit( Dev )!= VL53L0X_ERROR_NONE){
+		return -1;
+	};
+	if(VL53L0X_PerformRefCalibration(Dev, &VhvSettings, &PhaseCal)!= VL53L0X_ERROR_NONE){
+		return -1;
+	};
+	if(VL53L0X_PerformRefSpadManagement(Dev, &refSpadCount, &isApertureSpads) != VL53L0X_ERROR_NONE){
+		return -1;
+	};
 	if(VL53L0X_SetDeviceMode(Dev, VL53L0X_DEVICEMODE_CONTINUOUS_RANGING) != VL53L0X_ERROR_NONE){////// SINGLE->CONTINUOUS
 		pTOF_UserStruct->currentErrorStatus = INIT_ERROR_TOF;
 		TOF_setErrorLiteral(INIT_ERROR_TOF);
+		return -1;
 	}
 
-	VL53L0X_StartMeasurement(Dev);//////
+	if(VL53L0X_StartMeasurement(Dev) != VL53L0X_ERROR_NONE){
+		return -1;
+	}//////
 
 	// Enable/Disable Sigma and Signal check :
 
-	VL53L0X_SetLimitCheckEnable(Dev, VL53L0X_CHECKENABLE_SIGMA_FINAL_RANGE, 1);
-	VL53L0X_SetLimitCheckEnable(Dev, VL53L0X_CHECKENABLE_SIGNAL_RATE_FINAL_RANGE, 1);
-	VL53L0X_SetLimitCheckValue(Dev, VL53L0X_CHECKENABLE_SIGNAL_RATE_FINAL_RANGE, (FixPoint1616_t)(0.1*65536));
-	VL53L0X_SetLimitCheckValue(Dev, VL53L0X_CHECKENABLE_SIGMA_FINAL_RANGE, (FixPoint1616_t)(60*65536));
+	if(VL53L0X_SetLimitCheckEnable(Dev, VL53L0X_CHECKENABLE_SIGMA_FINAL_RANGE, 1) != VL53L0X_ERROR_NONE){
+		return -1;
+	};
+	if(VL53L0X_SetLimitCheckEnable(Dev, VL53L0X_CHECKENABLE_SIGNAL_RATE_FINAL_RANGE, 1)!= VL53L0X_ERROR_NONE){
+		return -1;
+	};
+	if(VL53L0X_SetLimitCheckValue(Dev, VL53L0X_CHECKENABLE_SIGNAL_RATE_FINAL_RANGE, (FixPoint1616_t)(0.1*65536))!= VL53L0X_ERROR_NONE){
+		return -1;
+	};
+	if(VL53L0X_SetLimitCheckValue(Dev, VL53L0X_CHECKENABLE_SIGMA_FINAL_RANGE, (FixPoint1616_t)(60*65536))!= VL53L0X_ERROR_NONE){
+		return -1;
+	};
 
 	// On initialise à 501 la distance lue :
 	pTOF_UserStruct->currentValue = 501;
 
-	return;
+	return 1;
 }
 
 

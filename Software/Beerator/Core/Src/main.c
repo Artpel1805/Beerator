@@ -499,9 +499,10 @@ printf("Initialisation Motors Successful \r\n\n");
 //TOF
 printf("Initialisation TOF ... \r\n");
 
-tof.I2cHandle = &hi2c2;
-TOF_init(&tof);
-
+	tof.I2cHandle = &hi2c2;
+	if(TOF_init(&tof) != 1){
+		Error_Handler();
+	};
 //TCS3200
 
 TCS3200_Init();
@@ -542,10 +543,10 @@ if(xReturned != pdPASS){
 	printf("Error Creating the task \r\n");
 }
 
-xReturned = xTaskCreate(Avance_Task, "Avance Task", 300, NULL, tskIDLE_PRIORITY + 5, &xAvanceHandle);
-if(xReturned != pdPASS){
-	printf("Error Creating the task \r\n");
-}
+	xReturned = xTaskCreate(Avance_Task, "Avance Task", 500, NULL, tskIDLE_PRIORITY + 5, &xAvanceHandle);
+	if(xReturned != pdPASS){
+		printf("Error Creating the task \r\n");
+	}
 
 xReturned = xTaskCreate(TOF_Task, "TOFMesure", 1000, NULL, tskIDLE_PRIORITY + 4, &xTOFMesure);
 if(xReturned != pdPASS){
