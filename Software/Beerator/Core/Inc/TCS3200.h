@@ -5,8 +5,20 @@
  *      Author: arthurpellegrin
  */
 
+#include "main.h"
+#include <stdio.h>
+#include "cmsis_os.h"
+
 #ifndef INC_TCS3200_H_
 #define INC_TCS3200_H_
+
+typedef struct color_struct
+{
+
+	uint32_t red;
+	uint32_t green;
+
+} TCS3200_struct;
 
 #endif /* INC_TCS3200_H_ */
 

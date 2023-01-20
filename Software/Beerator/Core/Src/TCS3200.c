@@ -10,14 +10,14 @@
 #include "main.h"
 
 
-int flag=1;
-int Red_Freq;
-int Green_Freq;
-int Blue_Freq;
 
 void TCS3200_Init()
 {
-	TCS3200_Switch_Led(0);
+
+	TCS3200_Switch_S2(1);
+	TCS3200_Switch_S3(0);
+
+
 }
 
 
@@ -56,6 +56,37 @@ void TCS3200_Switch_S3(int state){
 		Error_Handler();
 	}
 }
+
+/*void TCS3200_Read_Color(TCS3200_struct *TCS3200_st_color)
+{
+	float red_freq;
+	float green_freq;
+
+	TCS3200_Switch_S2(0);
+	TCS3200_Switch_S3(0);
+	HAL_Delay(1);
+	red_freq=frequency;
+	HAL_Delay(1);
+
+	TCS3200_Switch_S2(1);
+	TCS3200_Switch_S3(1);
+
+	HAL_Delay(1);
+	green_freq=frequency;
+	if(red_freq > green_freq)
+	{
+		TCS3200_st_color->red=1;
+		TCS3200_st_color->green=0;
+	}
+	else {
+		TCS3200_st_color->red=0;
+		TCS3200_st_color->green=1;
+	}
+
+
+
+}
+*/
 
 
 
