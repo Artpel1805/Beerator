@@ -331,7 +331,7 @@ uint8_t XL320_Init(h_XL320_t * XL320)
 		printf ("model_number= 0x%04x \r\n", XL320->model_number);
 		printf ("firmware_version= 0x%04x \r\n", XL320->firmware_version);
 
-		if((XL320_set_torque_enable(XL320, 1)== XL320_OK ) && (XL320_set_speed_position(XL320, 200)==XL320_OK)) return XL320_OK;
+		if((XL320_set_torque_enable(XL320, 1)== XL320_OK ) && (XL320_set_speed_position(XL320, 700)==XL320_OK)) return XL320_OK;
 		else return XL320_ERROR;
 
 
@@ -341,17 +341,10 @@ uint8_t XL320_Init(h_XL320_t * XL320)
 
 
 uint8_t XL320_Catch(h_XL320_t * XL320){
-	if(XL320_set_goal_position(XL320, XL320_OPEN_ANGLE)!= XL320_OK) return XL320_ERROR;
 
 	if(XL320_set_goal_position(XL320, XL320_CLOSE_ANGLE) != XL320_OK) return XL320_ERROR;
 
-	uint16_t load = XL320_read_load(XL320);
-
-	if(load > CATCHED_LOAD){
-		return XL320_OK;
-	}
-	if(XL320_set_goal_position(XL320, XL320_OPEN_ANGLE)!= XL320_OK) return XL320_ERROR;
-	return XL320_NOT_FOUND;
+	return XL320_OK;
 }
 
 

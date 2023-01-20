@@ -36,6 +36,7 @@
 #include "drv_uart1.h"
 #include "XL320.h"
 #include "asserv.h"
+#include "tof.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -71,10 +72,14 @@ pos_R pos;
 // Servo
 h_XL320_t XL320;
 
+//TOF
+TOF_InitStruct tof;
+
 //parametre Robot
 
 float angle;
 float distance;
+int mesure ;
 
 
 //Handlers
@@ -83,6 +88,7 @@ TaskHandle_t xOpenXL320Handle = NULL;
 TaskHandle_t xCloseXL320Handle = NULL;
 TaskHandle_t xBorderDetectionHandle = NULL;
 TaskHandle_t xMotorSpeedControl = NULL;
+TaskHandle_t xTOFMesure = NULL;
 TaskHandle_t xTurnHandle = NULL;
 TaskHandle_t xTurnReverseRightHandle = NULL;
 TaskHandle_t xTurnReverseLeftHandle = NULL;
@@ -92,11 +98,11 @@ TaskHandle_t xBackHandle=NULL;
 TaskHandle_t xSearchHandle=NULL;
 
 
+
 //Global
 
 float distance = 100;
 int borderDetected = 0;
-
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -123,40 +129,6 @@ void Start_Shell(void* pvParameters){
 	vTaskDelete(NULL);
 }
 
-void XL320_Open(void * pvParameterts){
-	for(;;){
-		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
-		if(XL320_set_goal_position(&XL320, XL320_OPEN_ANGLE) != XL320_OK){
-			printf("Error Opening XL320 \r\n");
-			Error_Handler();
-		};
-	}
-	vTaskDelete(NULL);
-}
-
-void XL320_Catch_Task(void * pvParameterts){
-	for(;;){
-		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
-		uint16_t XL320_Response = XL320_Catch(&XL320);
-		if(XL320_Response == XL320_ERROR){
-			printf("Error Catching XL320 \r\n");
-			Error_Handler();
-		}
-	}
-	vTaskDelete(NULL);
-}
-
-void Border_Detected(void * PvParameters){
-	for(;;){
-		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
-		motor_stop(&motor2);
-		motor_stop(&motor1);
-		vTaskDelay(1000);
-		xTaskNotifyGive(xBackHandle);
-	}
-	vTaskDelete(NULL);
-}
-
 void Motor_Speed_Control(void * PvParameters){
 	motor2.htim_motor->Instance->CCR1 = 20;
 	motor1.htim_motor->Instance->CCR1 = 20;
@@ -180,106 +152,134 @@ void Get_Position(void*PvParameters)
 	vTaskDelete(NULL);
 }
 
+
+void Border_Detected(void * PvParameters){
+	float angle=35;
+	for(;;){
+		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+		motor_stop(&motor2);
+		motor_stop(&motor1);
+		float buff_r = pos.dR;
+		float buff_l = pos.dL;
+
+		motor_run_reverse(&motor1);
+		motor_run_reverse(&motor2);
+
+		while((abs(buff_r - pos.dR) < 100) && (abs(buff_l - pos.dL) < 100))
+		{
+			if(abs(buff_r - pos.dR) > 100){
+				motor_stop(&motor1);
+
+			}
+			if(abs(buff_l - pos.dL) > 100){
+				motor_stop(&motor2);
+
+			}
+		}
+		motor_stop(&motor1);
+		motor_stop(&motor2);
+
+		float buff=pos.alpha;
+		motor_run_reverse(&motor2);
+		while(abs(angle-abs(buff-pos.alpha))>ANGLE_ERROR)
+		{
+
+		}
+		motor_stop(&motor2);
+
+		borderDetected = 0 ;
+		printf("Border Avoided \r\n");
+
+		mesure = 0;
+		xTaskNotifyGive(xAvanceHandle);
+	}
+	vTaskDelete(NULL);
+}
+
+void Search_Task(void* PvParameters){
+	for(;;){
+		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+		printf("Search Task \r\n");
+		int delay = rand() % 5000;
+		motor_stop(&motor2);
+		motor_stop(&motor1);
+		motor2.speedInstruction =  50;
+		motor_run_forward(&motor2);
+		vTaskDelay(delay);
+		motor2.speedInstruction =  SPEED_COMMAND;
+
+		motor_run_forward(&motor1);
+	}
+	vTaskDelete(NULL);
+}
+
+void TOF_Task(void* PvParameters){
+	for(;;){
+		mesure = TOF_measure();
+		if((mesure != -1) && (mesure > 30)){
+			motor_stop(&motor1);
+			motor_stop(&motor2);
+			xTaskNotifyGive(xOpenXL320Handle);
+			xTaskNotifyGive(xAvanceHandle);
+		}
+		if((mesure != -1) && (mesure < 30)){
+			motor_stop(&motor1);
+			motor_stop(&motor2);
+			xTaskNotifyGive(xCloseXL320Handle);
+		}
+		vTaskDelay(100);
+	}
+}
+
 void Avance_Task(void*PvParameters)
 {
 	for(;;)
 	{
 		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+		printf("Advanced Task \r\n");
 		float buff_r = pos.dR;
 		float buff_l = pos.dL;
 		motor_run_forward(&motor1);
 		motor_run_forward(&motor2);
-		while((abs(buff_r - pos.dR) < distance) && (abs(buff_l - pos.dL) < distance))
+		while((abs(buff_r - pos.dR) < mesure) && (abs(buff_l - pos.dL) < mesure))
 		{
-			if(abs(buff_r - pos.dR) > distance){
+			if(abs(buff_r - pos.dR) > mesure){
 				motor_stop(&motor1);
 
 			}
-			if(abs(buff_l - pos.dL) > distance){
+			if(abs(buff_l - pos.dL) > mesure){
 				motor_stop(&motor2);
 
 			}
 		}
 		motor_stop(&motor2);
 		motor_stop(&motor1);
-	}
-	vTaskDelete(NULL);
-}
-
-void Back_Task(void* PvParameters)
-{
-	for(;;)
-	{
-		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
-		float buff_r = pos.dR;
-		float buff_l = pos.dL;
-		motor_run_reverse(&motor1);
-		motor_run_reverse(&motor2);
-		while((abs(buff_r - pos.dR) < distance) && (abs(buff_l - pos.dL) < distance))
-		{
-			if(abs(buff_r - pos.dR) > distance){
-				motor_stop(&motor1);
-
-			}
-			if(abs(buff_l - pos.dL) > distance){
-				motor_stop(&motor2);
-
-			}
-		}
-		motor_stop(&motor1);
-		motor_stop(&motor2);
-		vTaskDelay(1000);
-		xTaskNotifyGive(xTurnReverseRightHandle);
-
-	}
-	vTaskDelete(NULL);
-}
-
-void Turn_Reverse_Left_Task(void*PvParameters)
-{
-	float angle=45;
-	for(;;)
-	{
-		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
-		float buff=pos.alpha;
-		motor_run_reverse(&motor1);
-		while(abs(angle-abs(buff-pos.alpha))>ANGLE_ERROR)
-		{
-
-		}
-		motor_stop(&motor1);
-		vTaskDelay(1000);
 		xTaskNotifyGive(xSearchHandle);
 	}
 	vTaskDelete(NULL);
-
-}
-void Turn_Reverse_Right_Task(void*PvParameters)
-{
-	float angle=45;
-	for(;;)
-	{
-		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
-		float buff=pos.alpha;
-		motor_run_reverse(&motor2);
-		while(abs(angle-abs(buff-pos.alpha))>ANGLE_ERROR)
-		{
-
-		}
-		motor_stop(&motor2);
-		vTaskDelay(1000);
-		xTaskNotifyGive(xSearchHandle);
-	}
-	vTaskDelete(NULL);
-
 }
 
-void Search_Task(void* PvParameters){
+void XL320_Open(void * pvParameterts){
 	for(;;){
-		borderDetected = 0;
 		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
-		motor_run_forward(&motor2);
-		motor_run_forward(&motor1);
+		printf("OPEN PINCE \r\n");
+
+		if(XL320_set_goal_position(&XL320, XL320_OPEN_ANGLE) != XL320_OK){
+			printf("Error Opening XL320 \r\n");
+		};
+	}
+	vTaskDelete(NULL);
+}
+
+void XL320_Catch_Task(void * pvParameterts){
+	for(;;){
+		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+		printf("Close Pince \r\n");
+
+		uint16_t XL320_Response = XL320_Catch(&XL320);
+		if(XL320_Response == XL320_ERROR){
+			printf("Error Catching XL320 \r\n");
+		}
 	}
 	vTaskDelete(NULL);
 }
@@ -345,11 +345,11 @@ int main(void)
 	/* Initialize all configured peripherals */
 	MX_GPIO_Init();
 	MX_ADC1_Init();
-	MX_I2C2_Init();
 	MX_TIM1_Init();
 	MX_TIM3_Init();
 	MX_TIM14_Init();
 	MX_TIM16_Init();
+	MX_I2C2_Init();
 	MX_USART1_UART_Init();
 	MX_USART2_UART_Init();
 	MX_TIM17_Init();
@@ -402,10 +402,18 @@ int main(void)
 	pos.dL = 0;
 	pos.d_alpha = 0;
 	pos.alpha = 0;
-	//	motor_run_forward(&motor2);
 
 	printf("Initialisation Motors Successful \r\n\n");
 
+	//TOF
+	printf("Initialisation TOF ... \r\n");
+
+	tof.I2cHandle = &hi2c2;
+	if(TOF_init(&tof) != 1){
+		Error_Handler();
+	};
+
+	printf("Initialisation TOF Successful \r\n\n");
 
 	//Shell Configuration
 	printf("Launching Shell .... \r\n");
@@ -428,57 +436,53 @@ int main(void)
 
 	BaseType_t xReturned;
 
-	xReturned = xTaskCreate(XL320_Catch_Task, "XL320_Close", STACK_SIZE, NULL, tskIDLE_PRIORITY + 1 ,&xCloseXL320Handle);
+	xReturned = xTaskCreate(Motor_Speed_Control, "SpeedControl", 500, NULL, tskIDLE_PRIORITY + 6, &xMotorSpeedControl);
+	if(xReturned != pdPASS){
+		printf("Error Creating the task \r\n");
+	}
+	xReturned = xTaskCreate(Get_Position, "Position", 200, NULL, tskIDLE_PRIORITY + 6, &xGetPosHandle);
+	if(xReturned != pdPASS){
+		printf("Error Creating the task \r\n");
+	}
+	xReturned = xTaskCreate(Border_Detected, "Border Detection", 1000, NULL, tskIDLE_PRIORITY + 6 ,&xBorderDetectionHandle);
 	if(xReturned != pdPASS){
 		printf("Error Creating the task \r\n");
 	}
 
-	xReturned = xTaskCreate(XL320_Open, "XL320_OPEN", STACK_SIZE, NULL, tskIDLE_PRIORITY + 1 ,&xOpenXL320Handle);
+	xReturned = xTaskCreate(Avance_Task, "Avance Task", 500, NULL, tskIDLE_PRIORITY + 5, &xAvanceHandle);
 	if(xReturned != pdPASS){
 		printf("Error Creating the task \r\n");
 	}
 
-	xReturned = xTaskCreate(Border_Detected, "Border Detection", STACK_SIZE, NULL, tskIDLE_PRIORITY + 6 ,&xBorderDetectionHandle);
+	xReturned = xTaskCreate(TOF_Task, "TOFMesure", 1000, NULL, tskIDLE_PRIORITY + 4, &xTOFMesure);
 	if(xReturned != pdPASS){
 		printf("Error Creating the task \r\n");
 	}
+
+	xReturned = xTaskCreate(Search_Task, "Search Task", 100, NULL, tskIDLE_PRIORITY + 2, &xSearchHandle);
+	if(xReturned != pdPASS){
+		printf("Error Creating the task \r\n");
+	}
+
 
 	xReturned = xTaskCreate(Start_Shell, "StartShell", STACK_SIZE, NULL, tskIDLE_PRIORITY, &h_shell.xHandleShell);
 	if(xReturned != pdPASS){
 		printf("Error Creating the task \r\n");
 	}
 
-	xReturned = xTaskCreate(Motor_Speed_Control, "SpeedControl", 500, NULL, tskIDLE_PRIORITY + 3, &xMotorSpeedControl);
-	if(xReturned != pdPASS){
-		printf("Error Creating the task \r\n");
-	}
-	xReturned = xTaskCreate(Get_Position, "Position", 200, NULL, tskIDLE_PRIORITY + 3, &xGetPosHandle);
+
+	xReturned = xTaskCreate(XL320_Catch_Task, "XL320_Close", STACK_SIZE, NULL, tskIDLE_PRIORITY + 5 ,&xCloseXL320Handle);
 	if(xReturned != pdPASS){
 		printf("Error Creating the task \r\n");
 	}
 
-	xReturned = xTaskCreate(Turn_Reverse_Right_Task, "Turn Reverse Right Task", 250, NULL, tskIDLE_PRIORITY + 2, &xTurnReverseRightHandle);
+	xReturned = xTaskCreate(XL320_Open, "XL320_OPEN", STACK_SIZE, NULL, tskIDLE_PRIORITY + 5,&xOpenXL320Handle);
 	if(xReturned != pdPASS){
 		printf("Error Creating the task \r\n");
 	}
 
-	xReturned = xTaskCreate(Turn_Reverse_Left_Task, "Turn Reverse Left Task", 250, NULL, tskIDLE_PRIORITY + 2, &xTurnReverseLeftHandle);
-	if(xReturned != pdPASS){
-		printf("Error Creating the task \r\n");
-	}
 
-	xReturned = xTaskCreate(Avance_Task, "Avance Task", 300, NULL, tskIDLE_PRIORITY + 2, &xAvanceHandle);
-	if(xReturned != pdPASS){
-		printf("Error Creating the task \r\n");
-	}
-	xReturned = xTaskCreate(Back_Task, "Back Task", 300, NULL, tskIDLE_PRIORITY + 2, &xBackHandle);
-	if(xReturned != pdPASS){
-		printf("Error Creating the task \r\n");
-	}
-	xReturned = xTaskCreate(Search_Task, "Search Task", 100, NULL, tskIDLE_PRIORITY + 2, &xSearchHandle);
-	if(xReturned != pdPASS){
-		printf("Error Creating the task \r\n");
-	}
+
 	vTaskStartScheduler();
 	/* USER CODE END 2 */
 

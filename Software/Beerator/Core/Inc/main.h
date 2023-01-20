@@ -65,10 +65,10 @@ void Error_Handler(void);
 #define IR2_OUT_EXTI_IRQn EXTI4_15_IRQn
 #define LED_GREEN_Pin GPIO_PIN_3
 #define LED_GREEN_GPIO_Port GPIOC
-#define TOF1_EXTI_Pin GPIO_PIN_2
-#define TOF1_EXTI_GPIO_Port GPIOA
-#define TOF1_XSHUT_Pin GPIO_PIN_3
-#define TOF1_XSHUT_GPIO_Port GPIOA
+#define TOF_INT_Pin GPIO_PIN_2
+#define TOF_INT_GPIO_Port GPIOA
+#define TOF_XSHUT_Pin GPIO_PIN_3
+#define TOF_XSHUT_GPIO_Port GPIOA
 #define TOF2_XSHUT_Pin GPIO_PIN_5
 #define TOF2_XSHUT_GPIO_Port GPIOA
 #define TCS_OUT_Pin GPIO_PIN_1
